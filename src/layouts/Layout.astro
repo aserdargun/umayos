@@ -55,7 +55,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'UM
     <a class="skip-link" href="#main">{t.skip}</a>
     <header class="header">
       <div class="container header-inner">
-        <a class="wordmark" href={route} aria-label={`UMAY OS · ${t.home}`}><span class="brand-icons" aria-hidden="true"><img class="brand-light" src="/umay-icons/light/icon-128.png" width="48" height="48" alt="" /><img class="brand-dark" src="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" /></span><span>UMAY OS</span></a>
+        <a class="wordmark" href={route} aria-label={`UMAY OS · ${t.home}`}><span class="brand-icons" aria-hidden="true"><img class="brand-light" src="/umay-icons/light/icon-128.png" width="48" height="48" alt="" /><img class="brand-dark" src="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" /></span><span><strong>UMAY</strong> OS</span></a>
         <nav aria-label={locale === 'tr' ? 'Ana gezinme' : 'Main navigation'}>{t.nav.map((label, i) => <a href={navHref(i)}>{label}</a>)}</nav>
         <div class="header-tools">
           <div class="languages" aria-label={locale === 'tr' ? 'Dil' : 'Language'}><a href="/" lang="tr" hreflang="tr" aria-current={locale === 'tr' ? 'page' : undefined} data-language="tr">TR</a><span aria-hidden="true">/</span><a href="/en/" lang="en" hreflang="en" aria-current={locale === 'en' ? 'page' : undefined} data-language="en">EN</a></div>
@@ -68,7 +68,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'UM
       </div>
     </header>
     <main id="main" tabindex="-1"><slot /></main>
-    <footer class="footer dark"><div class="container footer-inner"><div><a class="wordmark" href={route}><img src="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" /><span>UMAY OS</span></a><p>Unified Multi-Agent Advisor for Yield</p></div><div><nav aria-label={locale === 'tr' ? 'Alt gezinme' : 'Footer navigation'}>{t.nav.map((label, i) => <a href={navHref(i)}>{label}</a>)}</nav><p>{t.closing.note}</p></div></div></footer>
+    <footer class="footer dark"><div class="container footer-inner"><div><a class="wordmark" href={route}><span><strong>UMAY</strong> <span class="accent">OS</span></span></a><p>Unified Multi-Agent Advisor for Yield</p></div><div><nav aria-label={locale === 'tr' ? 'Alt gezinme' : 'Footer navigation'}>{t.nav.map((label, i) => <a href={navHref(i)}>{label}</a>)}</nav><p>{t.closing.note}</p></div></div></footer>
     <script>import '../scripts/theme'; import '../scripts/interactions';</script>
   </body>
 </html>

@@ -1,0 +1,7 @@
+---
+import type { Locale } from '../data/site';
+interface Props { number: string; name: 'manifesto' | 'architecture' | 'scientist' | 'experience' | 'development'; locale: Locale; }
+const { number, name, locale } = Astro.props;
+const labels = { tr: { manifesto: 'Manifesto', architecture: 'Mimari', scientist: 'Scientist', experience: 'Deneyim', development: 'Gelişim' }, en: { manifesto: 'Manifesto', architecture: 'Architecture', scientist: 'Scientist', experience: 'Experience', development: 'Development' } };
+---
+<p class="section-label"><span>{number}</span><span aria-hidden="true">/</span>{labels[locale][name]}</p>

@@ -1,8 +1,7 @@
 ---
 import { content, siteRepo, type Locale } from '../data/site';
-import Artwork from './Artwork.astro';
 import Arrow from './Arrow.astro';
 const { locale } = Astro.props as { locale: Locale };
 const t = content[locale].closing;
 ---
-<section class="closing dark" id="closing" aria-labelledby="closing-title"><div class="container closing-inner"><Artwork name="hero" alt={content[locale].alt.hero} class="closing-art" /><div class="closing-copy"><h2 id="closing-title">{t.lines.map((line, i) => <span class={i === 1 ? 'accent' : ''}>{line}</span>)}</h2><p>{t.text}</p><a class="button" href={siteRepo}>{t.action}<Arrow /></a></div></div></section>
+<section class="closing dark" id="closing" aria-labelledby="closing-title"><div class="container closing-inner"><div class="closing-copy"><h2 id="closing-title">{t.lines.map((line, i) => <span class={i === 1 ? 'accent' : ''}>{line}</span>)}</h2><p>{t.text}</p><a class="button primary" href={siteRepo}>{t.action}<Arrow /></a></div><img class="closing-brand" src="/umay-icons/dark/icon-512.png" width="512" height="512" alt="" loading="lazy" decoding="async" /></div></section>

@@ -2,27 +2,29 @@
 import { content, type Locale } from '../data/site';
 import Arrow from './Arrow.astro';
 import Artwork from './Artwork.astro';
+import SectionLabel from './SectionLabel.astro';
+import DiagramIcon from './DiagramIcon.astro';
 const { locale } = Astro.props as { locale: Locale };
 const t = content[locale].architecture;
 const views = ['operation', 'teacher', 'development'];
 ---
 <section id="architecture" class="section container" aria-labelledby="architecture-title">
-  <h2 id="architecture-title">{t.title}</h2><p class="section-intro">{t.intro}</p>
-  <div class="tabs" role="tablist" aria-label={locale === 'tr' ? 'Mimari görünümü' : 'Architecture view'} data-controls="architecture" hidden>{t.labels.map((label, i) => <button role="tab" id={`tab-${views[i]}`} aria-controls={`panel-${views[i]}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-view={views[i]}>{label}</button>)}</div>
+  <SectionLabel number="02" name="architecture" locale={locale} />
+  <div class="section-heading"><h2 id="architecture-title">{t.title}</h2><p class="section-intro">{t.intro}</p></div>
+  <div class="tabs" role="tablist" aria-label={locale === 'tr' ? 'Mimari görünümü' : 'Architecture view'} data-controls="architecture" hidden>{t.labels.map((label, i) => <button role="tab" id={`tab-${views[i]}`} aria-controls={`panel-${views[i]}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-view={views[i]}><span aria-hidden="true">0{i + 1}</span>{label}</button>)}</div>
   <div id="panel-operation" data-architecture-panel="operation" aria-labelledby="operation-heading">
     <h3 id="operation-heading" class="view-heading">{t.labels[0]}</h3>
     <div class="placement">
       <div class="onprem"><p class="boundary-label">{t.onprem}</p><div class="operating-diagram">
-        <div class="diagram-node human-node"><strong>{t.human}</strong></div>
+        <div class="diagram-node human-node"><DiagramIcon name="human" /><strong>{t.human}</strong></div>
         <div class="connector human-connector"><Arrow /></div>
-        <div class="diagram-node core-node"><h4>{t.core}</h4><div class="core-roles"><p>{t.s1}</p><p>{t.s2}</p></div></div>
-        <div class="connector app-connector"><Arrow /></div>
-        <div class="diagram-node app-node"><strong>{t.app}</strong><p>{t.appNote}</p></div>
-        <div class="diagram-node scientist-node"><strong>{t.scientist}</strong><p>{t.scientistNote}</p></div>
-        <div class="diagram-node knowledge-node"><strong>{t.knowledge}</strong><p>{t.knowledgeNote}</p></div>
-        <svg class="branch-lines" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path d="M500 0v30H270v70M500 30h230v70" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke" /></svg>
+        <div class="diagram-node core-node"><div class="core-heading"><img src="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" /><h4>{t.core}</h4></div><div class="core-roles"><p>{t.s1}</p><p>{t.s2}</p></div></div>
+        <div class="diagram-node scientist-node"><DiagramIcon name="scientist" /><strong>{t.scientist}</strong><p>{t.scientistNote}</p></div>
+        <div class="diagram-node app-node"><DiagramIcon name="application" /><strong>{t.app}</strong><p>{t.appNote}</p></div>
+        <div class="diagram-node knowledge-node"><DiagramIcon name="knowledge" /><strong>{t.knowledge}</strong><p>{t.knowledgeNote}</p></div>
+        <svg class="branch-lines" viewBox="0 0 1000 52" preserveAspectRatio="none" aria-hidden="true"><path d="M500 0v52M166 52V26h668v26" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke" /></svg>
       </div></div>
-      <aside class="rented"><strong>{t.rented}</strong><p>{t.rentedNote}</p></aside>
+      <aside class="rented"><DiagramIcon name="cloud" /><strong>{t.rented}</strong><p>{t.rentedNote}</p></aside>
     </div>
     <p class="diagram-distinction">{t.distinction}</p><p class="view-description">{t.operation}</p>
   </div>
