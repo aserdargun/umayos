@@ -28,16 +28,18 @@ const next = document.querySelector<HTMLButtonElement>(
   '[data-direction="next"]',
 );
 let activeSection = location.hash.slice(1);
-let intendedSection = activeSection;
+let intendedSection: string | null = location.hash.slice(1) || null;
 let scrollTimer: ReturnType<typeof setTimeout>;
 function rememberSection(section: string) {
   activeSection = section;
-  intendedSection = section;
+  intendedSection = section || null;
   clearTimeout(scrollTimer);
 }
 // Anchor animations and layout changes must not replace an explicit selection.
 // Start following the visible section again when the visitor scrolls themselves.
-const followScroll = () => { intendedSection = ""; };
+const followScroll = () => {
+  intendedSection = null;
+};
 window.addEventListener("wheel", followScroll, { passive: true });
 window.addEventListener("touchmove", followScroll, { passive: true });
 window.addEventListener("keydown", (event) => {
@@ -52,13 +54,15 @@ window.addEventListener("pointerdown", (event) => {
 window.addEventListener("scroll", () => {
   clearTimeout(scrollTimer);
   scrollTimer = setTimeout(() => {
-    if (intendedSection) return;
     const probe = (document.querySelector("header")?.getBoundingClientRect().height ?? 0) + 60;
     const section = [...document.querySelectorAll<HTMLElement>("main section[id]")].find(el => {
       const rect = el.getBoundingClientRect();
       return rect.top <= probe && rect.bottom > probe;
     });
-    if (section) activeSection = section.id;
+    if (section) {
+      activeSection = section.id;
+      if (section.id === intendedSection) intendedSection = null;
+    }
   }, 180);
 }, { passive: true });
 document.querySelectorAll<HTMLAnchorElement>('a[href*="#"]').forEach(link => link.addEventListener("click", () => {
@@ -180,9 +184,9 @@ document
       const destination = new URL(link.href);
       const current = new URL(location.href);
       destination.search = current.search;
-      // Use the intended section while a smooth anchor scroll is still moving.
-      // A deliberate user scroll resumes visible-section tracking.
-      destination.hash = activeSection;
+      // Prefer the intentionally pinned section while scroll-spy may briefly
+      // report a different visible section during smooth/programmatic scroll.
+      destination.hash = intendedSection || activeSection;
       if (destination.hash === "#hero") destination.hash = "";
       link.href = destination.href;
     }),
