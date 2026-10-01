@@ -174,6 +174,21 @@ test("theme works when browser storage is unavailable", async ({ page }) => {
   expect(errors).toEqual([]);
 });
 
+test("language preserves explicit section during programmatic scrolling and follows manual scroll", async ({ page }) => {
+  await page.goto("/?view=teacher#architecture");
+  await expect(page.locator('[data-view="teacher"]')).toHaveAttribute("aria-selected", "true");
+  // Simulate an intermediate viewport during an anchor animation/layout shift.
+  await page.locator("#manifesto").evaluate(el => el.scrollIntoView({ behavior: "instant" }));
+  await page.waitForTimeout(250);
+  await page.locator('[data-language="en"]').click();
+  await expect(page).toHaveURL(/view=teacher.*#architecture$/);
+  await page.locator("#manifesto").evaluate(el => el.scrollIntoView({ behavior: "instant" }));
+  await page.mouse.wheel(0, 1);
+  await page.waitForTimeout(250);
+  await page.locator('[data-language="tr"]').click();
+  await expect(page).toHaveURL(/view=teacher.*#manifesto$/);
+});
+
 test("keyboard controls, shareable state and reduced motion", async ({
   page,
 }) => {

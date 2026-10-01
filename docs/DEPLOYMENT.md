@@ -15,7 +15,7 @@ Hedef kullanıcı tarafından seçilen `umayos subscription` ve `swa-umayos-org`
 | Actions secret | `AZURE_STATIC_WEB_APPS_API_TOKEN_UMAYOS_ORG` |
 | Concurrency | `swa-umayos-org-production`, `cancel-in-progress: false` |
 
-Azure kaynak entegrasyonu `None`; tek yayın workflow'u doğrulanmış statik çıktıyı yükler. `main` push veya manuel workflow dispatch, Node 24 ile `npm ci`, Chromium kurulumu, `npm run validate` ve `npm run prepare:release` çalıştırır. Official Actions referansları sabit commit SHA'larına pinlidir. `Azure/static-web-apps-deploy`, `skip_app_build: true`, `skip_api_build: true`, `app_location: dist` kullanır; backend/API artifact'i yoktur.
+Azure kaynak entegrasyonu `None`; tek yayın workflow'u doğrulanmış statik çıktıyı yükler. `main` push veya manuel workflow dispatch, sabit Ubuntu 24.04 runner ve Node 24 ile `npm ci`, Chromium kurulumu, `npm run validate` ve `npm run prepare:release` çalıştırır. Official Actions referansları sabit commit SHA'larına pinlidir. `Azure/static-web-apps-deploy`, `skip_app_build: true`, `skip_api_build: true`, `app_location: dist` kullanır; backend/API artifact'i yoktur.
 
 Deployment token yalnız Azure CLI → GitHub Actions secret borusunda aktarılır; dosyaya veya loga yazılmaz. Bütün subscription kapsamlı Azure komutlarında yukarıdaki ID açıkça verilir. Bu yeni kaynak önceki uygulamaları değiştirmez.
 
@@ -32,6 +32,6 @@ curl --fail https://white-wave-09587f203.3.azurestaticapps.net/release.json
 PLAYWRIGHT_BASE_URL=https://white-wave-09587f203.3.azurestaticapps.net npm run test:e2e
 ```
 
-Canlı test aynı 23 testlik yerel TR/EN, dört genişlik, iki tema ve etkileşim sözleşmesini kullanır; yerel preview açmaz. Tema/icon screenshot kanıtı için `CAPTURE_THEME_EVIDENCE=1` eklenebilir. Yerel kabul kaydı: [VALIDATION](VALIDATION.md).
+Canlı test aynı 24 testlik yerel TR/EN, dört genişlik, iki tema ve etkileşim sözleşmesini kullanır; yerel preview açmaz. Tema/icon screenshot kanıtı için `CAPTURE_THEME_EVIDENCE=1` eklenebilir. Yerel kabul kaydı: [VALIDATION](VALIDATION.md).
 
 `umayos.org` canonical hedefi korunur. Özel alan adı/DNS bağlantısı bu yayın görevine dahil değildir. Yayın kapsamı public manifesto/mimari sitesidir; UMAY runtime, kurum içi SWAPP, gerçek veri entegrasyonu veya cihazdaki PWA kurulumu kabulü değildir.

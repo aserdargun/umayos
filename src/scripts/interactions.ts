@@ -28,10 +28,31 @@ const next = document.querySelector<HTMLButtonElement>(
   '[data-direction="next"]',
 );
 let activeSection = location.hash.slice(1);
+let intendedSection = activeSection;
 let scrollTimer: ReturnType<typeof setTimeout>;
+function rememberSection(section: string) {
+  activeSection = section;
+  intendedSection = section;
+  clearTimeout(scrollTimer);
+}
+// Anchor animations and layout changes must not replace an explicit selection.
+// Start following the visible section again when the visitor scrolls themselves.
+const followScroll = () => { intendedSection = ""; };
+window.addEventListener("wheel", followScroll, { passive: true });
+window.addEventListener("touchmove", followScroll, { passive: true });
+window.addEventListener("keydown", (event) => {
+  if (event.defaultPrevented || !["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) return;
+  const target = event.target;
+  if (target instanceof Element && (target.closest("input, textarea, [contenteditable]") || (event.key === " " && target.closest("button, summary")))) return;
+  followScroll();
+});
+window.addEventListener("pointerdown", (event) => {
+  if (event.clientX >= document.documentElement.clientWidth) followScroll();
+});
 window.addEventListener("scroll", () => {
   clearTimeout(scrollTimer);
   scrollTimer = setTimeout(() => {
+    if (intendedSection) return;
     const probe = (document.querySelector("header")?.getBoundingClientRect().height ?? 0) + 60;
     const section = [...document.querySelectorAll<HTMLElement>("main section[id]")].find(el => {
       const rect = el.getBoundingClientRect();
@@ -42,9 +63,9 @@ window.addEventListener("scroll", () => {
 }, { passive: true });
 document.querySelectorAll<HTMLAnchorElement>('a[href*="#"]').forEach(link => link.addEventListener("click", () => {
   const target = new URL(link.href).hash.slice(1);
-  if (document.querySelector(`main section[id="${CSS.escape(target)}"]`)) activeSection = target;
+  if (document.querySelector(`main section[id="${CSS.escape(target)}"]`)) rememberSection(target);
 }));
-window.addEventListener("hashchange", () => { activeSection = location.hash.slice(1); });
+window.addEventListener("hashchange", () => { rememberSection(location.hash.slice(1)); });
 function updateUrl() {
   const url = new URL(location.href);
   if (view === "operation") url.searchParams.delete("view");
@@ -110,13 +131,13 @@ function tabKeyboard(
 }
 const selectView = (button: HTMLButtonElement) => {
   view = button.dataset.view as View;
-  activeSection = "architecture";
+  rememberSection("architecture");
   renderView();
   updateUrl();
 };
 const selectStep = (button: HTMLButtonElement) => {
   step = Number(button.dataset.step);
-  activeSection = "scientist";
+  rememberSection("scientist");
   renderStep();
   updateUrl();
 };
@@ -141,13 +162,13 @@ if (viewButtons.length && stepButtons.length) {
   });
   previous?.addEventListener("click", () => {
     step = Math.max(0, step - 1);
-    activeSection = "scientist";
+    rememberSection("scientist");
     renderStep();
     updateUrl();
   });
   next?.addEventListener("click", () => {
     step = Math.min(5, step + 1);
-    activeSection = "scientist";
+    rememberSection("scientist");
     renderStep();
     updateUrl();
   });
@@ -160,7 +181,7 @@ document
       const current = new URL(location.href);
       destination.search = current.search;
       // Use the intended section while a smooth anchor scroll is still moving.
-      // Natural scrolling updates it once scrolling settles.
+      // A deliberate user scroll resumes visible-section tracking.
       destination.hash = activeSection;
       if (destination.hash === "#hero") destination.hash = "";
       link.href = destination.href;
