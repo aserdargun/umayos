@@ -1,0 +1,222 @@
+[
+  {
+    "file": "public/assets/hero-480.avif",
+    "format": "heif",
+    "width": 480,
+    "height": 320,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 5453
+  },
+  {
+    "file": "public/assets/hero-480.webp",
+    "format": "webp",
+    "width": 480,
+    "height": 320,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 7426
+  },
+  {
+    "file": "public/assets/hero-960.avif",
+    "format": "heif",
+    "width": 960,
+    "height": 640,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 14383
+  },
+  {
+    "file": "public/assets/hero-960.webp",
+    "format": "webp",
+    "width": 960,
+    "height": 640,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 21304
+  },
+  {
+    "file": "public/assets/hero-1536.avif",
+    "format": "heif",
+    "width": 1536,
+    "height": 1024,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 32357
+  },
+  {
+    "file": "public/assets/hero-1536.webp",
+    "format": "webp",
+    "width": 1536,
+    "height": 1024,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 50526
+  },
+  {
+    "file": "public/assets/teacher-480.avif",
+    "format": "heif",
+    "width": 480,
+    "height": 320,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 6197
+  },
+  {
+    "file": "public/assets/teacher-480.webp",
+    "format": "webp",
+    "width": 480,
+    "height": 320,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 9008
+  },
+  {
+    "file": "public/assets/teacher-960.avif",
+    "format": "heif",
+    "width": 960,
+    "height": 640,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 16224
+  },
+  {
+    "file": "public/assets/teacher-960.webp",
+    "format": "webp",
+    "width": 960,
+    "height": 640,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 25056
+  },
+  {
+    "file": "public/assets/teacher-1536.avif",
+    "format": "heif",
+    "width": 1536,
+    "height": 1024,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 31790
+  },
+  {
+    "file": "public/assets/teacher-1536.webp",
+    "format": "webp",
+    "width": 1536,
+    "height": 1024,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 50958
+  },
+  {
+    "file": "public/assets/archive-480.avif",
+    "format": "heif",
+    "width": 480,
+    "height": 320,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 8022
+  },
+  {
+    "file": "public/assets/archive-480.webp",
+    "format": "webp",
+    "width": 480,
+    "height": 320,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 12894
+  },
+  {
+    "file": "public/assets/archive-960.avif",
+    "format": "heif",
+    "width": 960,
+    "height": 640,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 20701
+  },
+  {
+    "file": "public/assets/archive-960.webp",
+    "format": "webp",
+    "width": 960,
+    "height": 640,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 34350
+  },
+  {
+    "file": "public/assets/archive-1536.avif",
+    "format": "heif",
+    "width": 1536,
+    "height": 1024,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 41220
+  },
+  {
+    "file": "public/assets/archive-1536.webp",
+    "format": "webp",
+    "width": 1536,
+    "height": 1024,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 68810
+  },
+  {
+    "file": "public/assets/hero-mobile-480.avif",
+    "format": "heif",
+    "width": 480,
+    "height": 514,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 10000
+  },
+  {
+    "file": "public/assets/hero-mobile-480.webp",
+    "format": "webp",
+    "width": 480,
+    "height": 514,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 14378
+  },
+  {
+    "file": "public/assets/hero-mobile-956.avif",
+    "format": "heif",
+    "width": 956,
+    "height": 1024,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 30589
+  },
+  {
+    "file": "public/assets/hero-mobile-956.webp",
+    "format": "webp",
+    "width": 956,
+    "height": 1024,
+    "channels": 3,
+    "premultiplied": false,
+    "hasAlpha": false,
+    "size": 50006
+  }
+]

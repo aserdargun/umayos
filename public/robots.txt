@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://umayos.org/sitemap.xml

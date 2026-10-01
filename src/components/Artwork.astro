@@ -1,0 +1,10 @@
+---
+interface Props { name: 'hero' | 'teacher' | 'archive'; alt: string; priority?: boolean; class?: string; }
+const { name, alt, priority = false, class: className = '' } = Astro.props;
+const set = (format: string, mobile = false) => (mobile ? [480, 956] : [480, 960, 1536]).map(w => `/assets/${name}${mobile ? '-mobile' : ''}-${w}.${format} ${w}w`).join(', ');
+---
+<picture class={className}>
+  {name === 'hero' && <><source media="(max-width: 900px)" type="image/avif" srcset={set('avif', true)} sizes="100vw" /><source media="(max-width: 900px)" type="image/webp" srcset={set('webp', true)} sizes="100vw" /></>}
+  <source type="image/avif" srcset={set('avif')} sizes={name === 'teacher' ? '100vw' : '(max-width: 900px) 100vw, 65vw'} />
+  <img src={`/assets/${name}-960.webp`} srcset={set('webp')} sizes={name === 'teacher' ? '100vw' : '(max-width: 900px) 100vw, 65vw'} width="1536" height="1024" alt={alt} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : 'auto'} decoding="async" />
+</picture>

@@ -1,0 +1,7 @@
+---
+import { content, type Locale } from '../data/site';
+const { locale } = Astro.props as { locale: Locale };
+const t = content[locale].manifesto;
+---
+<section id="manifesto" class="section container" aria-labelledby="manifesto-title"><h2 id="manifesto-title">{t.title.map(line => <span>{line}</span>)}</h2><p class="manifesto-intro">{t.intro}</p><ol class="principles">{t.principles.map(([title, text], i) => <li><span class="number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol></section>
+<div class="quote-band dark"><div class="container"><blockquote>{t.quote.map(line => <span>{line}</span>)}</blockquote></div></div>

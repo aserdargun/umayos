@@ -1,0 +1,141 @@
+# Image Gen briefs and prompts
+
+Generated with the built-in Image Gen tool on 1 October 2026. The tool did not expose a model version; none is asserted. No private institutional material was provided. All original images were inspected with view_image for material, framing, legibility, edges and palette. Production files are separate from section screenshot references.
+
+## design-reference: hero
+
+File: `design/concepts/hero.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge. Generate DESKTOP HERO reference at approximately 1440x960, readable screenshot. Header navy: UMAY OS left, Manifesto / Mimari / Gelişim middle, TR / EN and GitHub right, thin bottom divider. Hero navy two columns. Left very large 3-line headline exactly "Modeller değişir." / "Deneyim kalır." / "Karar insanda kalır." first two white, third teal. Beneath short Turkish description: "Yerel modelleri, uzman eylemcileri ve kalıcı bilgiyi insan denetiminde birleştiren işletim katmanı." Two square outlined/teal controls "Manifestoyu oku" and "Mimariyi keşfet" with minimal SVG-like arrow. Right calm exquisite 3D architectural assemblage: floating translucent teal glass knowledge plates around solid navy modular blocks, soft studio light, navy background blending naturally, no text/topology/UI inside art. Bottom hairline and publication-note "Linux üzerinde bir eylemci işletim katmanı." A little pure-white following section preview at bottom. Aim breathtaking yet calm, clear headline and balanced media, no decorative fillers.
+
+## design-reference: manifesto
+
+File: `design/concepts/manifesto.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge.DESKTOP MANIFESTO section, 1440x960 family reference. White background, navy text. Huge left title "Bir cevaptan fazlası. Bir çalışma biçimi." Below short line "Oku → analiz et → danış. Karar insanda." Eight principles as editorial numbered open rows, TWO columns 4 rows, generous spacing and fine horizontal dividing lines, no cards. Principle bold 24px lines: "Kendi altyapında çalış." / "Deneyim modelden uzun yaşasın." / "Öğretmen üretir. Çalışan uygular." / "Açıklama kanıta dayansın." / "Yetki insanda kalsın." / "Beceri tekrar kullanılabilsin." / "Öğrenme kontrollü ilerlesin." / "Fayda varsa genişle." Each one with one short supporting Turkish sentence. Tiny teal numbers 01-08. Bottom navy transition quote band "İyi bir cevap başlangıçtır. Doğrulanmış bilgi, izlenebilir bir kayıttır."
+
+## design-reference: architecture
+
+File: `design/concepts/architecture.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge.DESKTOP ARCHITECTURE section 1440x960, pure white, navy and teal. Title "Bir çekirdek. Uzmanlaşan bir aile." short explanatory AOS core and Scientist first expert. horizontal square text tab rail "İşletim / Öğretmen / Gelişim" with teal bottom line for İşletim. A single broad accessible diagram area, thin outline on-prem boundary with small "On-prem · yerel işletim" label. Left "İnsan · amaç ve izin", central large navy rectangular "UMAY OS Core" with "S1 · hızlı seçim" and "S2 · plan ve toparlanma" as two divisions, far right "Application Pack · SWAPP" with line "Tek GUI · tek yürütme sahibi". Below central "UMAY Scientist · ilk uzman" and "Yerel bilgi · RAG / Skill / Eğitim verisi" connected via thin teal lines. To right outside on-prem boundary small outlined "Kiralık self-host GPU" separate box. Under diagram explanatory one sentence "Model bir hesap kaynağıdır. Eylemci, sınırları tanımlı bir yürütme rolüdür." Fine dotted conceptual connections, no dense mega diagram. BELOW a dark wide teacher/worker conceptual two-workspace artwork with no UI text. All exact diagram text must be in HTML/SVG implementation. No teacher direct live GUI arrow.
+
+## design-reference: scientist
+
+File: `design/concepts/scientist.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge.DESKTOP SCIENTIST example section 1440x960. Navy background, white/teal. Top title "İlk uzman: Scientist." supporting "Soru, kanıt ve hesap arasında." Small factual label "Kavramsal örnek · sentetik veri". Six step buttons as horizontal numbered progress rail: Soru / Veri / Hesap / Hipotez / Yanıt / İnceleme, selected Hesap teal. Below white editorial evidence sheet: left deterministic line chart labeled "Titreşim · mm/s RMS", 6 point values 2.0 2.2 2.1 2.5 3.2 3.4, dates 01–06 Eyl. Right "Deterministik hesap" and "İlk üç gün: 2,10 mm/s" "Son üç gün: 3,03 mm/s" "Değişim: +%44,4", small footnote "Bu değişim bir arıza tanısı değildir." Beneath three open columns source / alternative explanation / missing evidence. Source "sentetik-titresim-v1.csv" alternative "Yük veya ölçüm koşulları değişmiş olabilir." missing "Devir, yük ve bakım kaydı yok." Prev/next square outlined controls. Calm research note, not real industrial dashboard.
+
+## design-reference: experience
+
+File: `design/concepts/experience.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge.DESKTOP DURABLE EXPERIENCE section 1440x960, pure white. Huge navy title "Model değişir. Bilginin izi kalır." asymmetric layout upper left supporting "Saklanan şey yalnız bir cevap değil; kaynağı, incelemesi ve sürümüdür." right gorgeous conceptual archive sculpture: horizontal translucent glass/white layers with teal thin edges, subtle shadow on white, no text. Bottom editorial THREE horizontal columns with no card boxes headings "RAG" / "Skill" / "Eğitim verisi", explanatory Turkish paragraphs "Kaynağa bağlı bilgi." / "Sürümlü ve sınanabilir yöntem." / "Değerlendirilmiş öğrenme örneği." Under thin teal step flow "Aday → İnsan incelemesi → Doğrulanmış kayıt → Değerlendirme → Sürüm / geri alma". Small paragraph "Embeddings, tokenizer çıktıları ve LoRA adapter’ları her modele doğrudan taşınmaz."
+
+## design-reference: development
+
+File: `design/concepts/development.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge.DESKTOP DEVELOPMENT AND SOURCES section 1440x960. Pure white, navy/teal, research publication. Heading "Bugün nerede duruyoruz?" small date "Kaynak incelemesi · 1 Ekim 2026". Three OPEN editorial columns with thin top navy rules, no enclosed cards. Column 1 "Public kaynaklarda mevcut" content "AOS · çekirdek temeli" and "AI-Scientist · ilk uzman temeli", short code-pin lines and real github-like source links. Column 2 "UMAY mimari kararı" says "Yerel S1/S2 işletim. Öğretmen ve çalışan ayrımı. Kalıcı Investigation ve insan terfisi." Column 3 "Entegrasyon ve kabul bekliyor" says "Core–Scientist birleşimi. Broker baseline uyumu. SWAPP yerel GUI kabulü. Sürekli eğitim." Below horizontal ROADMAP numbered line with Integration / Local GUI acceptance / Independent evaluation / Next experts, no dates/promised metrics. Bottom footnote "Kaynak envanteri, UMAY test sonucu değildir."
+
+## design-reference: closing
+
+File: `design/concepts/closing.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge.DESKTOP CLOSING AND FOOTER section 1440x960. Navy #0B1F3A, large white and teal type, generous clean space. Single concluding headline "Zekâ değişebilir." white line then "Sorumluluk kalır." teal line. Beneath "Bir sonraki modeli değil, onunla çalışmanın kalıcı temelini inşa ediyoruz." Real outlined button "Gelişimi GitHub’da incele" with simple arrow. Right or lower subtle architectural glass knowledge plates motif on navy, no heads/logos. Low footer hairline, text UMAY OS and "Unified Multi-Agent Advisor for Yield", right links Manifesto / Mimari / Gelişim, small statement "Bir kamu anlatısı. Runtime kabulü değildir." No signup/download/demo or invented licence claims.
+
+## design-reference: mobile-hero
+
+File: `design/concepts/mobile-hero.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge.MOBILE HERO reference standalone at 390x844 portrait. Same navy hero. Top wordmark UMAY OS left, compact TR / EN and GitHub right. Under header second compact navigation row Manifesto / Mimari / Gelişim with ample touch targets. At top 34px bold headline in exact three lines "Modeller değişir." "Deneyim kalır." "Karar insanda kalır." last teal. Below 16px short description "Yerel modelleri, uzman eylemcileri ve kalıcı bilgiyi insan denetiminde birleştiren işletim katmanı." Stacked or paired square teal outlined buttons "Manifestoyu oku" and "Mimariyi keşfet". Below a distinct large architectural navy-block/teal-glass sculpture image blending navy background, object centered crop without clipping important silhouette. Bottom Linux operating layer note and white section begins. All readable, generous 20px gutters, no decorative eyebrow.
+
+## design-reference: mobile-architecture
+
+File: `design/concepts/mobile-architecture.png`
+
+Concept only; never embedded as site UI.
+
+Prompt:
+
+> Design one fresh standalone section screenshot for a Turkish public editorial manifesto website UMAY OS (Unified Multi-Agent Advisor for Yield), a planned Linux-based local agent operating layer, for researchers and engineers. This is ONE section in coordinated set: hero, manifesto, interactive architecture, Scientist synthetic example, durable experience, development/source status, closing, plus mobile hero and mobile architecture. Visual system: true navy #0B1F3A, teal #20B8BE, pure white; sophisticated clean Swiss research publication, large Inter-like sans serif with Turkish characters, wide gutters, generous space, hairline rules, square controls, very little rounding; no default card grids, purple neon, robot heads, glowing brains, fake metrics or terminals. Code-native text/controls, implementable Astro+CSS, images separable. Existing brand icon is unavailable: show text wordmark UMAY OS only; DO NOT invent head/brand icon. No hero pretitle/eyebrow/badge.MOBILE ARCHITECTURE reference standalone 390x844 portrait pure white, navy text. 30px headline "Bir çekirdek. Uzmanlaşan bir aile." a short paragraph explaining AOS core/Scientist first specialist. Three equal touch text buttons İşletim / Öğretmen / Gelişim above a VERTICAL diagram, native HTML text, never shrink a huge desktop diagram. On-prem boundary simple fine dashed outline, inside top "İnsan · amaç ve izin", thin teal down arrow, navy "UMAY OS Core" with stacked S1 · hızlı seçim / S2 · plan ve toparlanma, then Scientist first expert, Application Pack · SWAPP, local knowledge in vertically stacked OPEN compact diagram nodes with connections, 16px+ labels. Outside below on-prem boundary "Kiralık self-host GPU · ayrı yerleşim" with thin border. Short footnote "Tek GUI · tek yürütme sahibi". No teacher to live GUI arrow, no overflow, no tiny labels.
+
+## production-artwork: hero
+
+File: `design/originals/hero.png`
+
+Image Gen conceptual artwork; not real equipment or application UI.
+
+Use: Hero and closing.
+
+TR alt: Gece mavisi modüller ve turkuaz cam katmanlarla yerel zekâ ve kalıcı bilgi üzerine kavramsal kompozisyon.
+
+EN alt: A conceptual composition of navy modules and teal glass layers representing local intelligence and lasting knowledge.
+
+Prompt:
+
+> Create a NEW standalone production artwork for UMAY OS manifesto website, NOT a UI screenshot. Landscape 3:2 composition. Exquisite calm architectural still life: solid navy modular monolith blocks with interleaved translucent teal glass knowledge plates, polished finely textured materials, measured soft studio lighting, subtle teal edge reflections, restrained research aesthetic. Same object language as supplied reference but new dedicated asset. Seamless dark #0B1F3A studio backdrop and ground, object occupies right 60 percent, clean completely empty left 40 percent for later HTML headline, plenty top space and mobile crop-safe object silhouette. Metaphor of modular local intelligence and durable knowledge, NOT exact topology. No text, logos, heads, robots, brains, neon, UI, diagrams, data, employer, real equipment or institutional imagery. Output only artwork, no framing or layout screenshot.
+
+## production-artwork: teacher
+
+File: `design/originals/teacher.png`
+
+Image Gen conceptual artwork; not real equipment or application UI.
+
+Use: Teacher/worker architectural interlude.
+
+TR alt: Birbirinden ayrılmış iki mimari çalışma alanı; solda aday üretimi, sağda incelenmiş modüller.
+
+EN alt: Two separated architectural workspaces: candidate ideas on the left and reviewed modules on the right.
+
+Prompt:
+
+> Generate standalone LANDSCAPE 3:2 production art, no UI screenshot, for UMAY OS teacher and worker conceptual relation. Two complementary ARCHITECTURAL WORKSPACES, no people: left an elevated open teal translucent glass drafting plane with loose modular blocks as candidate ideas; right a disciplined grounded navy workbench with precisely aligned solid modules and a small neatly organized glass archive. Clear empty physical gap between workspaces, visually suggest deliberate review rather than direct control or automatic authority. Soft navy #0B1F3A background, sophisticated material and light consistent with floating glass/navy monolith hero, controlled #20B8BE reflections, calm high-quality sculptural still-life, generous negative space. Absolutely no text, exact arrows/topology, screens, UI, logos, brains, robot faces, employer data. This is an openly conceptual metaphor, not real hardware/service.
+
+## production-artwork: archive
+
+File: `design/originals/archive.png`
+
+Image Gen conceptual artwork; not real equipment or application UI.
+
+Use: Durable experience section.
+
+TR alt: Bilginin kaynağını ve inceleme geçmişini temsil eden şeffaf arşiv katmanları.
+
+EN alt: Transparent archive layers representing knowledge provenance and review history.
+
+Prompt:
+
+> Generate standalone LANDSCAPE 3:2 production art for durable verified experience on UMAY OS editorial site. A quiet beautiful architectural archive: stack of 9-12 horizontal translucent white/clear glass slabs with fine restrained teal #20B8BE edges and a few navy index inserts, floating with measured even gaps above a PURE WHITE seamless surface. Think preserved knowledge layers and provenance, not an actual server. Exquisite soft diffuse studio light and clean shadows, geometric disciplined form, same material language as navy/teal modular glass sculpture hero. Centered sculpture takes 70% frame with generous white margin for responsive cropping. No text, numbers, logo, branding, precise topology, fake UI, people, faces, brains, neon. Fine crisp edges. Metaphorical still-life only.

@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from './Hero.astro';
+import Manifesto from './Manifesto.astro';
+import Architecture from './Architecture.astro';
+import Scientist from './Scientist.astro';
+import Experience from './Experience.astro';
+import Development from './Development.astro';
+import Closing from './Closing.astro';
+import type { Locale } from '../data/site';
+const { locale } = Astro.props as { locale: Locale };
+---
+<Layout locale={locale}><Hero locale={locale} /><Manifesto locale={locale} /><Architecture locale={locale} /><Scientist locale={locale} /><Experience locale={locale} /><Development locale={locale} /><Closing locale={locale} /></Layout>

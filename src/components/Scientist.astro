@@ -1,0 +1,20 @@
+---
+import { content, type Locale } from '../data/site';
+import { vibration, timestamps, firstMean, lastMean, percentageChange, method } from '../data/synthetic';
+import Arrow from './Arrow.astro';
+const { locale } = Astro.props as { locale: Locale };
+const t = content[locale].scientist;
+const format = (n: number, digits = 2) => n.toLocaleString(locale === 'tr' ? 'tr-TR' : 'en-US', {minimumFractionDigits: digits, maximumFractionDigits: digits});
+const points = vibration.map((value, i) => ({x: 55 + i * 100, y: 225 - value * 42, value}));
+---
+<section id="scientist" class="scientist section dark" aria-labelledby="scientist-title"><div class="container">
+  <h2 id="scientist-title">{t.title}</h2><p class="scientist-subtitle">{t.subtitle}</p><p class="section-intro">{t.intro}</p><p class="synthetic-label">{t.label}</p>
+  <div class="steps" data-controls="scientist" role="tablist" aria-label={locale === 'tr' ? 'Sentetik inceleme adımları' : 'Synthetic investigation steps'} hidden>{t.steps.map(([label], i) => <button role="tab" id={`step-tab-${i}`} aria-controls={`step-panel-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-step={i}><span>{i + 1}</span>{label}</button>)}</div>
+  <div class="step-narrative" aria-live="polite">{t.steps.map(([label, title, text], i) => <article id={`step-panel-${i}`} data-step-panel={i} aria-labelledby={`step-heading-${i}`}><p class="step-label">{i + 1} / 6 · {label}</p><h3 id={`step-heading-${i}`}>{title}</h3><p>{text}</p></article>)}</div>
+  <div class="evidence-sheet"><div class="evidence-top">
+    <figure class="chart"><figcaption>{t.chart}</figcaption><svg viewBox="0 0 620 275" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title">{t.chart}</title><desc id="chart-desc">{`${t.label}. ${timestamps[0]} — ${timestamps[5]}. ${vibration.join(', ')} mm/s RMS.`}</desc>{[0, 1, 2, 3, 4, 5].map(value => <g><line x1="55" x2="565" y1={225 - value * 42} y2={225 - value * 42} stroke="#D9E1E8" /><text x="38" y={230 - value * 42} text-anchor="end">{value}</text></g>)}<polyline points={points.map(p => `${p.x},${p.y}`).join(' ')} fill="none" stroke="#087B80" stroke-width="2.5" />{points.map((p, i) => <g><circle cx={p.x} cy={p.y} r="5" fill="#087B80" /><text x={p.x} y={p.y - 13} text-anchor="middle" class="value-label">{format(p.value, 1)}</text><text x={p.x} y="257" text-anchor="middle">{String(i + 1).padStart(2, '0')} {locale === 'tr' ? 'Eyl' : 'Sep'}</text></g>)}</svg><p class="chart-time">2026 · 12:00 UTC · {method}</p></figure>
+    <div class="stats"><h3>{t.steps[2]?.[1]}</h3><dl><div><dt>{t.first}</dt><dd>{format(firstMean)} <small>mm/s</small></dd></div><div><dt>{t.last}</dt><dd>{format(lastMean)} <small>mm/s</small></dd></div><div><dt>{t.change}</dt><dd class="positive">+{format(percentageChange, 1)}%</dd></div></dl><p class="diagnostic">{t.diagnostic}</p></div>
+  </div><div class="evidence-fields"><div><h4>{t.source}</h4><a href="/data/synthetic-vibration-v1.csv">synthetic-vibration-v1.csv</a><p>{method}<br />2026-09-01 → 2026-09-06 · UTC</p></div><div><h4>{t.alternative}</h4><p>{t.alternativeText}</p></div><div><h4>{t.missing}</h4><p>{t.missingText}</p></div></div><details class="data-table"><summary>{t.table}</summary><table><thead><tr><th scope="col">{t.time}</th><th scope="col">{t.value}</th></tr></thead><tbody>{vibration.map((value, i) => <tr><td>{timestamps[i]}</td><td>{format(value, 1)}</td></tr>)}</tbody></table></details></div>
+  <div class="step-navigation" data-controls="step-navigation" hidden><button class="button" data-direction="previous"><span class="reverse"><Arrow /></span>{t.previous}</button><span data-step-count aria-live="polite">1 / 6</span><button class="button" data-direction="next">{t.next}<Arrow /></button></div>
+  <p class="scientist-limits">{t.limits}</p>
+</div></section>

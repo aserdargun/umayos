@@ -1,0 +1,8 @@
+# Conceptual example; entirely synthetic; method vibration-window-mean v1
+timestamp_utc,vibration_mm_s_rms
+2026-09-01T12:00:00Z,2.0
+2026-09-02T12:00:00Z,2.2
+2026-09-03T12:00:00Z,2.1
+2026-09-04T12:00:00Z,2.5
+2026-09-05T12:00:00Z,3.2
+2026-09-06T12:00:00Z,3.4

@@ -1,0 +1,8 @@
+---
+import { content, type Locale } from '../data/site';
+import Artwork from './Artwork.astro';
+import Arrow from './Arrow.astro';
+const { locale } = Astro.props as { locale: Locale };
+const t = content[locale].experience;
+---
+<section id="experience" class="section container" aria-labelledby="experience-title"><div class="experience-lead"><div><h2 id="experience-title">{t.title.map(line => <span>{line}</span>)}</h2><p class="section-intro">{t.intro}</p></div><Artwork name="archive" alt={content[locale].alt.archive} /></div><div class="knowledge-products">{t.products.map(([title, subtitle, text]) => <article><h3>{title}</h3><p class="product-subtitle">{subtitle}</p><p>{text}</p></article>)}</div><ol class="learning-flow">{t.flow.map((label, i) => <li><span>{label}</span>{i < t.flow.length - 1 && <Arrow />}</li>)}</ol><p class="technical-note">{t.note}</p></section>

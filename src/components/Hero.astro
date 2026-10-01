@@ -1,0 +1,14 @@
+---
+import { content, type Locale } from '../data/site';
+import Artwork from './Artwork.astro';
+import Arrow from './Arrow.astro';
+const { locale } = Astro.props as { locale: Locale };
+const t = content[locale];
+---
+<section class="hero dark" aria-labelledby="hero-title" id="hero">
+  <div class="container hero-inner">
+    <Artwork name="hero" alt={t.alt.hero} priority class="hero-art" />
+    <div class="hero-copy"><h1 id="hero-title">{t.hero.lines.map((line, i) => <span class={i === 2 ? 'accent' : ''}>{line}</span>)}</h1><p class="hero-description">{t.hero.description}</p><div class="hero-actions"><a class="button primary" href="#manifesto">{t.hero.actions[0]} <Arrow /></a><a class="button" href="#architecture">{t.hero.actions[1]} <Arrow /></a></div></div>
+    <p class="hero-note">{t.hero.note}</p>
+  </div>
+</section>
