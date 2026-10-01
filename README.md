@@ -52,7 +52,7 @@ npm run preview
 
 Yayın hedefi `umayos subscription` içindeki `rg-umayos-org / swa-umayos-org`, **West Europe / Free** Azure Static Web App'tir. `.github/workflows/deploy-swa-umayos-org.yml`, `main` değişikliklerinde Node 24 ile bütün kabul sırasını çalıştırır; ardından doğrulanmış `dist/` çıktısını yükler. Ayrıntılar ve yeniden yayın sözleşmesi: [DEPLOYMENT](docs/DEPLOYMENT.md).
 
-`public/staticwebapp.config.json` gerçek HTTP 404'ü `/404.html` ile sunar; AVIF/WebP/font/CSV/manifest MIME tiplerini tanımlar. `/release.json` yayındaki commit ve workflow kimliğini verir. Canonical ve hreflang hedefi `https://umayos.org` olarak korunur; özel alan adı ve DNS bağlantısı ayrıca yapılır.
+`public/staticwebapp.config.json` gerçek HTTP 404'ü `/404.html` ile sunar; AVIF/WebP/font/CSV/manifest MIME tiplerini tanımlar. `/release.json` yayındaki commit ve workflow kimliğini verir. Canonical, hreflang ve özel alan adı `https://umayos.org` adresidir. IHS'deki kök A kaydı bu Azure kaynağının doğrulanmış `stableInboundIP` değeri `20.82.12.44` adresine yönlenir; kök TXT kaydı Azure sahiplik doğrulamasını sağlar. DNS ve HTTPS kontrol sırası [DEPLOYMENT](docs/DEPLOYMENT.md) içinde yer alır.
 
 ## İçerik ve görseller
 
