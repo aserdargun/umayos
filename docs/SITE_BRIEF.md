@@ -12,6 +12,6 @@
 
 **Tasarım kaynağı:** `design/DESIGN_SYSTEM.md` ve dokuz ayrı referans. Referansların uydurulmuş URL’leri, fazladan nav öğeleri, bitmiş ürün iddiaları ve kişi görselleri uygulamaya taşınmadı. Üretim görselleri ayrı işlerde oluşturuldu; hiçbir konsept ekran görüntüsü sayfa olarak gömülmedi.
 
-**Marka sınırlaması:** Özgün Umay Ana ikonuna erişilemedi. Wordmark ve tipografik U türevleri geçicidir; özgün profil yeniden çizilmedi. Final marka uygulaması orijinal seçilmiş ikonların sağlanmasına bağlıdır.
+**Marka ve tema (1 Ekim 2026 güncellemesi):** Kullanıcının seçtiği `umay-ana-icon-set-v1` açık/koyu profilleri doğrudan kullanılır. Navbar, footer, favicon, Apple/manifest ve sosyal kart entegredir; profil yeniden çizilmedi. Tema sistem tercihini izler; elle seçim tarayıcıda, yeniden yüklemede ve dil değişiminde korunur. Beyaz okuma alanları karanlık temada gece mavisine dönüşür; özgün hero/anlatı bantları ve görsel kompozisyonlar korunur. Telefonda tema ve dil düğmeleri birlikte erişilebilirdir; GitHub bağlantısı kapanışta kalır.
 
-**Yayın:** Sağlayıcı bağımsız `dist/`. Proje lisansı seçilmedi; public erişim lisans diye sunulmaz. Kurum, operasyon, gerçek veriler veya özel kaynakların kopyaları bu repoya alınmadı. Hosting/DNS/HTTPS kabulü ve UMAY runtime kabulü ayrı aşamalardır.
+**Yayın:** `dist/`, `umayos subscription` içindeki `swa-umayos-org` Free Azure Static Web App'e gönderilir. Üretim workflow'u önce yerel kabul sırasını çalıştırır. DNS/özel alan adı ve UMAY runtime kabulü ayrı aşamalardır. Proje lisansı seçilmedi; public erişim lisans diye sunulmaz. Kurum, operasyon veya gerçek veri kopyaları bu repoya alınmadı.

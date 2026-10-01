@@ -1,4 +1,12 @@
-# Local site acceptance
+# Local theme and Azure release preparation
+
+**1 October 2026, macOS:** Node **22.23.1**, npm **10.9.8**, Astro **7.3.5**, Playwright **1.63.0**. `npm ci`, asset generation, `npm run validate` and `npm run prepare:release` passed. Astro checked 26 files with zero errors/warnings/hints; content checks verified 140 local references; **23 browser tests passed** across TR/EN, light/dark and 1440/768/390/320px. Both themes passed the existing axe accessibility and console/asset checks. Reload/language persistence, live system preference, cross-tab synchronization, blocked storage, keyboard and both JavaScript-disabled themes were exercised.
+
+The selected icon set's 42 copied files matched the source bytes before the two manifest names were adapted to UMAY OS; PNG/ICO assets remain unchanged. Navbar/footer/favicon/Apple/manifest and the social card use those profiles. IAB directly exercised the theme toggle; desktop/mobile screenshots were reviewed. White reading surfaces change to navy in dark mode; original navy hero/narrative bands and white photographic compositions retain their intended backgrounds. Layout, headline, navigation labels, Inter typography, section order and conceptual artwork remain intact; the requested mark and theme control are the visible additions. Mobile keeps theme/language controls and the closing GitHub link.
+
+Deployment settings and live verification commands: [DEPLOYMENT](DEPLOYMENT.md). This record describes the executed local checks; Azure `Ready`, workflow result and `/release.json` must be checked together for each production release. Custom DNS, device installation and UMAY runtime acceptance are separate.
+
+## Initial cloud site acceptance (historical snapshot)
 
 Date: **1 October 2026**. Linux cloud environment; Node **24.19.0**, npm **11.9.0**, Astro **7.3.5**, Playwright **1.63.0**, system Chromium **151.0.7922.173** (Debian 13). Browser/IAB automation plugin was not available in this session, so the explicitly permitted Playwright Chromium fallback was used. Development and built-static preview were both exercised. No UMAY runtime or model provider was started.
 

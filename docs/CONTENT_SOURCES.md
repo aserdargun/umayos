@@ -9,7 +9,7 @@ Kontrol tarihi: **1 Ekim 2026**. Kaynaklar salt okunur incelendi; uygulamaları 
 
 Native `git ls-remote` ile iki public HEAD’in bu pinlere eşit olduğu doğrulandı. Pinli temiz kaynak checkout’larındaki README’ler incelendi. Bu, Git okuma ve kaynak kimliği kontrolüdür; upstream uygulamaların testleri veya birleşik UMAY runtime kabulü çalıştırılmış değildir. Aynı adlı üçüncü taraf Scientist projesi kaynak olarak kullanılmadı.
 
-UMAY’ın son ürün yönü ve sekiz manifesto ilkesi, kullanıcının sağladığı kamuya uygun mimari özet üzerinden yeniden yazıldı. Core–Scientist birleşimi, SWAPP kabulü, sürekli eğitim ve broker baseline uyumu tamamlanmış gösterilmez. Özel yerel belge ve özgün ikon alanlarına bu buluttan erişilemedi; okunmuş oldukları iddia edilmez ve kopyaları eklenmez.
+UMAY’ın son ürün yönü ve sekiz manifesto ilkesi, kullanıcının sağladığı kamuya uygun mimari özet üzerinden yeniden yazıldı. Core–Scientist birleşimi, SWAPP kabulü, sürekli eğitim ve broker baseline uyumu tamamlanmış gösterilmez. İlk bulut çalışmasında özel yerel belge ve özgün ikon alanlarına erişilemedi. 1 Ekim yerel entegrasyonunda kullanıcı tarafından belirtilen UMAY ikon seti okundu ve seçilmiş marka türevleri alındı; özel kurum/operasyon belgelerinin kopyaları bu repoya eklenmedi.
 
 ## Framework ve font
 
@@ -23,4 +23,4 @@ Altı elle tanımlanan değer: 2.0, 2.2, 2.1, 2.5, 3.2, 3.4 mm/s RMS. Zamanlar 1
 
 ## Görseller
 
-Dokuz bölüm/mobil konsepti ve üç ayrı üretim asset’i yerleşik Image Gen aracıyla üretildi. Araç model sürümü bildirmedi. Görseller metaforiktir; metin/topoloji/gerçek UI üretim asset’lerine basılmadı. Promptlar, alt metinler ve dosyalar `design/` altında izlenebilir. Sosyal kart metni üretim görselinin bir türevi üzerine yerel olarak dizildi. Umay Ana kaynak ikonu mevcut olmadığı için marka türevleri geçici tipografik işarettir.
+Dokuz bölüm/mobil konsepti ve üç ayrı üretim asset’i yerleşik Image Gen aracıyla üretildi. Araç model sürümü bildirmedi. Görseller metaforiktir; metin/topoloji/gerçek UI üretim asset’lerine basılmadı. İlk üretim promptları, alt metinler ve dosyalar `design/` altında izlenebilir. Sosyal kart metni ve seçilmiş Umay Ana ikonu üretim görselinin bir türevi üzerine yerel olarak dizildi. Güncel marka kaynağı kullanıcının `UMAY/assets/icons/umay-ana-icon-set-v1` setidir; `design/brand/` köken kaydını taşır.

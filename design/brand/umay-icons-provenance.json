@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-30",
+  "origin": "user_selected_image_attachments",
+  "sources": {
+    "light": {
+      "file": "sources/light.png",
+      "original_name": "codex-clipboard-d64b2299-a0d6-4153-ab82-e24aae84589a.png",
+      "sha256": "d35465c37f8d6457ce70765a66926e5ba97f9795f563da92c4a2fea0aa6e3dc5",
+      "size": [1254, 1254],
+      "mode": "RGBA"
+    },
+    "dark": {
+      "file": "sources/dark.png",
+      "original_name": "codex-clipboard-bf041698-e3a4-4bc0-8b3b-7abc13fa1151.png",
+      "sha256": "64dfed0e66d2c6cc9e24829c28463662c0e830754b3caa03e60e147cd9f1b8a0",
+      "size": [1254, 1254],
+      "mode": "RGBA"
+    }
+  },
+  "processing": {
+    "redraw": false,
+    "crop": false,
+    "recolor": false,
+    "resampling": "Lanczos",
+    "transparent_exports": "Full source canvas resized, preserving alpha",
+    "platform_exports": "Source composited on an opaque theme background with padding",
+    "backgrounds": {"light": "#F7FAFC", "dark": "#0B1F3A"}
+  }
+}

@@ -7,7 +7,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 5453
+    "size": 5642
   },
   {
     "file": "public/assets/hero-480.webp",
@@ -27,7 +27,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 14383
+    "size": 14831
   },
   {
     "file": "public/assets/hero-960.webp",
@@ -47,7 +47,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 32357
+    "size": 33153
   },
   {
     "file": "public/assets/hero-1536.webp",
@@ -67,7 +67,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 6197
+    "size": 6499
   },
   {
     "file": "public/assets/teacher-480.webp",
@@ -87,7 +87,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 16224
+    "size": 16603
   },
   {
     "file": "public/assets/teacher-960.webp",
@@ -107,7 +107,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 31790
+    "size": 32562
   },
   {
     "file": "public/assets/teacher-1536.webp",
@@ -127,7 +127,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 8022
+    "size": 8415
   },
   {
     "file": "public/assets/archive-480.webp",
@@ -147,7 +147,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 20701
+    "size": 21514
   },
   {
     "file": "public/assets/archive-960.webp",
@@ -167,7 +167,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 41220
+    "size": 42660
   },
   {
     "file": "public/assets/archive-1536.webp",
@@ -187,7 +187,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 10000
+    "size": 10431
   },
   {
     "file": "public/assets/hero-mobile-480.webp",
@@ -207,7 +207,7 @@
     "channels": 3,
     "premultiplied": false,
     "hasAlpha": false,
-    "size": 30589
+    "size": 31557
   },
   {
     "file": "public/assets/hero-mobile-956.webp",

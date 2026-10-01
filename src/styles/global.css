@@ -5,9 +5,36 @@
   --white: #fff;
   --muted: #46566b;
   --line: #cbd5df;
+  --surface: #fff;
+  --text: #0b1f3a;
+  --panel: #fff;
+  --core: #0b1f3a;
+  color-scheme: light;
   --font: "Inter Variable", Inter, system-ui, sans-serif;
   --gutter: 64px;
   --section: 112px;
+}
+:root[data-theme="dark"] {
+  --surface: #0b1f3a;
+  --text: #eef4fb;
+  --panel: #142c4a;
+  --core: #061528;
+  --muted: #b8c7d9;
+  --line: #425a73;
+  --ink-teal: #20b8be;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #0b1f3a;
+    --text: #eef4fb;
+    --panel: #142c4a;
+    --core: #061528;
+    --muted: #b8c7d9;
+    --line: #425a73;
+    --ink-teal: #20b8be;
+    color-scheme: dark;
+  }
 }
 * {
   box-sizing: border-box;
@@ -18,8 +45,8 @@ html {
 }
 body {
   margin: 0;
-  background: var(--white);
-  color: var(--navy);
+  background: var(--surface);
+  color: var(--text);
   font-family: var(--font);
   font-size: 17px;
   line-height: 1.65;
@@ -134,8 +161,8 @@ ul {
   top: 12px;
   left: 12px;
   padding: 12px 20px;
-  background: var(--white);
-  color: var(--navy);
+  background: var(--surface);
+  color: var(--text);
   z-index: 20;
   transform: translateY(-160%);
 }
@@ -151,9 +178,12 @@ ul {
   align-items: center;
   justify-content: space-between;
   gap: 28px;
-  border-bottom: 1px solid #64758a;
+  border-bottom: 1px solid var(--line);
 }
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-size: 28px;
   font-weight: 500;
   letter-spacing: 0.055em;
@@ -171,7 +201,7 @@ nav a {
   padding-block: 10px;
 }
 nav a:hover {
-  color: var(--teal);
+  color: var(--ink-teal);
 }
 .header-tools {
   display: flex;
@@ -193,11 +223,11 @@ nav a:hover {
   justify-content: center;
 }
 .languages [aria-current] {
-  color: var(--teal);
+  color: var(--ink-teal);
   font-weight: 650;
 }
 .languages span {
-  color: #93a2b5;
+  color: var(--muted);
 }
 .github {
   display: flex;
@@ -206,7 +236,7 @@ nav a:hover {
   padding-block: 10px;
   text-decoration: none;
   font-size: 15px;
-  border-left: 1px solid #64758a;
+  border-left: 1px solid var(--line);
   padding-left: 28px;
 }
 .github .arrow {
@@ -294,12 +324,12 @@ h1 {
     color 0.18s;
 }
 .button:hover {
-  background: var(--navy);
-  color: var(--white);
+  background: var(--text);
+  color: var(--surface);
 }
 .button.primary {
-  background: var(--navy);
-  color: var(--white);
+  background: var(--text);
+  color: var(--surface);
 }
 .dark .button {
   border-color: #b2c0d0;
@@ -397,7 +427,7 @@ h1 {
   min-height: 52px;
 }
 .tabs button[aria-selected="true"] {
-  color: var(--navy);
+  color: var(--text);
   border-color: var(--ink-teal);
   font-weight: 650;
 }
@@ -445,7 +475,7 @@ h1 {
   text-align: center;
   position: relative;
   z-index: 1;
-  background: white;
+  background: var(--panel);
   min-width: 0;
 }
 .diagram-node strong {
@@ -460,7 +490,7 @@ h1 {
   color: var(--muted);
 }
 .core-node {
-  background: var(--navy);
+  background: var(--core);
   color: var(--white);
   padding: 24px 14px;
 }
@@ -666,8 +696,8 @@ h1 {
   font-size: 17px;
 }
 .evidence-sheet {
-  background: var(--white);
-  color: var(--navy);
+  background: var(--panel);
+  color: var(--text);
   padding: 36px;
 }
 .evidence-top {
@@ -692,7 +722,7 @@ h1 {
 }
 .chart .value-label {
   font-weight: 650;
-  fill: var(--navy);
+  fill: var(--text);
   font-size: 15px;
 }
 .chart-time {
@@ -1924,6 +1954,83 @@ html[lang="en"] .hero h1 {
   position: sticky;
   top: 0;
   z-index: 10;
+  background: var(--surface);
+  color: var(--text);
+}
+.brand-icons,
+.wordmark > img {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+.brand-dark,
+.theme-sun {
+  display: none;
+}
+:root[data-theme="dark"] :is(.brand-light, .theme-moon) {
+  display: none;
+}
+:root[data-theme="dark"] :is(.brand-dark, .theme-sun) {
+  display: block;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand-light {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .brand-dark {
+    display: block;
+  }
+}
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  color: var(--ink-teal);
+  border-color: var(--ink-teal);
+}
+.dark nav a:hover {
+  color: var(--teal);
+}
+.chart polyline,
+.chart circle {
+  stroke: var(--ink-teal);
+}
+.chart circle {
+  fill: var(--ink-teal);
+}
+.chart line {
+  stroke: var(--line);
+}
+/* Keep the original white photographic compositions on their paper surface. */
+.teacher-interlude picture,
+.experience-lead picture {
+  background: #fff;
+}
+@media (max-width: 600px) {
+  .header-tools {
+    gap: 8px;
+  }
+  .header-tools .github {
+    display: none;
+  }
+  .header .wordmark {
+    gap: 8px;
+    font-size: 20px;
+  }
+  .header .brand-icons,
+  .header .brand-icons img {
+    width: 40px;
+    height: 40px;
+  }
 }
 html {
   scroll-padding-top: 110px;

@@ -1,12 +1,14 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+for (const theme of ["light", "dark"] as const) {
 for (const width of [1440, 768, 390, 320]) {
   for (const locale of ["tr", "en"]) {
-    test(`${locale} at ${width}px: complete surface and preserved language state`, async ({
+    test(`${locale} ${theme} at ${width}px: complete surface and preserved language state`, async ({
       page,
     }) => {
       await page.setViewportSize({ width, height: 960 });
+      await page.emulateMedia({ colorScheme: theme });
       const errors: string[] = [];
       const failedAssets: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
@@ -20,6 +22,8 @@ for (const width of [1440, 768, 390, 320]) {
       await page.goto(locale === "tr" ? "/" : "/en/");
       await expect(page).toHaveTitle(/UMAY OS/);
       await expect(page.locator("html")).toHaveAttribute("lang", locale);
+      await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
+      await expect(page.locator("#umay-favicon")).toHaveAttribute("href", `/umay-icons/${theme}/favicon-32x32.png`);
       await expect(page.locator("h1 span")).toHaveCount(3);
       await expect(page.locator(".principles li")).toHaveCount(8);
       await expect(page.locator(".header nav a")).toHaveCount(3);
@@ -35,6 +39,10 @@ for (const width of [1440, 768, 390, 320]) {
       await expect(page).toHaveURL(/#architecture$/);
       await page.locator('[data-view="teacher"]').click();
       await expect(page.locator("#panel-teacher")).toBeVisible();
+      if (process.env.CAPTURE_THEME_EVIDENCE && locale === "tr" && [1440, 390].includes(width)) {
+        await page.locator("#architecture").evaluate(el => el.scrollIntoView({ behavior: "instant", block: "start" }));
+        await page.screenshot({ path: `test-results/${theme}-${width}-architecture.jpg`, type: "jpeg" });
+      }
       await expect(page.locator("#panel-operation")).toBeHidden();
       await expect(page.locator("#panel-teacher li")).toHaveCount(5);
       await page.locator('[data-view="development"]').click();
@@ -107,6 +115,64 @@ for (const width of [1440, 768, 390, 320]) {
     });
   }
 }
+}
+
+test("theme choice, icons and language survive reload and system changes", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.getByRole("button", { name: "Açık temaya geç" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(page.locator("#umay-favicon")).toHaveAttribute("href", "/umay-icons/light/favicon-32x32.png");
+  await expect(page.locator("#umay-apple-icon")).toHaveAttribute("href", "/umay-icons/light/apple-touch-icon.png");
+  await expect(page.locator("#umay-manifest")).toHaveAttribute("href", "/umay-icons/light/site.webmanifest");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.emulateMedia({ colorScheme: "dark" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.locator('[data-language="en"]').click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.getByRole("button", { name: "Switch to dark theme" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator("#umay-favicon")).toHaveAttribute("href", "/umay-icons/dark/favicon-32x32.png");
+  await expect(page.locator("#umay-apple-icon")).toHaveAttribute("href", "/umay-icons/dark/apple-touch-icon.png");
+  await expect(page.locator("#umay-manifest")).toHaveAttribute("href", "/umay-icons/dark/site.webmanifest");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+});
+
+test("system theme remains live until the visitor chooses a theme", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await page.emulateMedia({ colorScheme: "dark" });
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+});
+
+test("theme preference stays synchronized across tabs", async ({ page, context }) => {
+  await page.goto("/");
+  const other = await context.newPage();
+  await other.goto("/en/");
+  await page.getByRole("button", { name: "Karanlık temaya geç" }).click();
+  await expect(other.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(other.locator("#umay-favicon")).toHaveAttribute("href", "/umay-icons/dark/favicon-32x32.png");
+  await other.close();
+});
+
+test("theme works when browser storage is unavailable", async ({ page }) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "localStorage", { get() { throw new DOMException("Storage blocked", "SecurityError"); } });
+  });
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Karanlık temaya geç" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  expect(errors).toEqual([]);
+});
 
 test("keyboard controls, shareable state and reduced motion", async ({
   page,
@@ -144,15 +210,21 @@ test("keyboard controls, shareable state and reduced motion", async ({
 
 test("all narrative and architecture remain readable without JavaScript", async ({
   browser,
-}) => {
+}, testInfo) => {
+  for (const theme of ["light", "dark"] as const) {
   const context = await browser.newContext({
     javaScriptEnabled: false,
+    colorScheme: theme,
     viewport: { width: 320, height: 900 },
+    baseURL: testInfo.project.use.baseURL,
   });
   const page = await context.newPage();
   for (const path of ["/", "/en/"]) {
-    await page.goto(`http://127.0.0.1:4327${path}`);
+    await page.goto(path);
     await expect(page.locator("h1")).toBeVisible();
+    await expect(page.locator(`.header .brand-${theme}`)).toBeVisible();
+    await expect(page.locator("[data-theme-toggle]")).toBeHidden();
+    expect(await page.locator("body").evaluate(el => getComputedStyle(el).backgroundColor)).toBe(theme === "dark" ? "rgb(11, 31, 58)" : "rgb(255, 255, 255)");
     for (const id of ["panel-operation", "panel-teacher", "panel-development"])
       await expect(page.locator(`#${id}`)).toBeVisible();
     await expect(page.locator("[data-step-panel]")).toHaveCount(6);
@@ -168,6 +240,7 @@ test("all narrative and architecture remain readable without JavaScript", async 
     ).toBeTruthy();
   }
   await context.close();
+  }
 });
 
 test("distribution, canonical metadata, synthetic source and true 404", async ({
@@ -197,11 +270,21 @@ test("distribution, canonical metadata, synthetic source and true 404", async ({
     "/robots.txt",
     "/sitemap.xml",
     "/og-image.png",
-    "/favicon.svg",
+    "/favicon.ico",
     "/apple-touch-icon.png",
     "/fonts/Inter-OFL.txt",
   ])
     expect((await request.get(asset)).status()).toBe(200);
+  for (const theme of ["light", "dark"]) {
+    const root = `/umay-icons/${theme}/`;
+    const manifestResponse = await request.get(`${root}site.webmanifest`);
+    expect(manifestResponse.status()).toBe(200);
+    const manifest = await manifestResponse.json();
+    expect(manifest.name).toBe("UMAY OS");
+    expect(manifest.start_url).toBe("../../");
+    for (const file of ["favicon.ico", "favicon-32x32.png", "apple-touch-icon.png", ...manifest.icons.map((icon: { src: string }) => icon.src)])
+      expect((await request.get(`${root}${file}`)).status()).toBe(200);
+  }
   const csv = await request.get("/data/synthetic-vibration-v1.csv");
   expect(await csv.text()).toContain("entirely synthetic");
   expect(

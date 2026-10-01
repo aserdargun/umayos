@@ -1,0 +1,24 @@
+{
+  "routes": [
+    {
+      "route": "/release.json",
+      "headers": { "Cache-Control": "no-store" }
+    }
+  ],
+  "responseOverrides": {
+    "404": { "rewrite": "/404.html" }
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "mimeTypes": {
+    ".avif": "image/avif",
+    ".webp": "image/webp",
+    ".woff2": "font/woff2",
+    ".csv": "text/csv",
+    ".ico": "image/x-icon",
+    ".webmanifest": "application/manifest+json",
+    ".json": "application/json"
+  }
+}
