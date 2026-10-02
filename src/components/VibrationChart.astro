@@ -1,0 +1,31 @@
+---
+import { content, type Locale } from '../data/site';
+import { vibration, timestamps } from '../data/synthetic';
+const { locale } = Astro.props as { locale: Locale };
+const t = content[locale].scientist;
+const format = (value: number) => value.toLocaleString(locale === 'tr' ? 'tr-TR' : 'en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+// A separate compact coordinate system keeps labels readable without stretching
+// SVG text or changing the six source values on small screens.
+const layouts = [
+  { name: 'wide', width: 900, height: 220, left: 55, step: 158, bottom: 170, unit: 30, dateY: 204 },
+  { name: 'compact', width: 520, height: 290, left: 52, step: 87.2, bottom: 240, unit: 40, dateY: 274 },
+];
+---
+{layouts.map(layout => {
+  const points = vibration.map((value, i) => ({ x: layout.left + i * layout.step, y: layout.bottom - value * layout.unit, value }));
+  const right = layout.left + 5 * layout.step;
+  return <svg class={`chart-${layout.name}`} viewBox={`0 0 ${layout.width} ${layout.height}`} role="img" aria-labelledby={`chart-title-${layout.name} chart-desc-${layout.name}`}>
+    <title id={`chart-title-${layout.name}`}>{t.chart}</title>
+    <desc id={`chart-desc-${layout.name}`}>{`${t.label}. ${timestamps[0]} — ${timestamps[5]}. ${vibration.join(', ')} mm/s RMS.`}</desc>
+    {[0, 1, 2, 3, 4, 5].map(value => <g>
+      <line x1={layout.left} x2={right} y1={layout.bottom - value * layout.unit} y2={layout.bottom - value * layout.unit} />
+      <text x={layout.left - 18} y={layout.bottom + 5 - value * layout.unit} text-anchor="end">{value}</text>
+    </g>)}
+    <polyline points={points.map(p => `${p.x},${p.y}`).join(' ')} fill="none" stroke-width="2.5" />
+    {points.map((point, i) => <g>
+      <circle cx={point.x} cy={point.y} r={layout.name === 'compact' ? 4 : 7} />
+      <text x={point.x} y={point.y - 13} text-anchor="middle" class="value-label">{format(point.value)}</text>
+      <text x={point.x} y={layout.dateY} text-anchor="middle">{String(i + 1).padStart(2, '0')} {locale === 'tr' ? 'Eyl' : 'Sep'}</text>
+    </g>)}
+  </svg>;
+})}

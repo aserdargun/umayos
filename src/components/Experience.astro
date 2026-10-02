@@ -6,4 +6,22 @@ import SectionLabel from './SectionLabel.astro';
 const { locale } = Astro.props as { locale: Locale };
 const t = content[locale].experience;
 ---
-<section id="experience" class="section container" aria-labelledby="experience-title"><div class="experience-lead"><div><SectionLabel number="04" name="experience" locale={locale} /><h2 id="experience-title">{t.title.map(line => <span>{line}</span>)}</h2><p class="section-intro">{t.intro}</p></div><Artwork name="archive" alt={content[locale].alt.archive} /></div><div class="knowledge-products">{t.products.map(([title, subtitle, text], i) => <article><div class="product-index"><span class="number" aria-hidden="true">0{i + 1}</span></div><h3>{title}</h3><p class="product-subtitle">{subtitle}</p><p>{text}</p></article>)}</div><ol class="learning-flow">{t.flow.map((label, i) => <li><span>{label}</span>{i < t.flow.length - 1 && <Arrow />}</li>)}</ol><p class="technical-note">{t.note}</p></section>
+<section id="experience" class="section container" aria-labelledby="experience-title">
+  <div class="experience-lead">
+    <SectionLabel number="04" name="experience" locale={locale} />
+    <h2 id="experience-title">{t.title.map((line, i) => <span>{i > 0 ? ' ' : ''}{line}</span>)}</h2>
+    <p class="section-intro">{t.intro}</p>
+  </div>
+  <div class="experience-body">
+    <Artwork name="archive" alt={content[locale].alt.archive} />
+    <div class="knowledge-products">
+      {t.products.map(([title, subtitle, text], i) => <article>
+        <span class="number" aria-hidden="true">0{i + 1}</span>
+        <h3>{title}</h3>
+        <div><p class="product-subtitle">{subtitle}</p><p>{text}</p></div>
+      </article>)}
+    </div>
+  </div>
+  <ol class="learning-flow">{t.flow.map((label, i) => <li><span class="flow-index" aria-hidden="true">0{i + 1}</span><span>{label}</span>{i < t.flow.length - 1 && <Arrow />}</li>)}</ol>
+  <p class="technical-note">{t.note}</p>
+</section>

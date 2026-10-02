@@ -2,7 +2,7 @@
 
 UMAY OS’un Türkçe ve İngilizce public manifesto/mimari sitesi. **Unified Multi-Agent Advisor for Yield.** Ürün runtime’ı, gerçek kurum entegrasyonu veya çalışan Scientist servisi değildir.
 
-Astro 7.3.5, TypeScript, statik çıktı ve sade CSS. JavaScript yalnız mimari sekmeleri, sentetik örnek adımları ve dil değişiminde durum korumayı geliştirir. Ana içerik ve üç mimari görünümü JavaScript olmadan okunur. Model API’si, backend, auth, analytics veya uzaktan font çağrısı yoktur.
+Astro 7.3.5, TypeScript, statik çıktı ve sade CSS. JavaScript tema seçimini, mimari sekmelerini, sentetik örnek adımlarını, bölüm takibini ve dil değişiminde durum korumayı geliştirir. Ana içerik ve üç mimari görünümü JavaScript olmadan okunur. Model API’si, backend, auth, analytics veya uzaktan font çağrısı yoktur.
 
 ## Kurulum ve geliştirme
 
@@ -59,12 +59,14 @@ Yayın hedefi `umayos subscription` içindeki `rg-umayos-org / swa-umayos-org`, 
 - `src/data/site.ts`: bütün TR/EN içerik, public kaynak kimlikleri, pinler, inceleme tarihi. Dil eşliği otomatik kontrol edilir.
 - `src/data/synthetic.ts` ve `public/data/synthetic-vibration-v1.csv`: altı elle tanımlanmış sentetik titreşim örneği; deterministik hesap. Gerçek cihaz/kurum verisi değil.
 - `src/components/`: her anlatı bölümü ayrı Astro bileşeni. `src/scripts/interactions.ts`: küçük, bağımsız istemci kodu.
-- `design/concepts/`: yedi bölüm ve iki mobil Image Gen referansı; sayfaya gömülmez.
+- `design/concepts/v3/`: güncel yedi bölümün Image Gen tasarım referansları; sayfaya gömülmez. Önceki referanslar tasarım geçmişi olarak korunur. Güncel kararlar: `design/REDESIGN_V3.md`.
 - `design/originals/`: üç ayrı Image Gen üretim görseli. `public/assets/`: 22 AVIF/WebP responsive türev. `npm run assets` mevcut orijinallerden aynı türevleri yeniden üretir, çevrimiçi görsel üretimi yapmaz.
-- `design/IMAGE_PROMPTS.md`, `asset-inventory.json`, `optimized-assets.json`: ilk üretim promptları, kavramsal durum, TR/EN alt metin, kullanım ve optimize dosyalar.
+- `design/IMAGE_PROMPTS.md`, `asset-inventory.json`, `optimized-assets.json`: ilk üretim promptları, kavramsal durum, TR/EN alt metin, kullanım ve optimize dosyalar. Güncel bölüm konseptleri: `design/IMAGE_PROMPTS_V3.md`.
 - `public/umay-icons/light/` ve `dark/`: seçilmiş Umay Ana ikon seti; özgün PNG/ICO baytları korunur. Köken ve entegrasyon: `design/brand/README.md`.
 - Inter Variable, yerelden sunulur; SIL OFL 1.1 metni `public/fonts/Inter-OFL.txt` içinde. Font lisansı proje lisansı değildir.
 
 Kullanıcının seçtiği açık/koyu Umay Ana ikonları navbar, footer, favicon, Apple/manifest ve sosyal kartta kullanılır. Profil yeniden çizilmedi veya renklendirilmedi. Proje lisansı kendiliğinden seçilmedi.
+
+V3 tasarımında Umay Ana profili açılışın odağıdır. Beş bölüm bağlantısı ve okuma çizgisi, iki sütunlu manifesto, tam genişlikte Scientist adımları ve telefona özel grafik geometrisi bütün içeriği daha rahat gezilebilir kılar. Renkler ve özgün ikon dosyaları korunur.
 
 Tasarım kararları: [SITE_BRIEF](docs/SITE_BRIEF.md). Kaynak kapsamı: [CONTENT_SOURCES](docs/CONTENT_SOURCES.md). Gerçek kontrol kanıtı ve sınırlar: [VALIDATION](docs/VALIDATION.md).

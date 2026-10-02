@@ -7,7 +7,7 @@ interface Props { locale: Locale; title?: string; description?: string; noindex?
 const { locale, title, description, noindex = false } = Astro.props;
 const t = content[locale];
 const route = locale === 'tr' ? '/' : '/en/';
-const sections = ['manifesto', 'architecture', 'development'];
+const sections = ['manifesto', 'architecture', 'scientist', 'experience', 'development'];
 const navHref = (index: number) => `${Astro.url.pathname === route ? '' : route}#${sections[index]}`;
 const canonical = new URL(Astro.url.pathname, 'https://umayos.org').href;
 const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'UMAY OS', url: 'https://umayos.org', inLanguage: ['tr', 'en'], description: t.meta.description, sameAs: [siteRepo] };
@@ -56,7 +56,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'UM
     <header class="header">
       <div class="container header-inner">
         <a class="wordmark" href={route} aria-label={`UMAY OS · ${t.home}`}><span class="brand-icons" aria-hidden="true"><img class="brand-light" src="/umay-icons/light/icon-128.png" width="48" height="48" alt="" /><img class="brand-dark" src="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" /></span><span><strong>UMAY</strong> OS</span></a>
-        <nav aria-label={locale === 'tr' ? 'Ana gezinme' : 'Main navigation'}>{t.nav.map((label, i) => <a href={navHref(i)}>{label}</a>)}</nav>
+        <nav aria-label={locale === 'tr' ? 'Ana gezinme' : 'Main navigation'}>{t.nav.map((label, i) => <a href={navHref(i)} data-section-link={sections[i]}>{label}</a>)}</nav>
         <div class="header-tools">
           <div class="languages" aria-label={locale === 'tr' ? 'Dil' : 'Language'}><a href="/" lang="tr" hreflang="tr" aria-current={locale === 'tr' ? 'page' : undefined} data-language="tr">TR</a><span aria-hidden="true">/</span><a href="/en/" lang="en" hreflang="en" aria-current={locale === 'en' ? 'page' : undefined} data-language="en">EN</a></div>
           <button class="theme-toggle" data-theme-toggle data-label-light={locale === 'tr' ? 'Açık temaya geç' : 'Switch to light theme'} data-label-dark={locale === 'tr' ? 'Karanlık temaya geç' : 'Switch to dark theme'} aria-label={locale === 'tr' ? 'Karanlık temaya geç' : 'Switch to dark theme'} hidden>
@@ -66,9 +66,17 @@ const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'UM
           <a href={siteRepo} class="github">GitHub <Arrow /></a>
         </div>
       </div>
+      <div class="reading-progress" aria-hidden="true"></div>
     </header>
     <main id="main" tabindex="-1"><slot /></main>
-    <footer class="footer dark"><div class="container footer-inner"><div><a class="wordmark" href={route}><span><strong>UMAY</strong> <span class="accent">OS</span></span></a><p>Unified Multi-Agent Advisor for Yield</p></div><div><nav aria-label={locale === 'tr' ? 'Alt gezinme' : 'Footer navigation'}>{t.nav.map((label, i) => <a href={navHref(i)}>{label}</a>)}</nav><p>{t.closing.note}</p></div></div></footer>
+    <footer class="footer dark">
+      <div class="container footer-inner">
+        <div class="footer-brand"><a class="wordmark" href={route}><img src="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" loading="lazy" /><span><strong>UMAY</strong> <span class="accent">OS</span></span></a><p>Unified Multi-Agent Advisor for Yield</p></div>
+        <nav aria-label={locale === 'tr' ? 'Alt gezinme' : 'Footer navigation'}>{t.nav.map((label, i) => <a href={navHref(i)}>{label}</a>)}</nav>
+        <a class="back-to-top" href={Astro.url.pathname === route ? '#hero' : route}>{t.backToTop}<Arrow /></a>
+      </div>
+      <div class="container footer-baseline"><p>{t.closing.note}</p><a href={siteRepo}>GitHub <Arrow /></a></div>
+    </footer>
     <script>import '../scripts/theme'; import '../scripts/interactions';</script>
   </body>
 </html>

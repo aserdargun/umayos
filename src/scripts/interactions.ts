@@ -30,9 +30,33 @@ const next = document.querySelector<HTMLButtonElement>(
 let activeSection = location.hash.slice(1);
 let intendedSection: string | null = location.hash.slice(1) || null;
 let scrollTimer: ReturnType<typeof setTimeout>;
+const sectionLinks = [...document.querySelectorAll<HTMLAnchorElement>("[data-section-link]")];
+const readingProgress = document.querySelector<HTMLElement>(".reading-progress");
+function showActiveSection(section: string) {
+  sectionLinks.forEach(link => {
+    if (link.dataset.sectionLink === section) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+}
+let progressFrame = 0;
+function updateReadingProgress() {
+  if (progressFrame) return;
+  progressFrame = requestAnimationFrame(() => {
+    progressFrame = 0;
+    const available = document.documentElement.scrollHeight - innerHeight;
+    const progress = available > 0 ? Math.min(1, Math.max(0, scrollY / available)) : 0;
+    readingProgress?.style.setProperty("--reading-progress", String(progress));
+  });
+}
+showActiveSection(activeSection);
+updateReadingProgress();
+window.addEventListener("resize", updateReadingProgress, { passive: true });
+const main = document.querySelector("main");
+if (main) new ResizeObserver(updateReadingProgress).observe(main);
 function rememberSection(section: string) {
   activeSection = section;
   intendedSection = section || null;
+  showActiveSection(section);
   clearTimeout(scrollTimer);
 }
 // Anchor animations and layout changes must not replace an explicit selection.
@@ -52,6 +76,7 @@ window.addEventListener("pointerdown", (event) => {
   if (event.clientX >= document.documentElement.clientWidth) followScroll();
 });
 window.addEventListener("scroll", () => {
+  updateReadingProgress();
   clearTimeout(scrollTimer);
   scrollTimer = setTimeout(() => {
     const probe = (document.querySelector("header")?.getBoundingClientRect().height ?? 0) + 60;
@@ -61,6 +86,7 @@ window.addEventListener("scroll", () => {
     });
     if (section) {
       activeSection = section.id;
+      showActiveSection(section.id);
       if (section.id === intendedSection) intendedSection = null;
     }
   }, 180);

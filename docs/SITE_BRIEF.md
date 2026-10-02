@@ -10,7 +10,9 @@
 
 **Etkileşim:** Sekmeler tıklama/dokunma, ok tuşları, Home/End ile çalışır. Örnek altı adımlıdır. Dil değişimi bölüm, mimari görünüm ve örnek adımını URL üzerinden korur. Ana metin ve tüm mimari görünümleri JS olmadan sunulur. Sticky header dil seçiciyi erişilebilir tutar. Reduced motion animasyon/geçiş ve yumuşak kaydırmayı kapatır.
 
-**Tasarım kaynağı:** `design/DESIGN_SYSTEM.md` ve dokuz ayrı referans. Referansların uydurulmuş URL’leri, fazladan nav öğeleri, bitmiş ürün iddiaları ve kişi görselleri uygulamaya taşınmadı. Üretim görselleri ayrı işlerde oluşturuldu; hiçbir konsept ekran görüntüsü sayfa olarak gömülmedi.
+**Güncel tasarım (2 Ekim 2026):** V3, Umay Ana profilini büyük açılış odağı olarak kullanır. Beş bölüme doğrudan gezinme, okuma konumu, iki sütunlu manifesto, belirgin mimari sekmeler, tam genişlikte Scientist adımları, telefonda ayrı grafik geometrisi ve açık bilgi kataloğu birlikte uygulanır. Özgün ikonlar ve tema paleti korunur. Güncel sistem `design/DESIGN_SYSTEM.md`, uygulama ve doğrulama kararları `design/REDESIGN_V3.md` içindedir.
+
+**İlk tasarım kaynağı (tarihsel):** `design/DESIGN_SYSTEM.md` ve dokuz ayrı referans. Referansların uydurulmuş URL’leri, fazladan nav öğeleri, bitmiş ürün iddiaları ve kişi görselleri uygulamaya taşınmadı. Üretim görselleri ayrı işlerde oluşturuldu; hiçbir konsept ekran görüntüsü sayfa olarak gömülmedi.
 
 **Marka ve tema (1 Ekim 2026 güncellemesi):** Kullanıcının seçtiği `umay-ana-icon-set-v1` açık/koyu profilleri doğrudan kullanılır. Navbar, footer, favicon, Apple/manifest ve sosyal kart entegredir; profil yeniden çizilmedi. Tema sistem tercihini izler; elle seçim tarayıcıda, yeniden yüklemede ve dil değişiminde korunur. Beyaz okuma alanları karanlık temada gece mavisine dönüşür; özgün hero/anlatı bantları ve görsel kompozisyonlar korunur. Telefonda tema ve dil düğmeleri birlikte erişilebilirdir; GitHub bağlantısı kapanışta kalır.
 

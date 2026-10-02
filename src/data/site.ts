@@ -24,7 +24,8 @@ export const content = {
     },
     skip: "İçeriğe geç",
     home: "Ana sayfa",
-    nav: ["Manifesto", "Mimari", "Gelişim"],
+    nav: ["Manifesto", "Mimari", "Scientist", "Deneyim", "Gelişim"],
+    backToTop: "Başa dön",
     hero: {
       lines: ["Modeller değişir.", "Deneyim kalır.", "Karar insanda kalır."],
       description:
@@ -261,7 +262,8 @@ export const content = {
     },
     skip: "Skip to content",
     home: "Home",
-    nav: ["Manifesto", "Architecture", "Development"],
+    nav: ["Manifesto", "Architecture", "Scientist", "Experience", "Development"],
+    backToTop: "Back to top",
     hero: {
       lines: [
         "Models change.",

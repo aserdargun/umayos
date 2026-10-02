@@ -1,62 +1,60 @@
-# UMAY OS design system — editorial V2
+# UMAY OS design system — editorial V3
 
-The active design is the complete seven-section redesign in
-[REDESIGN_V2.md](REDESIGN_V2.md), with fresh section references in `concepts/v2/`.
-The first-generation references remain in `concepts/` as design history.
+The active direction is [REDESIGN_V3.md](REDESIGN_V3.md), dated 2 October 2026.
+Seven section references are in `concepts/v3/`; the exact built-in Image Gen
+briefs are in [IMAGE_PROMPTS_V3.md](IMAGE_PROMPTS_V3.md). Earlier concepts and
+V2 documentation remain historical references.
 
-## Palette and type
+## Color, type and geometry
 
-Light: pure white `#FFFFFF`, navy text `#0B1F3A`, accessible teal `#087B80`.
-Dark: navy `#0B1F3A`, text `#EEF4FB`, panel `#142C4A`, deep Core `#061528`,
-muted `#B8C7D9`, rules `#425A73`, teal `#20B8BE`. Hero, teacher bridge,
-Scientist and closing keep their navy identity in both themes.
+Keep the supplied palette: navy `#0B1F3A`, turquoise `#20B8BE`, white `#FFFFFF`.
+Text on white uses accessible ink teal `#087B80`. Dark surfaces use `#142C4A`
+panels, `#061528` Core, `#B8C7D9` muted text and `#425A73` rules. The original
+light/dark Umay Ana PNG/ICO files are unchanged.
 
-Inter Variable is served locally with Latin and Latin Extended subsets. Native
-headings use weight 700, body 400 and controls 550. At 1536px the hero reaches
-101.4px (80px maximum in English), with the last statement at 77% of that size.
-Section titles reach 74px; manifesto and Scientist 84px; experience and closing
-92px. Tablet and phone use separate scales. All three hero statements remain
-unbroken in TR/EN. Body is 17–19px desktop and 16px phone; captions 12–14px;
-Scientist desktop tabs 15px. Controls never inherit browser defaults.
+Local Inter Variable; headings 700, body 400, controls 550–650. Hero reaches
+100px (English 80px), with a quieter final statement. Section headings reach
+72–86px; closing 92px. Body is 16–18px, labels 12–13px, desktop Scientist tabs
+15px. Mobile type sizes and chart geometry are separate responsive rules.
 
-## Layout and geometry
+1360px maximum content; 64px desktop gutters, 32px tablet, 20px phone.
+112px section spacing desktop, 68px phone. Open numbered rows, fine rules,
+4px controls and one evidence sheet. Section anchors account for the section's
+internal padding so titles arrive just below the sticky navigation.
 
-Content is at most 1400px with 56px gutters, 24px on tablets and 20px on phones.
-Sections use 104px padding, 76px tablet and 68px phone. Buttons and diagram
-nodes have 8px corners; marker squares have 2–4px corners. Open editorial rows,
-hairline rails and one evidence sheet replace repetitive card grids.
+## Composition
 
-- Header is sticky: exact Umay Ana profile, UMAY bold / OS regular, three
-  navigation links, TR/EN, theme control and GitHub. Small phones use two rows.
-- Hero text and glass sculpture occupy separate grid columns. The cropped
-  responsive image has an edge mask only. No tinted overlay or hero eyebrow.
-- Manifesto has a sticky left title and eight numbered rows at right. On tablets
-  and phones the title and list stack. The quote bridge ends in teal.
-- Architecture has a numbered tab rail, human above Core and three peer modules
-  below. The rented GPU stays outside the on-prem boundary. Phone peers connect
-  through a side spine, avoiding a misleading Scientist-to-SWAPP sequence.
-- Scientist is a question/evidence notebook. Intro, six steps, narrative and
-  previous/next sit left; chart, calculations, provenance, uncertainty and
-  actual data-table disclosure sit right. The chart uses a 900×275 native SVG
-  canvas with the unchanged six synthetic points. Mobile stacks the notebook.
-- Experience uses the original archive image on white, three open knowledge
-  columns and a five-stage rail. Development has three open status columns,
-  full source pins and an undated roadmap with unfilled markers.
-- Closing gives the unchanged original profile its own column, alongside the
-  thesis and a filled GitHub action. Footer keeps the navy band.
+- Header: unchanged profile/wordmark; all five sections; language, theme and
+  GitHub controls. Selected section uses `aria-current`; a decorative reading
+  line tracks the page. Phone navigation scrolls horizontally where needed.
+- Hero: oversized thesis on navy; second statement and primary action teal.
+  Original Umay Ana profile inside two fine circular borders. No raster mockup,
+  invented hero label, status or metric. Linux note stays at the baseline.
+- Manifesto: wide title/intro, eight open two-column principles in row-major
+  reading order; single column on phones. Navy statement band follows.
+- Architecture: three full-width tabs with a strong selected state; subtle
+  on-prem grid, human permission above Core, three peer descendants below,
+  rented GPU outside the boundary. The original teacher artwork is retained.
+- Scientist: full-width six-step rail, question on the left, evidence on the
+  right. Both chart layouts use the same six synthetic source samples. Native
+  SVG viewBoxes are 900×220 desktop and 520×290 phone; axes/labels never stretch.
+  The HTML data table, source, method, alternatives and missing evidence remain.
+- Experience: large heading, original archive image at left, three numbered
+  knowledge rows at right, five-stage review line beneath.
+- Development: three open status columns, outlined indices, exact source pins,
+  and a roadmap whose markers make no claim of completed acceptance.
+- Closing: large thesis, turquoise GitHub action, original profile. Footer has
+  all five section links, localized back-to-top and the public-narrative note.
+- 404: large outlined number, bilingual recovery actions, shared site chrome.
 
-## Assets, interaction and accessibility
+## Interaction and accessibility
 
-The actual light/dark UMAY Ana icon files from the supplied set are used without
-redrawing or recoloring. Their provenance is in `brand/`. Original glass artwork
-keeps its own background. Section concepts are never shipped as product UI.
-Directional arrows and five engineering icons are native SVG, currentColor,
-1.5–1.7px strokes with rounded joins. Focus rings are 3px; controls target at
-least 44px. Both themes follow the existing OS/manual/persisted preference
-contract, including blocked storage and cross-tab changes.
+Native SVG engineering icons retain their original geometry and stroke. Theme
+follows the system until a manual choice and synchronizes icons/manifests,
+reloads, languages and tabs. Blocked browser storage remains supported.
 
-Architecture and Scientist tabs support arrows, Home/End, shareable URL state
-and language preservation. Content stays complete without JavaScript.
-Entrance motion only activates after enhancement; native JS-free anchors are
-instant. Reduced motion disables animations, transitions and smooth scrolling.
-No diagram, synthetic sample or status column implies accepted UMAY runtime.
+Architecture and Scientist controls retain arrows, Home/End, URL state and
+locale/section preservation. All narrative and architecture views remain
+available without JavaScript. Small entrance/hover motion respects reduced
+motion; there is no scroll-hidden content. See `REDESIGN_V3.md` and
+`../docs/VALIDATION.md` for the actual visual and automated evidence.

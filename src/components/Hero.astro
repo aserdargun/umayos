@@ -1,14 +1,13 @@
 ---
 import { content, type Locale } from '../data/site';
-import Artwork from './Artwork.astro';
 import Arrow from './Arrow.astro';
 const { locale } = Astro.props as { locale: Locale };
 const t = content[locale];
 ---
 <section class="hero dark" aria-labelledby="hero-title" id="hero">
   <div class="container hero-inner">
-    <Artwork name="hero" alt={t.alt.hero} priority class="hero-art" />
-    <div class="hero-copy"><h1 id="hero-title">{t.hero.lines.map((line, i) => <span class={i === 2 ? 'accent' : ''}>{line}</span>)}</h1><p class="hero-description">{t.hero.description}</p><div class="hero-actions"><a class="button primary" href="#manifesto">{t.hero.actions[0]} <Arrow /></a><a class="button" href="#architecture">{t.hero.actions[1]} <Arrow /></a></div></div>
+    <div class="hero-copy"><h1 id="hero-title">{t.hero.lines.map((line, i) => <span class:list={[i === 1 && 'accent', i === 2 && 'hero-human']}>{line}</span>)}</h1><p class="hero-description">{t.hero.description}</p><div class="hero-actions"><a class="button primary" href="#manifesto">{t.hero.actions[0]} <Arrow /></a><a class="button hero-secondary" href="#architecture">{t.hero.actions[1]} <Arrow /></a></div></div>
+    <div class="hero-emblem" aria-hidden="true"><div class="emblem-orbit"></div><img src="/umay-icons/dark/icon-512.png" srcset="/umay-icons/dark/icon-512.png 512w, /umay-icons/dark/icon-1024.png 1024w" sizes="(max-width: 600px) 230px, (max-width: 900px) 280px, 34vw" width="512" height="512" alt="" fetchpriority="high" decoding="async" /></div>
     <div class="hero-baseline"><p class="hero-note">{t.hero.note}</p><a href="#manifesto" class="hero-scroll" aria-label={t.hero.actions[0]}><Arrow /></a></div>
   </div>
 </section>

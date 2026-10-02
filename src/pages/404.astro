@@ -1,4 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Arrow from '../components/Arrow.astro';
 ---
-<Layout locale="tr" title="404 — UMAY OS" description="Bu sayfa bulunamadı. / Page not found." noindex><section class="not-found section container"><p>404</p><h1>Bu sayfa bulunamadı.</h1><p lang="en">This page could not be found.</p><a class="button primary" href="/">Türkçe ana sayfa</a><a class="button" href="/en/" lang="en">English home</a></section></Layout>
+<Layout locale="tr" title="404 — UMAY OS" description="Bu sayfa bulunamadı. / Page not found." noindex>
+  <section class="not-found section container">
+    <p class="error-code" aria-hidden="true">404</p>
+    <h1>Bu sayfa bulunamadı.</h1>
+    <p lang="en">This page could not be found.</p>
+    <div class="error-actions"><a class="button primary" href="/">Türkçe ana sayfa<Arrow /></a><a class="button" href="/en/" lang="en">English home<Arrow /></a></div>
+  </section>
+</Layout>

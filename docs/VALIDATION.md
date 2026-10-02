@@ -1,4 +1,52 @@
-# Local theme and Azure release preparation
+# Verification record
+
+## Current editorial V3 redesign — 2 October 2026
+
+Executed locally in `/Users/aserdargun/.codex/worktrees/bff7/umayos` on macOS,
+Node **22.23.1**, npm **10.9.8**, Astro **7.3.5**, Playwright **1.63.0**.
+The redesign covers the complete Turkish/English publication and shared 404
+page. Source review dates, pins, synthetic data and advisory boundaries remain
+unchanged. All 42 tracked icon-set files and the root favicon/Apple assets have
+no Git diff.
+
+| Check | Result |
+| --- | --- |
+| `npm ci` | Passed; lockfile unchanged |
+| `npm run check` | 29 files; zero errors, warnings or hints |
+| `npm run build` | Passed; `/`, `/en/`, `/404.html` generated |
+| `npm run test:content` | Passed; TR/EN parity, eight principles, six steps, source identities, exact statistics and **123 local references** |
+| `npm run test:e2e` | **24/24 passed**, 50.6 seconds after the responsive chart correction |
+| Final narrow English tab adjustment | Rebuilt; content check and all four EN light/dark flows at 320/390px passed again, 19.1 seconds |
+| Original branding | 42 icon-set files, root favicon and Apple icon unchanged; original light/dark assets used throughout |
+| IAB visual review | Seven concept/render pairs plus 390px TR and 320px EN inspection; native source text and artwork take precedence over generated approximations |
+| Local preview | `http://127.0.0.1:4322/`; listener cwd verified as this worktree |
+
+The existing regression suite covers both languages, both themes and
+1440/768/390/320px, axe scans, console/page errors, local assets, horizontal
+overflow, architecture and Scientist controls, language/section/URL state,
+theme persistence/system/cross-tab/blocked-storage behavior, keyboard,
+reduced motion, JavaScript-disabled content and a true HTTP 404.
+
+IAB additionally exercised section links and their active indicator, theme and
+language changes, architecture keyboard selection, Scientist next/previous and
+data disclosure, and the 320px bilingual 404 recovery. Visual inspection found
+and corrected duplicated anchor spacing, small section headings, crowded
+phone chart labels and an English 320px tab label. The final compact SVG uses
+the same six samples and retains its accessible HTML table.
+
+The full comparison ledger, reference links, capture location and deliberate
+differences are in [REDESIGN_V3.md](../design/REDESIGN_V3.md). These are local
+website checks. Production identity and acceptance are verified separately
+through [DEPLOYMENT.md](DEPLOYMENT.md); no UMAY runtime was tested.
+Safari/Firefox, screen-reader and Lighthouse testing were not performed.
+
+## Historical records
+
+The entries below describe earlier runs and their environment at that time.
+The V3 record above supersedes their layout and asset descriptions; earlier
+missing-icon or hosting statements do not describe the current local site.
+
+### Local theme and Azure release preparation — 1 October 2026
 
 **1 October 2026, macOS:** Node **22.23.1**, npm **10.9.8**, Astro **7.3.5**, Playwright **1.63.0**. `npm ci`, asset generation, `npm run validate` and `npm run prepare:release` passed. Astro checked 26 files with zero errors/warnings/hints; content checks verified 140 local references; **24 browser tests passed** across TR/EN, light/dark and 1440/768/390/320px. Both themes passed the existing axe accessibility and console/asset checks. Reload/language persistence, live system preference, cross-tab synchronization, blocked storage, keyboard and both JavaScript-disabled themes were exercised.
 

@@ -26,7 +26,7 @@ for (const width of [1440, 768, 390, 320]) {
       await expect(page.locator("#umay-favicon")).toHaveAttribute("href", `/umay-icons/${theme}/favicon-32x32.png`);
       await expect(page.locator("h1 span")).toHaveCount(3);
       await expect(page.locator(".principles li")).toHaveCount(8);
-      await expect(page.locator(".header nav a")).toHaveCount(3);
+      await expect(page.locator(".header nav a")).toHaveCount(5);
       await expect(page.locator(".hero-actions a")).toHaveCount(2);
       expect(
         await page
@@ -76,7 +76,7 @@ for (const width of [1440, 768, 390, 320]) {
       await expect(page.locator('[data-direction="previous"]')).toBeDisabled();
       await page.locator(".data-table summary").click();
       await expect(page.locator(".data-table tbody tr")).toHaveCount(6);
-      await page.locator(".header nav a").nth(2).click();
+      await page.locator('.header nav a[href="#development"]').click();
       await expect(page).toHaveURL(/#development$/);
       await expect(page.locator(".source-title")).toHaveCount(2);
       for (const href of await page
