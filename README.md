@@ -2,6 +2,10 @@
 
 UMAY OS’un Türkçe ve İngilizce public manifesto/mimari sitesi. **Unified Multi-Agent Advisor for Yield.** Ürün runtime’ı, gerçek kurum entegrasyonu veya çalışan Scientist servisi değildir.
 
+3 Ekim 2026 çerçevesi: standart Linux üzerinde AOS Core, şirkete özel SWAPP ve ilk uzman AI-Scientist. System 1 (Operator) ve System 2 (Supervisor) ayrı model, veri, değerlendirme ve adaptör profilleri taşır. İzinli insan kullanım izleri incelenerek özel RAG, skills ve destekli modellerde Unsloth LoRA/QLoRA adaylarına dönüşür. Kapalı kaynak öğretmen modeller geliştirme ve eğitim tasarımını destekler; günlük açık ağırlıklı eylemcilerden ayrıdır. Kalite, süre ve maliyet birlikte izlenir.
+
+Claude/ChatGPT için [inşa kaynakları ve okuma sırası](docs/implementation/README.md), [aşamalı plan](docs/implementation/PLAN.md) ve [başlangıç/devralma promptu](docs/implementation/START_HERE.md) hazırdır. Site `/resources/umayos-implementation.md` yolunda bu yedi belgenin tek Markdown paketini derleme sırasında üretir; Gelişim bölümünden indirilebilir. Bu paket mimari ve kabul sözleşmesidir; özel SWAPP kodu, gerçek izler veya eğitilmiş ağırlıklar içermez.
+
 Astro 7.3.5, TypeScript, statik çıktı ve sade CSS. JavaScript tema seçimini, mimari sekmelerini, sentetik örnek adımlarını, bölüm takibini ve dil değişiminde durum korumayı geliştirir. Ana içerik ve üç mimari görünümü JavaScript olmadan okunur. Model API’si, backend, auth, analytics veya uzaktan font çağrısı yoktur.
 
 ## Kurulum ve geliştirme

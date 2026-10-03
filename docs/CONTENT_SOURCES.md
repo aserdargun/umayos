@@ -1,15 +1,55 @@
 # Public sources and content scope
 
-Kontrol tarihi: **1 Ekim 2026**. Kaynaklar salt okunur incelendi; uygulamaları bu anlatı sitesinin çalışma bağımlılığı değildir.
+Son kontrol tarihi: **3 Ekim 2026** (Europe/Istanbul). Kamuya açık Git kaynakları yeni, geçici checkout'larda salt okunur incelendi; uygulamaları bu anlatı sitesinin çalışma bağımlılığı değildir. Bu kayıt kod/kaynak incelemesini, upstream'in raporladığı eski deneyleri ve yeni UMAY hedeflerini ayırır. Bu çalışmada AOS, AI-Scientist veya model eğitimleri çalıştırılmadı.
 
-| Kaynak | İncelenen pin | Kullanılan kapsam |
+| Kaynak | Yeniden doğrulanan `main` pini ve commit zamanı | Kullanılan kapsam |
 | --- | --- | --- |
-| [aserdargun/aos](https://github.com/aserdargun/aos) | `ed6e857b0e61e9c19c8ba63933e2cc9f318fe444` | README: yerel S1/S2, typed yürütme, politika, input ownership, registry, knowledge/skill, GPU ve kabul sınırları |
-| [aserdargun/ai-scientist](https://github.com/aserdargun/ai-scientist) | `67258cdef33032c9a49eeae31c2e2ba26a98ca17` | README ve AOS entegrasyon notu: bağımsız çekirdek, Director/yerel provider, sandbox, hesap/değerlendirme, deney kaydı ve tamamlanmamış kabul |
+| [aserdargun/aos](https://github.com/aserdargun/aos) | [`ed6e857b0e61e9c19c8ba63933e2cc9f318fe444`](https://github.com/aserdargun/aos/commit/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444), 30 Eylül 2026 10:24:02 +03:00 | S1/S2, typed yürütme, tek input sahibi, knowledge/skill, adapter deneyleri ve entegrasyon sözleşmeleri |
+| [aserdargun/ai-scientist](https://github.com/aserdargun/ai-scientist) | [`67258cdef33032c9a49eeae31c2e2ba26a98ca17`](https://github.com/aserdargun/ai-scientist/commit/67258cdef33032c9a49eeae31c2e2ba26a98ca17), 30 Eylül 2026 10:05:13 +03:00 | Bağımsız laboratuvar, çalışma modları, Director/Scorer, Qwen profilleri, Unsloth deney taslağı ve SFT sınırı |
 
-Native `git ls-remote` ile iki public HEAD’in bu pinlere eşit olduğu doğrulandı. Pinli temiz kaynak checkout’larındaki README’ler incelendi. Bu, Git okuma ve kaynak kimliği kontrolüdür; upstream uygulamaların testleri veya birleşik UMAY runtime kabulü çalıştırılmış değildir. Aynı adlı üçüncü taraf Scientist projesi kaynak olarak kullanılmadı.
+3 Ekim'de yeni `git clone --depth 1` checkout'larının HEAD ve commit zamanları, ayrıca GitHub API depo metadata'sı okundu. Her iki depoda `default_branch=main`, `fork=false`, `parent=null`, `source=null`, `license=null` gözlendi. README'ler de proje lisansının henüz seçilmediğini söylüyor. Bu nedenle bunlar **kamuya açık kaynak depoları** olarak tanımlanır; seçilmiş bir açık kaynak lisansı veya başka bir projeden doğrulanmış fork kökeni iddia edilmez. UMAY için bu iki özgün depodan şirkete özel türevler hazırlanması hedeflenir. Aynı adlı üçüncü taraf Scientist projesi kaynak olarak kullanılmadı. Model, veri ve üçüncü taraf bileşen lisansları proje lisansından ayrı değerlendirilir.
 
-UMAY’ın son ürün yönü ve sekiz manifesto ilkesi, kullanıcının sağladığı kamuya uygun mimari özet üzerinden yeniden yazıldı. Core–Scientist birleşimi, SWAPP kabulü, sürekli eğitim ve broker baseline uyumu tamamlanmış gösterilmez. İlk bulut çalışmasında özel yerel belge ve özgün ikon alanlarına erişilemedi. 1 Ekim yerel entegrasyonunda kullanıcı tarafından belirtilen UMAY ikon seti okundu ve seçilmiş marka türevleri alındı; özel kurum/operasyon belgelerinin kopyaları bu repoya eklenmedi.
+## S1, S2 ve model kimlikleri
+
+| Rol | İncelenen sabit temel | Eğitim ve kullanım sınırı |
+| --- | --- | --- |
+| AOS System-1 / Operator | `Mapika/decider-2b`; checkpoint/tokenizer `7789eb65d5cf519737608e218fa88819bddea0af`; Mapika kodu `75b00fade2dd7f353106e3f4683e56fa2481ec28` | Durum ve sonlu seçenekler üzerinden olasılık/karar üretir; serbest metin yazan sohbet modeli değildir. Pinli kart v8 ve Qwen3.5-2B-Base kökenini tanımlar; İngilizce sınırı vardır. Türkçe SWAPP yetkinliği ayrıca kabul edilmelidir. |
+| AOS System-2 / Supervisor | `prism-ml/Ternary-Bonsai-2-27B-gguf`; checkpoint/projector `6ed5e12bf84b7a63069882c91dd9e9218647d17b`; Prism llama.cpp `9a9394a895b96003ca842a6041cb28ac49a108f7` (`prism-b10709-9a9394a`) | Planlama, toparlanma ve görsel yorumlama için PQ2_0 dil ağırlıkları + Q8_0 projector. GGUF çıkarımının çalışması, Unsloth eğitimi veya LoRA uyumu kanıtı değildir. |
+| AI-Scientist araştırma modeli | `Qwen/Qwen3.5-9B`; `c202236235762e1c871ad0ccb60c8ee5ba337b9a` | Lab içindeki S1/S2 adları aynı Qwen modelinin ayrı sınırlı, düşünme kapalı/açık örnekleme profilleridir; AOS Decider/Bonsai ikilisinin yerine geçirilmez. |
+
+Kimlik kaynakları: AOS [`prepare_decider.py`](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/scripts/prepare_decider.py), [`prepare_bonsai.py`](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/scripts/prepare_bonsai.py); [pinli Decider kartı](https://huggingface.co/Mapika/decider-2b/raw/7789eb65d5cf519737608e218fa88819bddea0af/README.md), [pinli Bonsai kartı](https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf/blob/6ed5e12bf84b7a63069882c91dd9e9218647d17b/README.md); Scientist [`native_runtime.py`](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/lab/llm/native_runtime.py). Bunlar seçili kaynak pinleridir; bu manifesto makinesinde yüklü model veya canlı servis kimliği doğrulanmadı. Model depolarının değişen `main` kartları, sabit temel yerine kullanılmaz.
+
+## RAG, LoRA/QLoRA ve Unsloth
+
+- **RAG:** model ağırlığını değiştirmeden, gözden geçirilmiş kaynakları çıkarım bağlamına taşır. AOS'ta kaynak/chunk kökeni ve uygulama/tenant/rol sınırı olan lexical retrieval dilimi var; şirket vektör indeksi ve genel RAG kalite kabulü yeni geliştirme işidir. Kaynak: [sürekli gelişim sözleşmesi](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/docs/CONTINUOUS_IMPROVEMENT.md).
+- **AOS S1 adapter deneyi:** sabit Decider'ın son MLP down-projection katmanına rank-4, 32.768 parametreli, tek SGD adımlı özel deney uygulanmış olarak raporlanıyor. İkinci süreçte aynı örnek grubu yeniden değerlendirilmiş; bağımsız test kümesi, sürekli eğitim, Unsloth entegrasyonu veya üretim terfisi kanıtı değildir. Kaynak: [adaptation sözleşmesi](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/docs/OWNED_EPISODE_ADAPTATION.md), [kayıtlı kanıt](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/docs/STATUS.md).
+- **AOS S2 eğitimi:** [Bonsai reçetesi](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/training/recipes/bonsai-computer-recovery-v001.yaml) `design_recipe_not_executable` durumunda; eğitilebilir checkpoint, hedef modüller ve dönüşüm uyumu henüz tanımlı değil. Uyumlu bir eğitim checkpoint'i seçilmeli; adapter tabanı, tokenizer, şablon, görsel bileşenler ve hedef runtime doğrulanmalıdır.
+- **Scientist'taki mevcut Unsloth taslağı:** [`maintenance.py`](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/lab/training/maintenance.py) ve [`qlora_step_worker.py`](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/lab/training/qlora_step_worker.py), Unsloth `2026.9.11`, Qwen3.5-9B, 4-bit, rank 32, 24.576 token, üç adım, CPU embedding offload ile yalnız sentetik ölçüm için yazılmış. `save_adapter=false`. [M0.14 kabulü](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/docs/ai-scientist/m0-acceptance.md) gerçek GPU ölçümü ve TRAIN→SERVE dönüşünü açık bırakıyor.
+- **3 Ekim güncel sağlayıcı kısıtı:** [Unsloth Qwen3.5 rehberinin](https://unsloth.ai/docs/models/qwen3.5/fine-tune) üst uyarısı, yüksek nicemleme farkları nedeniyle Qwen3.5'in dense ve MoE türlerinde 4-bit QLoRA'yı önermiyor. Aynı sayfadaki eski örnek yorumları bu uyarıyla çelişiyor; UMAY planı 4-bit yolu hazır kabul etmez. Bu aile için bf16 LoRA önce değerlendirilecek adaydır; donanım ihtiyacı yerelde ölçülür. QLoRA, yalnız seçili model ve görev için ayrı uyum/kalite kabulünden sonra açılır.
+
+Unsloth, yeni model bazlı eğitim hattı için seçilmiş araçtır; mevcut her checkpoint'in doğrudan desteklendiği iddiası değildir. Decider'ın sonlu seçenek kaybı, olasılık okuması ve kalibrasyonu sıradan sohbet SFT'siyle değiştirilmez. S1/S2 verileri ayrı tutulur. İzinli kullanıcı izi → temizleme ve uzman incelemesi → RAG/skill veya eğitim adayı → yeniden yükleme → sızıntısız bağımsız değerlendirme → sürümlü terfi/geri alma zinciri uygulanır. RAG ve LoRA tamamlayıcıdır; RAG'a veri eklemek fine-tuning sayılmaz.
+
+## Kodda yeniden kullanılabilecek sınırlar
+
+AOS [genişletme rehberi](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/docs/EXTENDING_AOS.md): `contracts.py`, `Supervisor.plan`, `DecisionEngine.decide`, `Operator`, `ComputerRuntime`, görev scheduler'ı ve scoped knowledge kayıtları. Bunlar henüz kararlı genel plugin SDK'sı değildir. [Entegrasyon sözleşmesi](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/docs/INTEGRATION_COMPOSITIONS.md) ek uzmanları typed görev/çıktı sınırlarına bağlar; tek masaüstüne birden çok eşzamanlı input sahibi vermez.
+
+Scientist'in [`lab/operating_modes`](https://github.com/aserdargun/ai-scientist/tree/67258cdef33032c9a49eeae31c2e2ba26a98ca17/lab/operating_modes) modülü LSH/OPTICS/SOM, mod toleransı, nearest-neighbor referansı, sensör residual'ları ve Overall Model Residual için başlangıçtır. [`lab/api/mode_sources.py`](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/lab/api/mode_sources.py) ve [`mode_experiments.py`](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/lab/api/mode_experiments.py) izinli kaynak/sensör/zaman seçimini değişmez snapshot'a taşır. [Çalışma modu deney sözleşmesi](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/docs/ai-scientist/42-operating-modes-omr-experiments.md) eğitim/kalibrasyon/değerlendirme ayrımı, bilinmeyen mod ve veri kalitesi sınırlarını korur. OMR bir residual ölçümüdür; kalan ömür veya arıza tanısı değildir.
+
+[`RunBudget`](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/lab/director/budget.py) öneri, duvar süresi ve token için rezervasyon/gerçekleşen tüketim kaydı sunar. Şirket geliştirme maliyeti için ayrıca sağlayıcı/model, fiyat sürümü, girdi/çıktı/cache token, GPU/CPU süresi, para birimi ve fatura mutabakatı eklenmelidir. Mevcut geliştirme sayaçları fatura veya parasal toplam değildir.
+
+[İncelenmiş SFT ihracatçısı](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/docs/ai-scientist/59-reviewed-sft-export.md) yalnız `local_noncommercial_sft` / `noncommercial_research` kapsamındadır. Kod, model ve veri hakları ayrı kanıtlanır; fixture/grid kayıtları uygun eğitim örneği sayılmaz. Şirket eğitim hattı yeni, açıkça izinli kullanım sözleşmesiyle geliştirilir; mevcut kayıtlar geriye dönük ticari hak varmış gibi yeniden etiketlenmez.
+
+## SWAPP'ın kamuya açık ürün bağlamı
+
+[Modül kataloğu](https://swapp.org.tr/moduller), Explorer ile varlık/etiket keşfini, DataPort ile veri seçimini/dışa aktarımı, Trend/Vitals ile zaman serisi ve sapma incelemesini, Atlas ile coğrafi 3B ikizi, Forge ile varlık/sensör/KKS bağlarını, Event/Plan ile olay ve çalışma kayıtlarını anlatır. İlk Scientist deneyleri için bu terimler ürün sözlüğüdür; özel API şeması veya erişim kanıtı değildir.
+
+[Mimari sayfası](https://swapp.org.tr/mimari) modüler monolit, ortak salt okunur veri servisleri, modül manifestoları ve rol/grup yetkilerini; [platform sayfası](https://swapp.org.tr/platform) değişikliklerle birlikte belge/manifesto ve kalite kapılarını açıklar. Site, ekranlarının ve örnek verilerinin temsilî olduğunu belirtir. Canlı şirket SWAPP'ı veya dijital ikiz veri bağlantısı bu incelemede açılmadı.
+
+Kullanıcının 3 Ekim ürün kararı: UMAY OS basit Linux üzerinde AOS çekirdeği, SWAPP uygulama bağlamı ve ilk uzman olarak AI-Scientist ile kurulacak; birçok eylemciyi ayrı yetki ve kaynak bütçeleriyle taşıyacak. `swapp-backend` ve `swapp-frontend` geliştirme sırasında ayrıca teslim edilecek kapalı şirket kaynaklarıdır. Şirket verileri, çalışanların kullanım yöntemleri/izleri, RAG vektör veri kümeleri ve LoRA adapter'ları özel kalır. Kapalı büyük modeller mimari, öğretmen ve geliştirme hattında kullanılır; şirket verisinin dış sağlayıcıya aktarımı ayrıca kapsamlandırılır. SWAPP'ı iyi bilen/kullanan eylemciler hedef yetkinliktir; mevcut kabul sonucu değildir.
+
+## Önceki sürümün köken kaydı
+
+1 Ekim sürümünde UMAY'ın ürün yönü ve sekiz manifesto ilkesi, kullanıcının sağladığı kamuya uygun mimari özet üzerinden yazıldı. İlk bulut çalışmasında özel yerel belge ve özgün ikon alanlarına erişilemedi. 1 Ekim yerel entegrasyonunda kullanıcı tarafından belirtilen UMAY ikon seti okundu ve seçilmiş marka türevleri alındı; özel kurum/operasyon belgelerinin kopyaları bu repoya eklenmedi. Aşağıdaki framework, font, ilk sentetik örnek ve görsel kayıtları o sürümün tarihsel kökenidir; yeni runtime veya eğitim kanıtı değildir.
 
 ## Framework ve font
 
@@ -17,7 +57,7 @@ UMAY’ın son ürün yönü ve sekiz manifesto ilkesi, kullanıcının sağlad�
 - npm registry’den Astro **7.3.5** ve engine koşulları doğrulandı. Node >=22.12.0; seçilen Node 24. TypeScript **5.9.3**, Playwright **1.63.0** ve tüm paket sürümleri lockfile ile sabit.
 - `@fontsource-variable/inter` **5.3.0**, npm metadata ve paket LICENSE: **SIL OFL 1.1**. Latin Extended Türkçe karakterleri yerelden sunulur. Proje lisansı seçilmedi.
 
-## Sentetik örnek
+## İlk sürümdeki sentetik örnek
 
 Altı elle tanımlanan değer: 2.0, 2.2, 2.1, 2.5, 3.2, 3.4 mm/s RMS. Zamanlar 1–6 Eylül 2026, günlük 12:00 UTC. Hesap sürümü `vibration-window-mean v1`; ilk ortalama 2.10, son ortalama 3.03333…, göreli artış 44.44444…%. Ekran yuvarlaması iki/tek ondalıkla yapılır. Bunlar gerçek tesis verisi, gerçek arıza tanısı, Scientist servis çıktısı veya UMAY performans ölçümü değildir.
 

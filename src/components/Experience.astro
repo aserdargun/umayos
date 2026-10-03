@@ -24,4 +24,5 @@ const t = content[locale].experience;
   </div>
   <ol class="learning-flow">{t.flow.map((label, i) => <li><span class="flow-index" aria-hidden="true">0{i + 1}</span><span>{label}</span>{i < t.flow.length - 1 && <Arrow />}</li>)}</ol>
   <p class="technical-note">{t.note}</p>
+  <aside class="private-boundary" aria-labelledby="private-title"><h3 id="private-title">{t.boundaryTitle}</h3><dl>{t.boundaries.map(([title, text]) => <div><dt>{title}</dt><dd>{text}</dd></div>)}</dl></aside>
 </section>

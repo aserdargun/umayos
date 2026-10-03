@@ -10,6 +10,7 @@ const format = (n: number, digits = 2) => n.toLocaleString(locale === 'tr' ? 'tr
 ---
 <section id="scientist" class="scientist section dark" aria-labelledby="scientist-title"><div class="container">
   <SectionLabel number="03" name="scientist" locale={locale} /><h2 id="scientist-title">{t.title}</h2><p class="scientist-subtitle">{t.subtitle}</p><p class="section-intro scientist-intro">{t.intro}</p>
+  <div class="experiment-program"><h3>{t.experimentTitle}</h3><div class="experiment-grid">{t.experiments.map(([title, text]) => <article><h4>{title}</h4><p>{text}</p></article>)}</div></div>
   <div class="steps" data-controls="scientist" role="tablist" aria-label={locale === 'tr' ? 'Sentetik inceleme adımları' : 'Synthetic investigation steps'} hidden>{t.steps.map(([label], i) => <button role="tab" id={`step-tab-${i}`} aria-controls={`step-panel-${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-step={i}><span>{i + 1}</span>{label}</button>)}</div>
   <div class="investigation-workbench"><div class="investigation-copy"><p class="synthetic-label">{t.label}</p>
   <div class="step-narrative" aria-live="polite">{t.steps.map(([label, title, text], i) => <article id={`step-panel-${i}`} data-step-panel={i} aria-labelledby={`step-heading-${i}`}><p class="step-label">{i + 1} / 6 · {label}</p><h3 id={`step-heading-${i}`}>{title}</h3><p>{text}</p></article>)}</div>

@@ -6,6 +6,7 @@ for (const file of [
   "index.html", "en/index.html", "404.html", "robots.txt", "sitemap.xml",
   "favicon.ico", "og-image.png", "apple-touch-icon.png",
   "data/synthetic-vibration-v1.csv", "fonts/Inter-OFL.txt",
+  "resources/umayos-implementation.md",
   "staticwebapp.config.json",
 ]) {
   assert.ok((await stat(`dist/${file}`)).isFile(), `Missing artifact: ${file}`);
@@ -24,6 +25,7 @@ assert.equal(config.responseOverrides["404"].rewrite, "/404.html");
 assert.equal(config.navigationFallback, undefined, "Unknown routes must return 404");
 assert.equal(config.mimeTypes[".avif"], "image/avif");
 assert.equal(config.mimeTypes[".csv"], "text/csv");
+assert.equal(config.mimeTypes[".md"], "text/markdown; charset=utf-8");
 const assets = await readdir("dist/_astro");
 for (const extension of [".js", ".css", ".woff2"])
   assert.ok(assets.some((file) => file.endsWith(extension)), `Missing ${extension} asset`);

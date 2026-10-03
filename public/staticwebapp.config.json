@@ -17,6 +17,7 @@
     ".webp": "image/webp",
     ".woff2": "font/woff2",
     ".csv": "text/csv",
+    ".md": "text/markdown; charset=utf-8",
     ".ico": "image/x-icon",
     ".webmanifest": "application/manifest+json",
     ".json": "application/json"

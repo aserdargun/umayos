@@ -79,6 +79,10 @@ for (const width of [1440, 768, 390, 320]) {
       await page.locator('.header nav a[href="#development"]').click();
       await expect(page).toHaveURL(/#development$/);
       await expect(page.locator(".source-title")).toHaveCount(2);
+      await expect(page.locator('.foundation-link[href="https://github.com/aserdargun/aos"]')).toHaveCount(1);
+      await expect(page.locator('.foundation-link[href="https://github.com/aserdargun/ai-scientist"]')).toHaveCount(1);
+      await expect(page.locator('.foundation-link[href="https://swapp.org.tr/"]')).toHaveCount(1);
+      await expect(page.locator('.resource-download')).toHaveAttribute('href', '/resources/umayos-implementation.md');
       for (const href of await page
         .locator(".source-title, .github, .closing a")
         .evaluateAll((links) => links.map((link) => link.getAttribute("href"))))
@@ -305,6 +309,18 @@ test("distribution, canonical metadata, synthetic source and true 404", async ({
   expect(
     (await csv.text()).split("\n").filter((line) => /^2026/.test(line)),
   ).toHaveLength(6);
+  const pack = await request.get('/resources/umayos-implementation.md');
+  expect(pack.status()).toBe(200);
+  const markdown = await pack.text();
+  for (const name of ['README', 'ARCHITECTURE', 'CONTRACTS', 'LEARNING', 'SCIENTIST', 'PLAN', 'START_HERE'])
+    expect(markdown).toContain(`<!-- Source: docs/implementation/${name}.md -->`);
+  expect(markdown).not.toContain('<!DOCTYPE html>');
+  await page.goto('/');
+  const downloadEvent = page.waitForEvent('download');
+  await page.locator('.resource-download').click();
+  const download = await downloadEvent;
+  expect(download.suggestedFilename()).toBe('umayos-implementation.md');
+  expect(await download.failure()).toBeNull();
   const response = await page.goto("/a-page-that-does-not-exist/");
   expect(response?.status()).toBe(404);
   await expect(page.locator("h1")).toHaveText("Bu sayfa bulunamadı.");
