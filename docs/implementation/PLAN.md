@@ -2,7 +2,7 @@
 
 Durum: plan; runtime işleri henüz yapılmış sayılmaz · [Paket dizini](README.md).
 
-Amaç ilk olarak bir Linux ortamında Core S1/S2, gerçek yerel SWAPP ve Scientist üzerinden ölçülebilir bir dikey dilim kurmaktır. Sonra izinli insan izlerinden RAG/skill ve model uyumlu LoRA/QLoRA adayları üretilir. Çok sayıda eylemci desteği, bu ilk dilimin sözleşmelerini izleyen uzmanların eklenmesiyle genişler.
+Amaç önce iki sentetik insan çalışan için ayrı Linux container alanları, Core S1/S2, yerel SWAPP ve Scientist üzerinden ölçülebilir bir dikey dilim kurmaktır. Tüm iş işlemleri baştan kalıcı loga bağlanır; katma değeri seçilmiş izinli kayıtlardan skill/RAG ve model uyumlu fine-tune adayları üretilir. Çok sayıda eylemci desteği, bu ilk dilimin sözleşmelerini izleyen uzmanların eklenmesiyle genişler.
 
 Takvim, ekip ve donanım henüz kesinleşmediği için burada tamamlanma tarihi veya maliyet rakamı verilmez. İş sırası bağımlılık temellidir. Her işin sahibi özel proje kaydında atanır; aşağıdaki roller atanmış kişi anlamına gelmez. Başlangıç durumunda bütün runtime kapıları **açık** durumdadır.
 
@@ -10,24 +10,26 @@ Takvim, ekip ve donanım henüz kesinleşmediği için burada tamamlanma tarihi 
 
 | Kimlik | Somut iş ve teslimat | Bağımlılık | Sorumlu rol | Bitmiş sayılması için |
 | --- | --- | --- | --- | --- |
-| P0.1 | AOS/Scientist pinli envanter; mevcut sınıf/test → UMAY fark matrisi | Public kaynak erişimi | Teknik lider | Exact SHA/path, yeniden koşulan test ve koşulmayan kapsam kaydı; çift registry/scheduler ihtiyacı gerekçeli |
+| P0.1 | AOS/Scientist pinli envanter; mevcut sınıf/test → UMAY fark matrisi | Public kaynak erişimi | Teknik lider | Yeni runner/izole proje/CPU adaptörü envanteri; public Scientist ile CPU capability kaynak farkının çözümü; exact SHA/path, yeniden koşulan test ve koşulmayan kapsam kaydı; çift registry/scheduler ihtiyacı gerekçeli |
 | P0.2 | Kaynak, bağımlılık, model, dataset ve teacher çıktısı kullanım/hak envanteri | P0.1 | Teknik/veri sahibi | Her artifact'in kullanım profili; belirsiz kullanımın açık kaydı; private türev bakım kararı |
 | P0.3 | İlk görev kataloğu, veri ve donanım envanteri, maliyet para birimi/bütçe politikası | Kullanıcı/şirket girdileri | Ürün/veri sahibi | Bir varlık ailesi, ilk 10 GUI senaryosu, değerlendirme sahibi, izinli kaynaklar ve ölçüm kapsamı |
-| P1.1 | Özel runtime çalışma alanı; pinli iki bileşen, lock ve reproducible Linux profili | P0.1; özel hedef alan | Core geliştirici | Temiz kurulumda kimlikler/health; eksik model veya config'te açık hata; sırlar commit dışında |
-| P1.2 | Sözleşmeleri mevcut tiplerle eşle; schema, event/kanıt ve cost ledger temeli | P0.1 | Core geliştirici | Geçerli/yanlış sürüm, tenant, duplicate, missing-cost ve cancel testleri |
+| P1.1 | Özel runtime çalışma alanı; pinli iki bileşen, lock ve tekrarlanabilir çalışan container şablonu | P0.1; özel hedef alan | Core geliştirici | Temiz kurulumda kimlikler/health; eksik model veya config'te açık hata; sırlar commit dışında |
+| P1.2 | Sözleşmeleri mevcut tiplerle eşle; schema, event/kanıt ve cost ledger temeli | P0.1 | Core geliştirici | Çalışan/workspace/run kapsamı; geçerli/yanlış sürüm, tenant, duplicate, missing-cost ve cancel testleri |
 | P1.3 | Core S1/S2 baseline, tek GUI sahibi, kaynak kuyruğu ve sandbox | P1.1–P1.2 | Core/model geliştirici | Gerçek model ölçümü; takeover, eski lease, OOM, timeout, öğretmen kapalıyken işletim |
+| P1.4 | İki çalışan alanını tahsis et; izolasyon, log collector ve yaşam döngüsü | P1.1–P1.3 | Core/QA | Çapraz dosya/ağ/GUI/cache erişimi reddi; restart sonrası loglar; collector kesintisi, sıra boşluğu ve dedupe; sırların arındırılması |
+| P1.5 | Güçlü modelle mimari değişiklik hattı ve ArchitectureChange kaydı | P1.2; model/veri politikası | Teknik lider | Karar/model/diff/test/migration/rollback ve insan onayı; günlük eylemciden izinsiz mimari değişiklik reddi |
 | P2.1 | Sentetik SWAPP sözleşme fixture'ı ve veri oracle'ı | P1.2 | Entegrasyon geliştirici | Sentetik twin/signal/time/quality örnekleri; mock kanıtı açık etiketli; gerçek endpoint iddiası yok |
 | P2.2 | Kaynaklı Scientist baseline deneyinin izole uçtan uca koşusu | P1.2, P2.1 | Araştırma geliştirici | Snapshot → spec → sandbox → hesap → rapor → maliyet zinciri; tekrar üretim |
-| P3.1 | Teslim edilen SWAPP frontend/backend'i yerel kur; schema/rol/tenant/build envanteri | Özel depolar, kurulum bilgisi, izinli seed | Entegrasyon geliştirici | Gerçek uygulama local health ve oracle; production sırlarına ihtiyaç duymayan profil |
-| P3.2 | SWAPP Application Pack v0.1; 10 dondurulmuş GUI görevi | P1.3, P3.1 | Entegrasyon/QA | Doğru varlık/birim/zaman/veri; loading/error/empty/session expiry; izinli export; bağımsız oracle |
+| P3.1 | Teslim edilen SWAPP frontend/backend'i çalışan container alanlarında kur; schema/rol/tenant/build envanteri | Özel depolar, kurulum bilgisi, izinli seed | Entegrasyon geliştirici | Gerçek uygulama local health ve oracle; production sırlarına ihtiyaç duymayan profil |
+| P3.2 | SWAPP Application Pack v0.1; 10 dondurulmuş GUI görevi | P1.4, P3.1 | Entegrasyon/QA | Doğru varlık/birim/zaman/veri; loading/error/empty/session expiry; izinli export; bağımsız oracle |
 | P3.3 | E1/E2/E3 dijital ikiz deneylerini gerçek local SWAPP'a bağla | P2.2, P3.2 | Araştırma geliştirici | Train/calibration/eval ayrımı; clustering/anomali sınırları; bütün denemeler ve hata/maliyet kaydı |
-| P4.1 | İzinli trace capture, minimizasyon/review, provenance ve RAG/skill adayı | P3.2; capture/veri politikası | Veri/öğrenme geliştirici | Ham izden incelenmiş aday; cross-role erişim, revocation, cache ve kaynak atfı kabulü |
+| P4.1 | Tüm işlem loglarından katma değer seçimi, minimizasyon/review, provenance ve RAG/skill adayı | P3.2; capture/veri politikası | Veri/öğrenme geliştirici | Kaynak olayları, seçim/ret gerekçesi, değer ölçütü ve hedef yerel model; cross-employee/role erişim, revocation, cache ve kaynak atfı kabulü |
 | P4.2 | Kapalı kaynak teacher/build adaptörü ve bütçe geçidi | P1.2; provider/veri politikası | Model geliştirici | Sentetik görevde schema/timeout/usage/cost; gerçek model/version; teacher üretime erişemez |
 | P4.3 | Sabit görevlerde base, base+RAG ve base+RAG+skill kıyası | P4.1–P4.2 | Bağımsız değerlendirici | Ölçülmüş davranış açığı; training ihtiyacı veriye dayanır; holdout teacher'dan ayrı |
 | P5.1 | S1 ve S2 için ayrı capability matrisi ve Unsloth LoRA/QLoRA uygunluk spike'ı | P4.3; trainable checkpoint/donanım/haklar | Model geliştirici | Exact architecture/readout/tokenizer/target-module/runtime testi; desteklenmeyen yol açık reddedilir |
 | P5.2 | Uygun role özgü dataset, recipe, eğitim ve adapter registry adayı | P5.1; yeterli incelenmiş veri | Öğrenme geliştirici | Base-only karşılaştırması; gerçek kaydedilmiş artifact/hash, bütçe ve lineage; smoke eğitim kalite kanıtı değil |
 | P5.3 | TRAIN→SERVE, S1/S2 ayrı ve birlikte evaluation, terfi/rollback | P5.2 | Bağımsız değerlendirici/model geliştirici | Ayrı süreçte yükleme, serving parity, izin sınırı, görev kalite/maliyet ve geri alma; insan onayı |
-| P6.1 | İkinci typed uzman ve eşzamanlılık/arıza kabulü | P3.3, P1.3 | Core geliştirici | Aynı sözleşme/policy/kanıt formatı; bir uzman arızası Core'u çökertmez; ayrı GUI oturumu veya kuyruk |
+| P6.1 | Yeni yerel uzman kayıt/adaptörü ve eşzamanlılık/arıza kabulü | P3.3, P1.3 | Core geliştirici | Sürümlü capability, model, log, iptal ve cleanup kabulü; aynı sözleşme/policy/kanıt formatı; bir uzman arızası Core'u çökertmez; ayrı GUI oturumu veya kuyruk |
 | P6.2 | Yerel pilot fayda karşılaştırması, restore ve işletim runbook'u | P3–P5 ilgili kapıları | Ürün/QA | Sabit bağımsız görevlerde insan süresi, kalite, gecikme, kapsam ve maliyet; backup restore/rollback |
 | P6.3 | Kurum içi SWAPP kabulü | Kurum ağı/hesap/veri izni ve P6.2 | Kurum kabul sahibi | Gerçek kurum ortamı, insan devralma, kesinti ve veri oracle'ı; ayrı imzalı kanıt |
 | P7.1 | İsteğe bağlı SWAPP olay/plan taslağı veya inceleme kaydı oluşturma | İlgili gerçek uygulama yeteneği ve ayrı kullanıcı kapsamı | Entegrasyon/ürün sahibi | İşlem öncesi insan onayı, rol/alan scope, idempotency, postcondition ve geri alma; OT kontrol yetkisi açılmaz |
@@ -40,9 +42,11 @@ P0.1, P1.2, P2 ve sentetik teacher/protokol hazırlığı SWAPP özel depoları 
 | --- | --- | --- |
 | K0 Kaynak/kurulum | SHA, artifact/hash, Linux/env, komut, exit code ve health raporu | Fixture testini gerçek model testi sayma |
 | K1 Yetki/iş | Yanlış tenant/rol, eski lease, iptal, deadline, kaynak revoke ve sandbox sınırları test edilir | Test edilen kapsamda bir yetkisiz erişim/eylem varsa terfi yok |
+| K1a Çalışan izolasyonu/log | İki çalışanın eşzamanlı alanları, erişim reddi, kalıcı olay zinciri ve collector kesinti/restart testi | Kayıp log, çalışan bağlamı sızıntısı veya ortak oturum varsa kabul yok |
+| K1b Mimari değişiklik | Güçlü model kimliği, karar/diff/migration, izole test, insan onayı ve rollback provası | Yerel eylemci tek başına mimariyi terfi edemez |
 | K2 SWAPP GUI | Önceden yazılmış 10 farklı görevin tamamı gerçek local frontend/backend üzerinde doğru oracle ile geçer | Mock, API-only veya ekran tahmini GUI kabulü değildir |
 | K3 Scientist | Dondurulmuş protokol, baseline/aday, split/hash, tekrar koşusu, başarısız koşular ve rapor | Etiketsiz veriyle fault recall/precision veya gerçek arıza başarısı iddiası yok |
-| K4 Öğrenme | İncelenmiş lineage, holdout izolasyonu, kaynak atfı/ACL ve aday kıyası | Teacher kendi etiketiyle tek başına kabul veremez |
+| K4 Öğrenme | Katma değer seçimi ve yerel modele katkı ölçümü, incelenmiş lineage, holdout izolasyonu, kaynak atfı/ACL ve aday kıyası | Teacher kendi etiketiyle tek başına kabul veremez |
 | K5 Model/adapter | S1/S2 ayrı skorlar, base/adapter serving ölçümü, çift regresyon, kaynak/cost ve rollback | Kaydetmeden yapılan dry-run veya aynı eğitim örneği değerlendirmesi yeterli değil |
 | K6 Maliyet | Her billable çağrı/işin usage kimliği; tahmin/rezervasyon/gerçekleşen mutabakatı | Eksik maliyet kayıtları sıfır kabul edilmez; unresolved tutar/kayıt oranı görünür |
 | K7 Fayda | Aynı bağımsız görevlerde baseline yöntemle kalite, insan emeği, elapsed/queue ve maliyet kıyası | Sadece başarılı işleri seçerek süre/ucuzluk raporlanmaz |

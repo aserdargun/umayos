@@ -3,7 +3,7 @@ export const sources = [
   {
     "name": "AOS",
     "repo": "https://github.com/aserdargun/aos",
-    "pin": "ed6e857b0e61e9c19c8ba63933e2cc9f318fe444",
+    "pin": "dfd06322219b9295c5fc618bef180464b3d17767",
     "role": {
       "tr": "Çekirdek temeli",
       "en": "Core foundation"
@@ -12,7 +12,7 @@ export const sources = [
   {
     "name": "AI-Scientist",
     "repo": "https://github.com/aserdargun/ai-scientist",
-    "pin": "67258cdef33032c9a49eeae31c2e2ba26a98ca17",
+    "pin": "01b17c3b3038d3c753cd80f2bbc9fbc04ca646fe",
     "role": {
       "tr": "İlk uzman temeli",
       "en": "First specialist foundation"
@@ -25,7 +25,7 @@ export const content = {
   "tr": {
     "meta": {
       "title": "UMAY OS — Modeller değişir. Deneyim kalır.",
-      "description": "Linux ve AOS üzerinde, SWAPP kullanım deneyiminden RAG ve LoRA ile öğrenen açık ağırlıklı eylemciler; ilk uzman AI-Scientist, insan denetimi ve ölçülen maliyetler."
+      "description": "Çalışan başına izole Linux container’larında SWAPP, AI-Scientist ve eylemciler; tüm işlemlerden izlenebilir deneyim, seçilmiş kayıtlardan yerel model gelişimi."
     },
     "skip": "İçeriğe geç",
     "home": "Ana sayfa",
@@ -43,12 +43,12 @@ export const content = {
         "Deneyim kalır.",
         "Karar insanda kalır."
       ],
-      "description": "SWAPP’ı bilen ve kullanan, insanın çalışma izlerinden öğrenen açık ağırlıklı eylemciler. Linux üzerinde AOS çekirdeği, ilk uzman olarak AI-Scientist.",
+      "description": "Her çalışana izole bir Linux çalışma alanı. SWAPP, AI-Scientist ve diğer eylemciler burada çalışır; işlemler kayda, değerli deneyimler yerel modellerin gelişimine dönüşür.",
       "actions": [
         "Manifestoyu oku",
         "Mimariyi keşfet"
       ],
-      "note": "Hedef mimari · Standart Linux üzerinde, şirkete uyarlanan eylemci işletim katmanı."
+      "note": "Hedef mimari · Çalışan başına container · Yerel işletim · Güçlü modellerle mimari gelişim"
     },
     "manifesto": {
       "title": [
@@ -62,16 +62,16 @@ export const content = {
       ],
       "principles": [
         [
-          "Şirketin bilgisi şirkette kalsın.",
-          "SWAPP frontend/backend, şirket verileri, çalışanların kullanım yöntemleri, LoRA adaptörleri ve RAG vektör verisetleri özel alanda kalır. Kamuya açılan şey mimari ve ilkeleridir."
+          "Her çalışana izole bir çalışma alanı.",
+          "Her çalışan için Linux container’ı ayağa kalkar; SWAPP web uygulaması, AI-Scientist ve diğer eylemciler bu izole kapsamda çalışır. Oturumlar, dosyalar ve erişim yetkileri ayrılır; şirket bilgisi özel alanda kalır."
         ],
         [
-          "Deneyim modelden uzun yaşasın.",
-          "İzinli SWAPP kullanım izleri; amaç, eylem, bağlam, sonuç ve insan düzeltmesiyle anlam kazanır. İncelenmiş kaynaklar korunur; modeller değiştikçe bilgi yeniden işlenebilir."
+          "Her işlem kayda, değerli deneyim birikime dönüşsün.",
+          "Çalışma alanındaki insan, eylemci ve servis işlemleri; amaç, eylem, sonuç, hata ve düzeltmeleriyle loglanır. Kayıtlar container’dan bağımsız korunur. Katma değeri doğrulanan, kullanım izni olan örnekler öğrenmeye alınır."
         ],
         [
-          "Büyük modeller geliştirsin. Açık modeller çalışsın.",
-          "Kapalı kaynak güçlü dil modelleri mimariyi, kodu, deneyleri ve eğitim adaylarını geliştirmeye yardım eder. Günlük eylemciler açık ağırlıklı modellerle şirket ortamında çalışır."
+          "Mimariyi güçlü modellerle geliştir. Yerelde işlet.",
+          "Mimari değişiklikler güçlü büyük dil modelleriyle hazırlanır: karar gerekçesi, kod farkı, test ve geri alma planı birlikte incelenir. İnsan onayıyla sürümlenir. Günlük eylemciler yerelde açık ağırlıklı modellerle çalışır."
         ],
         [
           "SWAPP’ı ölçerek öğren.",
@@ -79,15 +79,15 @@ export const content = {
         ],
         [
           "Yetki insanda kalsın.",
-          "Model izin üretmez. Eylemcilerin araçları ve erişimi görevle sınırlanır. Son karar, öğrenme kaydının kabulü ve yeni sürümün kullanıma alınması insandadır."
+          "Model izin üretmez. Eylemcilerin araçları ve erişimi çalışan ve görev kapsamıyla sınırlanır. Son karar, öğrenme kaydının kabulü ve yeni sürümün kullanıma alınması insandadır."
         ],
         [
-          "Bilimsel deneyi tekrar kurabil.",
-          "AI-Scientist, dijital ikiz verilerinde kümeleme ve anomali tespiti deneyleri tasarlar. Veri sürümü, yöntem, karşılaştırma, maliyet ve belirsizlik her sonuçla birlikte saklanır."
+          "İlk uzmanla başla. Yeni uzmanlara açık kal.",
+          "AI-Scientist ilk uzmandır; yerelde çalışan başka uzman eylemciler ortak görev, yetki, log ve sonuç sözleşmeleriyle eklenebilir. Her uzman izole kapsamda çalışır; bilimsel deneylerin veri, yöntem ve sonuçları yeniden kurulabilir olmalıdır."
         ],
         [
-          "RAG ile hatırla. LoRA ile davranışı uyarla.",
-          "RAG, ağırlıkları değiştirmeden kaynaklı bilgi getirir. LoRA, seçilmiş eğitim örnekleriyle uyumlu modelin davranışını uyarlar. Ham izler doğrudan eğitim verisi veya doğru cevap sayılmaz."
+          "Skill ile uygula. RAG ile hatırla. Fine-tune ile geliştir.",
+          "Seçilmiş kayıtlar testli skill’lere, kaynaklı RAG bilgisine ve yerel modellere özgü fine-tune adaylarına dönüşür. LoRA/QLoRA yalnız uyumlu modellerde değerlendirilir. Her adayın katkısı ölçülür; ham log doğrudan eğitim verisi sayılmaz."
         ],
         [
           "Gelişimi ve maliyeti birlikte ölç.",
@@ -96,46 +96,44 @@ export const content = {
       ]
     },
     "architecture": {
-      "title": "Bir çekirdek. Uzmanlaşan bir aile.",
-      "intro": "AOS, Linux üzerindeki yürütme çekirdeğinin; AI-Scientist, ilk bilimsel uzmanın temelidir. Bu iki repo kontrollü fork’larla şirkete özel SWAPP için geliştirilecek. Aşağıdaki yapı bir uygulama hedefidir; birleşik sistem kabulü henüz yapılmadı.",
+      "title": "Her çalışana bir alan. Ortak bir öğrenme.",
+      "intro": "AOS Core, çalışan başına izole Linux container kapsamını yönetir. Her alanda SWAPP web uygulaması, AI-Scientist ve diğer uzman eylemciler çalışır. Yerel model servisleri ve kalıcı kayıtlar şirket ortamında kalır. Bu hedef mimarinin birleşik sistem kabulü henüz yapılmadı.",
       "labels": [
         "İşletim",
         "Öğretmen",
         "Gelişim"
       ],
-      "onprem": "Şirket ortamı · standart Linux",
-      "human": "İnsan · amaç ve izin",
+      "onprem": "Şirket ortamı · Linux sunucusu",
+      "human": "Çalışan oturumu · amaç ve izin",
       "core": "UMAY OS Core · AOS",
       "s1": "System 1 · hızlı ve sınırlı eylem seçimi",
       "s2": "System 2 · plan, açıklama ve toparlanma",
       "scientist": "AI-Scientist · ilk uzman",
-      "scientistNote": "Dijital ikiz · kümeleme ve anomali deneyleri",
-      "app": "SWAPP · özel uygulama",
-      "appNote": "Frontend + backend · Core üzerinden izinli kullanım",
-      "knowledge": "Şirkete özel deneyim",
-      "knowledgeNote": "Kullanım izleri · RAG · LoRA · skills",
+      "scientistNote": "Çalışana bağlı, izole deney işleri",
+      "app": "SWAPP · web uygulaması",
+      "appNote": "Frontend + backend · çalışana ait uygulama örneği",
       "rented": "Kiralık self-host GPU",
       "rentedNote": "Ayrı yerleşim; kurum içi veri yerelliğiyle eş tutulmaz.",
       "distinction": "Model bir hesap kaynağıdır. Eylemci, sınırları tanımlı bir yürütme rolüdür.",
-      "operation": "Linux servisleri Core’u, SWAPP uygulamasını ve deney işçilerini barındırır. AOS, SWAPP tarayıcı oturumunun tek yürütme sahibidir; farklı tipte uzmanlar sürümlü görev ve sonuç sözleşmeleriyle çalışır. AI-Scientist izinli veri anlık görüntülerini ayrı deney ortamında işler.",
-      "teacherTitle": "Kapalı kaynak öğretmen. Açık ağırlıklı eylemciler.",
+      "operation": "Çalışan alanı bir container veya aynı izolasyon kapsamındaki servis container’larından oluşur. SWAPP, Core ve uzmanlar ayrı süreç yetkileriyle çalışır; Scientist deneyleri ek sandbox’larda yürütülür. Core her tarayıcı oturumunun tek otomasyon sahibidir. Container yeniden kurulsa da işlem kayıtları ve onaylı öğrenme ürünleri korunur. Ortak GPU için Scientist’in mevcut broker’ı tek tahsis otoritesi olarak korunur; çalışan container’ları ayrı GPU scheduler açmaz.",
+      "teacherTitle": "Mimari değişiklikler güçlü büyük dil modelleriyle.",
       "teacherFlow": [
-        "Claude / OpenAI · güçlü öğretmen",
-        "Mimari, kod, deney ve eğitim adayı",
+        "Claude / OpenAI · güçlü geliştirme modeli",
+        "Mimari karar · kod farkı · geri alma planı",
         "İzole test · kalite ve maliyet",
-        "İnsan incelemesi ve terfisi",
-        "Yerel açık model · sürüm ve geri alma"
+        "İnsan incelemesi ve onayı",
+        "Sürümlü dağıtım · yerel işletim"
       ],
-      "teacherText": "Güncel güçlü Claude ve OpenAI modelleri tasarım, geliştirme ve eğitim sürecini yönlendiren öğretmenler olarak seçilir. Model kimliği, sürüm, tarih, token ve ücret kaydedilir. Şirket verisi dış sağlayıcıya kendiliğinden açılmaz; öğretmen erişimi olmadan günlük yerel işletimin sürmesi hedeflenir.",
+      "teacherText": "Mimari ve sözleşme değişiklikleri güçlü büyük dil modelleriyle ayrı geliştirme alanında hazırlanır; gerekçe, etkilenen bileşenler ve test kanıtı birlikte kaydedilir. Günlük yerel eylemciler çalışma sırasında mimariyi değiştirmez. Şirket kayıtları dış sağlayıcıya otomatik aktarılmaz. Model kimliği ve maliyet izlenir; öğretmen erişimi olmadan yerel işletimin sürmesi hedeflenir.",
       "developmentTitle": "Birleşimden önce sözleşme, terfiden önce kanıt.",
       "developmentFlow": [
-        "Pinli AOS + AI-Scientist",
-        "SWAPP uygulama sözleşmesi",
-        "İzler → RAG / LoRA adayları",
+        "Çalışan container’ı + uygulama sözleşmesi",
+        "Tüm işlemler için kalıcı log",
+        "Değerli kayıt → skill / RAG / fine-tune",
         "Bağımsız kalite ve maliyet ölçümü",
         "İnsan terfisi · geri alma"
       ],
-      "developmentText": "Özel swapp-backend ve swapp-frontend geliştirme sırasında ayrıca teslim edilecek. Önce sentetik bir uygulama ve veriyle sözleşmeler sınanır; teslim sonrası gerçek SWAPP akışları, ardından şirket ortamı kabul edilir. RAG, LoRA ve yeni uzmanlar ayrı değerlendirmelerden geçer.",
+      "developmentText": "Önce iki sentetik çalışan alanıyla izolasyon, kayıt bütünlüğü ve yeniden başlatma sınanır. Özel SWAPP kodu teslim edildiğinde gerçek uygulama akışları aynı kapsamda kabul edilir. Seçilmiş kayıtların öğrenme katkısı ayrı ölçülür; mimari değişiklikler güçlü modelle hazırlanıp test ve insan onayından geçer.",
       "teacherCaption": "İki çalışma alanı, iki rol. Üretim ile kullanım arasında inceleme var. Kavramsal görsel.",
       "foundationsTitle": "Üç temel, açık sorumluluklar.",
       "foundations": [
@@ -176,12 +174,30 @@ export const content = {
           "Her rol güncel ve uyumlu modellerle yenilenebilir. Unsloth eğitimi, destekli taban ağırlıkları ve rolün veri biçimiyle hazırlanır; adaptörün hedef çıkarım motorunda yüklenmesi ve faydası ayrıca sınanır."
         ]
       ],
-      "rolesNote": "Bu model adları incelenen AOS temelini gösterir; değişmez ürün seçimi değildir. Decider ve ternary/GGUF Bonsai için Unsloth uyumu varsayılmaz. LoRA ve 4-bit QLoRA desteği model bazında doğrulanır; desteklenmeyen model için ayrı backend veya değerlendirilmiş alternatif gerekir. Scientist’in araştırma profilleri de Core S1/S2 protokolünden ayrıdır."
+      "rolesNote": "Bu model adları incelenen AOS temelini gösterir; değişmez ürün seçimi değildir. Decider ve ternary/GGUF Bonsai için Unsloth uyumu varsayılmaz. LoRA ve 4-bit QLoRA desteği model bazında doğrulanır; desteklenmeyen model için ayrı backend veya değerlendirilmiş alternatif gerekir. Scientist’in araştırma profilleri de Core S1/S2 protokolünden ayrıdır.",
+      "workspace": "Çalışan başına izole Linux container alanı",
+      "workspaceNote": "Ayrı oturum, dosya alanı, ağ erişimi ve kaynak kotası. Aynı şablon her çalışan için ayrı kurulur.",
+      "agents": "Diğer eylemciler",
+      "agentsNote": "Görev başına sınırlı araçlar ve yetki",
+      "servicesTitle": "Container dışında kalıcı şirket servisleri",
+      "services": [
+        [
+          "Yerel model servisleri",
+          "S1 / S2 / araştırma · yetki ve bağlam ayrımı"
+        ],
+        [
+          "Kalıcı log ve öğrenme deposu",
+          "Tüm işlemler → değer seçimi → skill / RAG / fine-tune"
+        ]
+      ],
+      "extensionsTitle": "Yeni yerel uzmanlara açık bir sistem.",
+      "extensionsText": "AI-Scientist ilk uzmandır. Yerelde çalışan başka uzman eylemciler; sürümlü yetenek kaydı, görev/sonuç sözleşmesi, sınırlı araç ve veri erişimi, kaynak kotası, iptal ve işlem loglarıyla sisteme eklenebilir. Her uzman çalışan alanının izolasyonuna ve insan denetimine uyar.",
+      "extensionsNote": "AOS’un yeni kayıtlı eylemci yürütücüsü bu genişlemenin kaynak temelidir. Kararlı genel plugin API’si, her uzmanla uyumluluk ve çok çalışanlı UMAY kabulü henüz tamamlanmış değildir. Açıklık burada genişletilebilirliktir; proje lisansı ayrıca belirlenir."
     },
     "scientist": {
       "title": "İlk uzman: Scientist.",
       "subtitle": "İlk iş: dijital ikizden bilimsel deneye.",
-      "intro": "SWAPP dijital ikizlerinden izinli zaman serileri alınacak; AI-Scientist çalışma rejimlerini kümelemek ve rejime göre anomali adaylarını incelemek için deney düzenekleri kuracak. Veri, kod, ölçüt ve sonuçlar deney defterinde izlenecek. Kaynak temelindeki Qwen3.5-9B araştırma profilleri, Core’un Decider/Bonsai rollerinden ayrıdır.",
+      "intro": "AI-Scientist, her çalışanın Linux container alanında ilk uzman olarak çalışacak. İzinli SWAPP dijital ikiz verileriyle kümeleme ve anomali deneyleri ayrı sandbox’larda yürütülecek; tüm denemeler, hatalar ve sonuçlar ortak işlem izine bağlanacak. Araştırma modelleri, Core’un S1/S2 rollerinden ayrı değerlendirilecek. Yeni kaynakta CPU deney akışı ve seçili deney hafızası mevcut; varsayılan field-lab profilinde LLM/GPU kapalı. Çalışan başına UMAY bağlantısı ayrı kabul bekliyor.",
       "label": "Anlatım örneği · altı sentetik nokta · ML modeli değil",
       "steps": [
         [
@@ -253,7 +269,7 @@ export const content = {
         "Model değişir.",
         "Bilginin izi kalır."
       ],
-      "intro": "İnsan SWAPP’ta varlığı bulur, trendi inceler, bulguyu değerlendirir. İzinli eylem izleri ve düzeltmeler, inceleme sonrasında şirkete özel bilgi ve davranış örneklerine dönüşür.",
+      "intro": "Çalışan alanındaki SWAPP kullanımı, eylemci adımları, model ve araç çağrıları, deneyler, hatalar ve insan düzeltmeleri loglanır. Sonucu doğrulanan, tekrar kullanılabilir katkı sağlayan kayıtlar seçilir; skill, RAG ve yerel model eğitimi için incelenir.",
       "products": [
         [
           "RAG",
@@ -263,22 +279,22 @@ export const content = {
         [
           "Skill",
           "Kullanım yöntemini tekrar edilebilir kıl.",
-          "SWAPP akışı; önkoşul, adımlar, yetki, beklenen sonuç ve testleriyle sürümlenir. İnsan alışkanlığı, doğrulanmadan otomasyon kuralı olmaz."
+          "SWAPP akışı veya eylemci yöntemi; önkoşul, adımlar, yetki, beklenen sonuç ve testleriyle sürümlenir. Bir kaydın skill olması için yöntemin yeniden uygulanabilir katkısı doğrulanır."
         ],
         [
-          "LoRA / QLoRA",
+          "Fine-tune · LoRA / QLoRA",
           "S1 ve S2 için ayrı, modele bağlı adaptörler.",
           "İncelenmiş örnekler rolün veri biçimine dönüştürülür. Unsloth destekli modellerde LoRA veya uygun 4-bit QLoRA yolu seçilir. Adaptör, aynı taban modele karşı bağımsız görevlerde sınanır; sonra insan onayıyla kullanıma alınır."
         ]
       ],
       "flow": [
-        "İzinli kullanım izi",
-        "Temizleme ve insan incelemesi",
-        "RAG / skill / eğitim adayı",
-        "Bağımsız değerlendirme",
-        "Sürüm, izleme ve geri alma"
+        "Tüm çalışma işlemlerini logla",
+        "Katma değeri seç ve incele",
+        "Skill / RAG / fine-tune adayı",
+        "Yerel modelde bağımsız değerlendirme",
+        "İnsan onayı, sürüm ve geri alma"
       ],
-      "note": "RAG indeksini yenilemek fine-tuning değildir. Bir kaynağı silmek, eğitilmiş adaptörden etkisini silmez. Model, tokenizer, embedding ve adaptör uyumu yeniden sınanır; terfi edilmemiş adaylar günlük işletimi değiştirmez.",
+      "note": "İşlem kaydı tutmak, her içeriği eğitimde kullanma izni vermez. Sırlar ve gereksiz kişisel veriler ayıklanır; başarısızlıklar ve düzeltmeler de katkı sağlayabilir. RAG ağırlıkları değiştirmez. Fine-tune adayları bağımsız değerlendirme ve insan onayından sonra yerel işletime alınır.",
       "boundaryTitle": "Şirkete özel kalan birikim",
       "boundaries": [
         [
@@ -287,7 +303,7 @@ export const content = {
         ],
         [
           "Özel veri ve yöntem",
-          "Şirket verileri, çalışanların kullanım izleri, incelemeler ve iş yapma yöntemleri şirketin erişim sınırlarında tutulur."
+          "Çalışanların işlem kayıtları ve yöntemleri erişim kapsamıyla saklanır. Öğrenme için paylaşım ayrıca incelenir; container izolasyonu veri paylaşım izni oluşturmaz."
         ],
         [
           "Özel öğrenme ürünleri",
@@ -303,23 +319,23 @@ export const content = {
         "UMAY mimari kararı",
         "Entegrasyon ve kabul bekliyor"
       ],
-      "sourceIntro": "AOS ve AI-Scientist mevcut uygulama temelleridir. Kaynak pinleri, bu sitede birleşik UMAY sisteminin çalıştığına dair test sonucu sayılmaz.",
+      "sourceIntro": "Yeni push’lar kaynak düzeyinde incelendi. Aşağıdaki çalışma sonuçları upstream’in tarihli kabul kayıtlarıdır; bu sitede yeniden çalıştırılmış UMAY runtime testleri değildir.",
       "decisions": [
-        "Standart Linux + AOS Core + şirketin SWAPP uygulaması.",
-        "İlk uzman AI-Scientist: dijital ikizlerde kümeleme ve anomali deneyleri.",
-        "Ayrı S1/S2 model profilleri; özel RAG, Unsloth LoRA/QLoRA ve kapalı kaynak öğretmenler.",
-        "Her geliştirme işi için kalite, süre ve maliyet kaydı."
+        "Her çalışan için izole Linux container alanı: SWAPP + AOS Core + eylemciler.",
+        "İlk uzman AI-Scientist; diğer uzmanlar aynı görev ve kayıt sözleşmesinde.",
+        "Tüm işlemlerin loglanması; değerli kayıtlardan skill, RAG ve yerel fine-tune.",
+        "Mimari değişikliklerde güçlü büyük dil modelleri, test ve insan onayı."
       ],
       "pending": [
-        "Kontrollü fork’lar ve Core–Scientist sözleşmesinin uygulanması.",
+        "Çalışan container alanları, yeni yerel uzman kabulü ve kalıcı log bütünlüğü.",
         "Özel SWAPP kodunun teslimi ve gerçek iş akışlarının kabulü.",
-        "İzinli iz toplama, RAG, eğitim ve bağımsız değerlendirme hattı.",
-        "Şirket ortamında kurulum, maliyet mutabakatı ve işletim kabulü."
+        "Eksiksiz işlem kaydı, değer seçimi ve yerel model gelişiminin ölçülmesi.",
+        "AOS–Scientist uyumlu kaynak/sözleşme çifti ve tek otoriteli gerçek ortak GPU kabulü."
       ],
       "roadmap": [
         [
           "Temel ve sözleşmeler",
-          "Kaynak pinleri, Linux profili, özel veri sınırı ve maliyet defteri."
+          "Çalışan container şablonu, erişim sınırları ve kalıcı işlem defteri."
         ],
         [
           "SWAPP ve ilk deney",
@@ -327,26 +343,30 @@ export const content = {
         ],
         [
           "Öğrenme ve kabul",
-          "Önce RAG, ihtiyaç varsa LoRA; taban modele karşı bağımsız ölçüm."
+          "Katma değerli kayıtlar → skill / RAG / fine-tune; bağımsız yerel model kıyası."
         ],
         [
           "Sürekli gelişim",
-          "İnsan terfisi, geri alma ve ihtiyaçla seçilen yeni uzmanlar."
+          "Güçlü modelle mimari geliştirme, insan onayı ve geri alınabilir sürümler."
         ]
       ],
       "note": "Bu repoların proje lisansları henüz seçilmemiştir; kamuya erişim ticari yeniden kullanım izni değildir. Kontrollü fork ve kullanım kapsamı kaynak/model lisanslarıyla birlikte doğrulanacak. Buradaki manifesto, plan ve örnek çalışan şirket entegrasyonu kanıtı değildir.",
       "costTitle": "Her gelişimin bir kalite sonucu ve maliyet kaydı var.",
       "costText": "Öğretmen çağrıları, kod geliştirme, deneyler, GPU eğitimi ve yerel çıkarım ayrı izlenir. Tahmini bütçe, gerçekleşen tüketim ve doğrulanmış fatura birbirine karıştırılmaz. Başarısız işler ve yeniden denemeler de maliyete dahildir.",
       "resourcesTitle": "Claude ve ChatGPT için inşa başlangıcı",
-      "resourcesText": "Mimari, veri ve görev sözleşmeleri, aşamalı geliştirme planı, kabul ölçütleri ve devralma promptu tek kaynak paketinde. Güncel model kimliği işe başlarken seçilir; varsayımlar ve açık işler birlikte taşınır.",
-      "resourcesAction": "İnşa kaynak paketini indir · Markdown"
+      "resourcesText": "Çalışan container mimarisi, işlem kayıtları, katma değer seçimi, yerel öğrenme ve güçlü modellerle değişiklik süreci; sözleşmeler, kabul ölçütleri ve devralma promptuyla tek pakette.",
+      "resourcesAction": "İnşa kaynak paketini indir · Markdown",
+      "sourceUpdates": [
+        "AOS: kayıtlı uzman yürütücüsü, kalıcı görev olayları ve izole proje yaşam döngüsü. Scientist CPU adaptöründe sınırlı gerçek deney kabulü raporlanıyor.",
+        "AI-Scientist: v0.1.0 ürün teslimi / 0.46.0 laboratuvar; CPU deneyleri, bağımsız Scorer/Referee ve açıkça seçilen deney hafızası."
+      ]
     },
     "closing": {
       "lines": [
         "Zekâ değişebilir.",
         "Sorumluluk kalır."
       ],
-      "text": "SWAPP’ta biriken insan deneyimini; şirkete ait, ölçülebilir ve sürekli gelişen eylemci yeteneklerine dönüştürmek için.",
+      "text": "Her çalışanın izole çalışma alanında biriken doğrulanmış deneyimi, şirkete ait yerel modellerin ve eylemcilerin kalıcı yeteneğine dönüştürmek için.",
       "action": "Gelişimi GitHub’da incele",
       "note": "Bir kamu anlatısı. Runtime kabulü değildir."
     },
@@ -359,7 +379,7 @@ export const content = {
   "en": {
     "meta": {
       "title": "UMAY OS — Models change. Experience endures.",
-      "description": "An AOS-based agent layer on Linux: open-weight workers learning from SWAPP experience through RAG and LoRA, with AI-Scientist, human oversight and measured costs."
+      "description": "SWAPP, AI-Scientist and agents in isolated Linux containers per employee; traceable operations and curated experience for improving local models."
     },
     "skip": "Skip to content",
     "home": "Home",
@@ -377,12 +397,12 @@ export const content = {
         "Experience endures.",
         "Decisions remain human."
       ],
-      "description": "Open-weight agents that know and use SWAPP, learning from how people work. Built on AOS on Linux, with AI-Scientist as the first specialist.",
+      "description": "An isolated Linux workspace for every employee. SWAPP, AI-Scientist and other agents run here; operations become records, and valuable experience improves local models.",
       "actions": [
         "Read the manifesto",
         "Explore the architecture"
       ],
-      "note": "Target architecture · An agent operating layer adapted to the company on standard Linux."
+      "note": "Target architecture · Containers per employee · Local operation · Architecture developed with powerful models"
     },
     "manifesto": {
       "title": [
@@ -396,16 +416,16 @@ export const content = {
       ],
       "principles": [
         [
-          "Keep company knowledge private.",
-          "SWAPP frontend/backend, company data, employee workflows, LoRA adapters and RAG vector datasets remain private. Architecture and principles are shared publicly."
+          "An isolated workspace for every employee.",
+          "A Linux container starts for each employee; the SWAPP web application, AI-Scientist and other agents run within this isolated scope. Sessions, files and access permissions stay separate; company knowledge remains private."
         ],
         [
-          "Let experience outlive the model.",
-          "Permitted SWAPP traces gain meaning through goals, actions, context, outcomes and human corrections. Reviewed sources endure and can be processed again when models change."
+          "Record every operation. Retain valuable experience.",
+          "Human, agent and service operations in the workspace are logged with goals, actions, outcomes, failures and corrections. Records persist independently of containers. Only permitted examples with verified value enter learning."
         ],
         [
-          "Large models develop. Open models operate.",
-          "Powerful closed-source language models help develop architecture, code, experiments and training candidates. Daily agents run open-weight models in the company environment."
+          "Develop architecture with powerful models. Operate locally.",
+          "Architecture changes are prepared with powerful large language models: decision rationale, code changes, tests and rollback plans are reviewed together. People approve versioned releases. Daily agents run open-weight models locally."
         ],
         [
           "Measure mastery of SWAPP.",
@@ -413,15 +433,15 @@ export const content = {
         ],
         [
           "Keep authority human.",
-          "Models do not grant permission. Tools and access are scoped to each task. People decide, accept learning records and approve new versions for use."
+          "Models do not grant permission. Tools and access are scoped to the employee and task. People decide, accept learning records and approve new versions for use."
         ],
         [
-          "Make experiments reproducible.",
-          "AI-Scientist designs clustering and anomaly detection experiments on digital-twin data. Data versions, methods, comparisons, costs and uncertainty accompany every result."
+          "Start with one specialist. Welcome more.",
+          "AI-Scientist is the first specialist; other local agents can join through shared task, permission, logging and result contracts. Every specialist runs in an isolated scope; scientific experiments retain reproducible data, methods and results."
         ],
         [
-          "Retrieve with RAG. Adapt behavior with LoRA.",
-          "RAG retrieves sourced knowledge without changing weights. LoRA adapts a compatible model using selected training examples. Raw traces are neither training data nor correct answers by default."
+          "Act with skills. Retrieve with RAG. Improve with fine-tuning.",
+          "Selected records become tested skills, sourced RAG knowledge and fine-tuning candidates for local models. LoRA/QLoRA is evaluated only for compatible models. Measure each candidate’s contribution; raw logs are not training data by default."
         ],
         [
           "Measure improvement and cost together.",
@@ -430,46 +450,44 @@ export const content = {
       ]
     },
     "architecture": {
-      "title": "One core. A family of specialists.",
-      "intro": "AOS provides the execution foundation on Linux; AI-Scientist provides the first scientific specialist. Controlled downstream forks will adapt both repositories to private SWAPP workflows. This is the target architecture; integrated system acceptance is still pending.",
+      "title": "A workspace for each employee. Shared learning.",
+      "intro": "AOS Core manages an isolated Linux container scope for each employee. Each workspace runs the SWAPP web application, AI-Scientist and other specialist agents. Local model services and persistent records remain in the company environment. Integrated acceptance of this target architecture is still pending.",
       "labels": [
         "Operation",
         "Teacher",
         "Development"
       ],
-      "onprem": "Company environment · standard Linux",
-      "human": "Human · purpose and permission",
+      "onprem": "Company environment · Linux host",
+      "human": "Employee session · purpose and permission",
       "core": "UMAY OS Core · AOS",
       "s1": "System 1 · fast, bounded action selection",
       "s2": "System 2 · planning, explanation and recovery",
       "scientist": "AI-Scientist · first specialist",
-      "scientistNote": "Digital twins · clustering and anomaly experiments",
-      "app": "SWAPP · private application",
-      "appNote": "Frontend + backend · permitted use through Core",
-      "knowledge": "Company-specific experience",
-      "knowledgeNote": "Usage traces · RAG · LoRA · skills",
+      "scientistNote": "Isolated experiment jobs scoped to the employee",
+      "app": "SWAPP · web application",
+      "appNote": "Frontend + backend · an instance per employee",
       "rented": "Rented self-host GPU",
       "rentedNote": "Separate placement; not equivalent to on-prem data locality.",
       "distinction": "A model is a compute resource. An agent is an execution role with defined boundaries.",
-      "operation": "Linux services host Core, the SWAPP application and experiment workers. AOS is the single execution owner of the SWAPP browser session; different specialists use versioned task and result contracts. AI-Scientist processes permitted data snapshots in a separate experiment environment.",
-      "teacherTitle": "Closed-source teachers. Open-weight agents.",
+      "operation": "An employee workspace consists of one container or service containers within the same isolation scope. SWAPP, Core and specialists use separate process permissions; Scientist experiments run in additional sandboxes. Core is the sole automation owner of each browser session. Records and approved learning artifacts survive container recreation. Scientist’s existing broker remains the single shared-GPU allocation authority; employee containers do not create separate GPU schedulers.",
+      "teacherTitle": "Architecture changes with powerful large language models.",
       "teacherFlow": [
-        "Claude / OpenAI · capable teacher",
-        "Architecture, code, experiment and training candidate",
+        "Claude / OpenAI · powerful development model",
+        "Architecture decision · code changes · rollback plan",
         "Isolated tests · quality and cost",
-        "Human review and promotion",
-        "Local open model · version and rollback"
+        "Human review and approval",
+        "Versioned deployment · local operation"
       ],
-      "teacherText": "Current capable Claude and OpenAI models guide design, development and training. Record the model identifier, version, date, tokens and cost. Company data is not automatically shared with external providers; daily local operation should continue without teacher access.",
+      "teacherText": "Architecture and contract changes are prepared with powerful large language models in a separate development workspace; rationale, affected components and test evidence are recorded together. Daily local agents do not change the architecture during operation. Company records are not automatically sent to external providers. Model identity and cost are tracked; local operation should continue without teacher access.",
       "developmentTitle": "Contracts before integration. Evidence before promotion.",
       "developmentFlow": [
-        "Pinned AOS + AI-Scientist",
-        "SWAPP application contract",
-        "Traces → RAG / LoRA candidates",
+        "Employee containers + application contract",
+        "Persistent logs for all operations",
+        "Valuable records → skills / RAG / fine-tuning",
         "Independent quality and cost evaluation",
         "Human promotion · rollback"
       ],
-      "developmentText": "Private swapp-backend and swapp-frontend will be delivered separately during development. Start with a synthetic application and data to test contracts; validate real SWAPP workflows after delivery, then the company environment. RAG, LoRA and new specialists have separate evaluations.",
+      "developmentText": "First test isolation, record integrity and restarts with two synthetic employee workspaces. Once private SWAPP code is delivered, validate real workflows in the same scope. Measure the learning value of selected records separately; architecture changes are prepared with powerful models and pass tests and human approval.",
       "teacherCaption": "Two workspaces, two roles. Review stands between production and use. Conceptual artwork.",
       "foundationsTitle": "Three foundations, clear responsibilities.",
       "foundations": [
@@ -510,12 +528,30 @@ export const content = {
           "Each role can move to current compatible models. Unsloth training uses supported base weights and role-specific data formats. Adapter loading and benefit in the target inference engine require separate validation."
         ]
       ],
-      "rolesNote": "These model names identify the inspected AOS baseline, not permanent product choices. Unsloth compatibility is not assumed for Decider or ternary/GGUF Bonsai. Validate LoRA and 4-bit QLoRA support per model; unsupported models require a separate backend or an evaluated alternative. Scientist research profiles also differ from the Core S1/S2 protocol."
+      "rolesNote": "These model names identify the inspected AOS baseline, not permanent product choices. Unsloth compatibility is not assumed for Decider or ternary/GGUF Bonsai. Validate LoRA and 4-bit QLoRA support per model; unsupported models require a separate backend or an evaluated alternative. Scientist research profiles also differ from the Core S1/S2 protocol.",
+      "workspace": "Isolated Linux container workspace per employee",
+      "workspaceNote": "Separate sessions, files, network access and resource quotas. The same template is provisioned independently for every employee.",
+      "agents": "Other agents",
+      "agentsNote": "Task-scoped tools and permissions",
+      "servicesTitle": "Persistent company services outside containers",
+      "services": [
+        [
+          "Local model services",
+          "S1 / S2 / research · separate access and context"
+        ],
+        [
+          "Persistent logs and learning store",
+          "All operations → value selection → skills / RAG / fine-tuning"
+        ]
+      ],
+      "extensionsTitle": "An open system for new local specialists.",
+      "extensionsText": "AI-Scientist is the first specialist. Other locally running specialist agents can join through versioned capability registration, task/result contracts, scoped tools and data, resource quotas, cancellation and operation logs. Every specialist follows workspace isolation and human oversight.",
+      "extensionsNote": "The new registered-agent runner in AOS provides a source foundation for this extension. A stable general plugin API, compatibility with every specialist and multi-employee UMAY acceptance are still pending. Open here means extensible; project licensing is a separate decision."
     },
     "scientist": {
       "title": "First specialist: Scientist.",
       "subtitle": "First task: from digital twin to scientific experiment.",
-      "intro": "Permitted time series from SWAPP digital twins will feed AI-Scientist experiments to cluster operating regimes and investigate regime-dependent anomaly candidates. Data, code, metrics and results will be tracked in the experiment ledger. The source baseline’s Qwen3.5-9B research profiles are separate from Core’s Decider/Bonsai roles.",
+      "intro": "AI-Scientist will run as the first specialist in each employee’s Linux container workspace. Clustering and anomaly experiments on permitted SWAPP digital-twin data will run in separate sandboxes; every trial, failure and result will link to the shared operation trace. Research models will be evaluated separately from Core S1/S2 roles. The new source includes CPU experiments and selected experiment memory; LLM/GPU calls are disabled in the default field-lab profile. Integration into UMAY employee workspaces requires separate acceptance.",
       "label": "Illustration · six synthetic points · not an ML model",
       "steps": [
         [
@@ -587,7 +623,7 @@ export const content = {
         "Models change.",
         "Knowledge keeps its history."
       ],
-      "intro": "People find assets, inspect trends and review findings in SWAPP. Permitted action traces and corrections become company-specific knowledge and behavior examples after review.",
+      "intro": "Log SWAPP use, agent steps, model and tool calls, experiments, failures and human corrections within each employee workspace. Select records with verified outcomes and reusable value; review them for skills, RAG and local model training.",
       "products": [
         [
           "RAG",
@@ -597,22 +633,22 @@ export const content = {
         [
           "Skill",
           "Make workflows repeatable.",
-          "Version each SWAPP workflow with preconditions, steps, authority, expected outcomes and tests. Human habits do not become automation rules without validation."
+          "Version a SWAPP workflow or agent method with preconditions, steps, authority, expected outcomes and tests. A record becomes a skill after its repeatable contribution is verified."
         ],
         [
-          "LoRA / QLoRA",
+          "Fine-tuning · LoRA / QLoRA",
           "Separate, model-bound adapters for S1 and S2.",
           "Reviewed examples are converted to the role’s data format. Choose LoRA or a compatible 4-bit QLoRA path for Unsloth-supported models. Evaluate the adapter against the same base on independent tasks before human-approved use."
         ]
       ],
       "flow": [
-        "Permitted usage trace",
-        "Cleaning and human review",
-        "RAG / skill / training candidate",
-        "Independent evaluation",
-        "Version, monitor and rollback"
+        "Log all workspace operations",
+        "Select and review valuable records",
+        "Skill / RAG / fine-tuning candidate",
+        "Independent local-model evaluation",
+        "Human approval, version and rollback"
       ],
-      "note": "Refreshing a RAG index is not fine-tuning. Deleting a source does not remove its influence from a trained adapter. Recheck model, tokenizer, embedding and adapter compatibility; unpromoted candidates do not change daily operation.",
+      "note": "Logging an operation does not grant permission to train on every payload. Remove secrets and unnecessary personal data; failures and corrections can also be valuable. RAG does not change weights. Fine-tuning candidates enter local operation only after independent evaluation and human approval.",
       "boundaryTitle": "The knowledge that stays with the company",
       "boundaries": [
         [
@@ -621,7 +657,7 @@ export const content = {
         ],
         [
           "Private data and methods",
-          "Company data, employee traces, reviews and working methods remain within company access boundaries."
+          "Employee operation records and methods retain their access scope. Sharing for learning requires separate review; container isolation does not grant data-sharing permission."
         ],
         [
           "Private learning artifacts",
@@ -637,23 +673,23 @@ export const content = {
         "UMAY architecture decision",
         "Integration and acceptance pending"
       ],
-      "sourceIntro": "AOS and AI-Scientist provide existing implementation foundations. Source pins are not test results for an integrated UMAY system on this site.",
+      "sourceIntro": "The new pushes were reviewed at source level. Execution results below are dated upstream acceptance reports, not UMAY runtime tests rerun on this site.",
       "decisions": [
-        "Standard Linux + AOS Core + the company’s SWAPP application.",
-        "AI-Scientist first: clustering and anomaly experiments on digital twins.",
-        "Separate S1/S2 model profiles; private RAG, Unsloth LoRA/QLoRA and closed-source teachers.",
-        "Quality, time and cost records for each development job."
+        "An isolated Linux container workspace per employee: SWAPP + AOS Core + agents.",
+        "AI-Scientist first; other specialists use the same task and logging contracts.",
+        "Log all operations; turn valuable records into skills, RAG and local fine-tuning.",
+        "Powerful large language models, tests and human approval for architecture changes."
       ],
       "pending": [
-        "Controlled forks and implementation of the Core–Scientist contract.",
+        "Employee container workspaces, new local specialist acceptance and persistent log integrity.",
         "Private SWAPP code delivery and real workflow acceptance.",
-        "Permitted trace collection, RAG, training and independent evaluation.",
-        "Company deployment, cost reconciliation and operational acceptance."
+        "Complete operation logging, value selection and measured local-model improvement.",
+        "A compatible AOS–Scientist source/contract pair and real shared-GPU acceptance under one authority."
       ],
       "roadmap": [
         [
           "Foundations and contracts",
-          "Source pins, Linux profile, private data boundaries and cost ledger."
+          "Employee container template, access boundaries and persistent operation ledger."
         ],
         [
           "SWAPP and first experiment",
@@ -661,26 +697,30 @@ export const content = {
         ],
         [
           "Learning and acceptance",
-          "RAG first; LoRA where justified, with independent base-model comparisons."
+          "Valuable records → skills / RAG / fine-tuning; independent local-model comparisons."
         ],
         [
           "Continuous improvement",
-          "Human promotion, rollback and new specialists selected for measured needs."
+          "Architecture developed with powerful models, human approval and reversible releases."
         ]
       ],
       "note": "Project licenses for these repositories have not been selected; public access does not grant commercial reuse permission. Verify controlled forks and usage scope against source and model licenses. This manifesto, plan and example do not prove a working company integration.",
       "costTitle": "Every improvement has a quality result and a cost record.",
       "costText": "Track teacher calls, coding, experiments, GPU training and local inference separately. Keep budget estimates, measured usage and reconciled invoices distinct. Include failed jobs and retries in costs.",
       "resourcesTitle": "A starting point for Claude and ChatGPT",
-      "resourcesText": "Architecture, data and task contracts, phased delivery, acceptance criteria and a handoff prompt in one source pack. Select current model identifiers at the start; carry assumptions and open work forward.",
-      "resourcesAction": "Download implementation pack · Markdown (Turkish)"
+      "resourcesText": "Employee container architecture, operation records, value selection, local learning and changes with powerful models; contracts, acceptance criteria and a handoff prompt in one pack.",
+      "resourcesAction": "Download implementation pack · Markdown (Turkish)",
+      "sourceUpdates": [
+        "AOS: registered specialist runner, durable task events and isolated project lifecycle. Limited real-experiment acceptance is reported for the Scientist CPU adapter.",
+        "AI-Scientist: v0.1.0 product delivery / 0.46.0 laboratory; CPU experiments, independent Scorer/Referee and explicitly selected experiment memory."
+      ]
     },
     "closing": {
       "lines": [
         "Intelligence can change.",
         "Responsibility endures."
       ],
-      "text": "Turn the human experience accumulated in SWAPP into measurable, continuously improving agent capabilities owned by the company.",
+      "text": "Turn verified experience from each employee’s isolated workspace into lasting capabilities for company-owned local models and agents.",
       "action": "Explore development on GitHub",
       "note": "A public narrative. Not runtime acceptance."
     },

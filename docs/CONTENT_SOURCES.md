@@ -2,12 +2,13 @@
 
 Son kontrol tarihi: **3 Ekim 2026** (Europe/Istanbul). Kamuya açık Git kaynakları yeni, geçici checkout'larda salt okunur incelendi; uygulamaları bu anlatı sitesinin çalışma bağımlılığı değildir. Bu kayıt kod/kaynak incelemesini, upstream'in raporladığı eski deneyleri ve yeni UMAY hedeflerini ayırır. Bu çalışmada AOS, AI-Scientist veya model eğitimleri çalıştırılmadı.
 
-| Kaynak | Yeniden doğrulanan `main` pini ve commit zamanı | Kullanılan kapsam |
-| --- | --- | --- |
-| [aserdargun/aos](https://github.com/aserdargun/aos) | [`ed6e857b0e61e9c19c8ba63933e2cc9f318fe444`](https://github.com/aserdargun/aos/commit/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444), 30 Eylül 2026 10:24:02 +03:00 | S1/S2, typed yürütme, tek input sahibi, knowledge/skill, adapter deneyleri ve entegrasyon sözleşmeleri |
-| [aserdargun/ai-scientist](https://github.com/aserdargun/ai-scientist) | [`67258cdef33032c9a49eeae31c2e2ba26a98ca17`](https://github.com/aserdargun/ai-scientist/commit/67258cdef33032c9a49eeae31c2e2ba26a98ca17), 30 Eylül 2026 10:05:13 +03:00 | Bağımsız laboratuvar, çalışma modları, Director/Scorer, Qwen profilleri, Unsloth deney taslağı ve SFT sınırı |
+## Yeni push incelemesi
 
-3 Ekim'de yeni `git clone --depth 1` checkout'larının HEAD ve commit zamanları, ayrıca GitHub API depo metadata'sı okundu. Her iki depoda `default_branch=main`, `fork=false`, `parent=null`, `source=null`, `license=null` gözlendi. README'ler de proje lisansının henüz seçilmediğini söylüyor. Bu nedenle bunlar **kamuya açık kaynak depoları** olarak tanımlanır; seçilmiş bir açık kaynak lisansı veya başka bir projeden doğrulanmış fork kökeni iddia edilmez. UMAY için bu iki özgün depodan şirkete özel türevler hazırlanması hedeflenir. Aynı adlı üçüncü taraf Scientist projesi kaynak olarak kullanılmadı. Model, veri ve üçüncü taraf bileşen lisansları proje lisansından ayrı değerlendirilir.
+Güncel kaynak pinleri AOS [`dfd06322219b9295c5fc618bef180464b3d17767`](https://github.com/aserdargun/aos/commit/dfd06322219b9295c5fc618bef180464b3d17767) ve AI-Scientist [`01b17c3b3038d3c753cd80f2bbc9fbc04ca646fe`](https://github.com/aserdargun/ai-scientist/commit/01b17c3b3038d3c753cd80f2bbc9fbc04ca646fe). Git remote HEAD/main ve yeni `--depth 12` checkout'ları önceki pinlerle karşılaştırıldı. [Yeni push incelemesi](UPSTREAM_REVIEW_2026-10-03.md) kaynak farklarını, dosya/commit sayılarını, yeniden kullanılacak modülleri ve açık kabul sınırlarını kaydeder.
+
+AOS'ta kayıtlı uzman runner, izole proje yaşam döngüsü, kalıcı görev/skill geçmişi ve ayrı Scientist CPU adaptörü var. Scientist v0.1.0 / harness 0.46.0, CPU deney akışı ve açık seçilmiş deney hafızası sunuyor. AOS'un ayrı CPU capability candidate'ı public Scientist pininde aynı endpoint olarak bulunmadığı için uyumlu kaynak çiftinin kabulü açık. Gerçek ortak GPU, özel SWAPP ve çalışan bazlı UMAY izolasyonu tamamlanmış gösterilmez.
+
+Aşağıdaki model/eğitim incelemesinin önceki temel pinleri AOS `ed6e857b0e61e9c19c8ba63933e2cc9f318fe444`, Scientist `67258cdef33032c9a49eeae31c2e2ba26a98ca17` idi. Tarihsel bağlantılar o incelemenin kökenini korur; yeni kaynakta model revision'ları ayrıca kontrol edildi. Önceki GitHub metadata gözleminde `fork=false`, `parent=null`, `source=null`, `license=null` kaydedilmişti; bu yenilemede metadata API sorgusu tekrarlanmadı. Yeni README'ler de lisans seçiminin beklediğini bildirir. Public erişim lisans veya runtime kabulü değildir.
 
 ## S1, S2 ve model kimlikleri
 
@@ -45,7 +46,7 @@ Scientist'in [`lab/operating_modes`](https://github.com/aserdargun/ai-scientist/
 
 [Mimari sayfası](https://swapp.org.tr/mimari) modüler monolit, ortak salt okunur veri servisleri, modül manifestoları ve rol/grup yetkilerini; [platform sayfası](https://swapp.org.tr/platform) değişikliklerle birlikte belge/manifesto ve kalite kapılarını açıklar. Site, ekranlarının ve örnek verilerinin temsilî olduğunu belirtir. Canlı şirket SWAPP'ı veya dijital ikiz veri bağlantısı bu incelemede açılmadı.
 
-Kullanıcının 3 Ekim ürün kararı: UMAY OS basit Linux üzerinde AOS çekirdeği, SWAPP uygulama bağlamı ve ilk uzman olarak AI-Scientist ile kurulacak; birçok eylemciyi ayrı yetki ve kaynak bütçeleriyle taşıyacak. `swapp-backend` ve `swapp-frontend` geliştirme sırasında ayrıca teslim edilecek kapalı şirket kaynaklarıdır. Şirket verileri, çalışanların kullanım yöntemleri/izleri, RAG vektör veri kümeleri ve LoRA adapter'ları özel kalır. Kapalı büyük modeller mimari, öğretmen ve geliştirme hattında kullanılır; şirket verisinin dış sağlayıcıya aktarımı ayrıca kapsamlandırılır. SWAPP'ı iyi bilen/kullanan eylemciler hedef yetkinliktir; mevcut kabul sonucu değildir.
+Kullanıcının 3 Ekim güncel ürün kararı: her insan çalışan için izole Linux container alanında AOS Core, SWAPP web uygulaması, AI-Scientist ve başka yerel uzman eylemciler çalışacak. Tüm iş işlemleri kalıcı loga bağlanacak; katma değerli kayıtlar incelenerek skill, RAG ve yerel fine-tune adaylarına dönüşecek. Mimari değişiklikler güçlü büyük dil modelleriyle hazırlanıp test ve insan onayından geçecek. `swapp-backend` ve `swapp-frontend` geliştirme sırasında ayrıca teslim edilecek kapalı şirket kaynaklarıdır. Şirket verileri, çalışanların kullanım yöntemleri/izleri, RAG vektör veri kümeleri ve LoRA adapter'ları özel kalır. Kapalı büyük modeller mimari, öğretmen ve geliştirme hattında kullanılır; şirket verisinin dış sağlayıcıya aktarımı ayrıca kapsamlandırılır. SWAPP'ı iyi bilen/kullanan eylemciler hedef yetkinliktir; mevcut kabul sonucu değildir.
 
 ## Önceki sürümün köken kaydı
 

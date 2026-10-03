@@ -19,19 +19,26 @@ const views = ['operation', 'teacher', 'development'];
   <div id="panel-operation" data-architecture-panel="operation" aria-labelledby="operation-heading">
     <h3 id="operation-heading" class="view-heading">{t.labels[0]}</h3>
     <div class="placement">
-      <div class="onprem"><p class="boundary-label">{t.onprem}</p><div class="operating-diagram">
+      <div class="onprem"><p class="boundary-label">{t.onprem}</p>
+        <div class="employee-workspace" aria-labelledby="workspace-heading">
+          <h4 id="workspace-heading">{t.workspace}</h4><p class="workspace-note">{t.workspaceNote}</p>
+          <div class="operating-diagram">
         <div class="diagram-node human-node"><DiagramIcon name="human" /><strong>{t.human}</strong></div>
         <div class="connector human-connector"><Arrow /></div>
         <div class="diagram-node core-node"><div class="core-heading"><img src="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" /><h4>{t.core}</h4></div><div class="core-roles"><p>{t.s1}</p><p>{t.s2}</p></div></div>
         <div class="diagram-node scientist-node"><DiagramIcon name="scientist" /><strong>{t.scientist}</strong><p>{t.scientistNote}</p></div>
         <div class="diagram-node app-node"><DiagramIcon name="application" /><strong>{t.app}</strong><p>{t.appNote}</p></div>
-        <div class="diagram-node knowledge-node"><DiagramIcon name="knowledge" /><strong>{t.knowledge}</strong><p>{t.knowledgeNote}</p></div>
+        <div class="diagram-node agents-node"><DiagramIcon name="knowledge" /><strong>{t.agents}</strong><p>{t.agentsNote}</p></div>
         <svg class="branch-lines" viewBox="0 0 1000 52" preserveAspectRatio="none" aria-hidden="true"><path d="M500 0v52M166 52V26h668v26" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke" /></svg>
-      </div></div>
+          </div>
+        </div>
+        <div class="persistent-services"><h4>{t.servicesTitle}</h4><dl>{t.services.map(([title, note]) => <div><dt>{title}</dt><dd>{note}</dd></div>)}</dl></div>
+      </div>
       <aside class="rented"><DiagramIcon name="cloud" /><strong>{t.rented}</strong><p>{t.rentedNote}</p></aside>
     </div>
     <p class="diagram-distinction">{t.distinction}</p><p class="view-description">{t.operation}</p>
     <div class="role-block" aria-labelledby="roles-title"><h3 id="roles-title">{t.rolesTitle}</h3><div class="role-grid">{t.roles.map(([name, title, text]) => <article><span class="number">{name}</span><h4>{title}</h4><p>{text}</p></article>)}</div><p class="technical-note">{t.rolesNote}</p></div>
+    <div class="role-block" aria-labelledby="extensions-title"><h3 id="extensions-title">{t.extensionsTitle}</h3><p class="view-description">{t.extensionsText}</p><p class="technical-note">{t.extensionsNote}</p></div>
   </div>
   <div id="panel-teacher" data-architecture-panel="teacher" aria-labelledby="teacher-heading"><h3 id="teacher-heading" class="view-heading">{t.teacherTitle}</h3><ol class="flow teacher-flow">{t.teacherFlow.map((label, i) => <li><span class="number">0{i + 1}</span><strong>{label}</strong>{i < t.teacherFlow.length - 1 && <Arrow />}</li>)}</ol><p class="view-description">{t.teacherText}</p></div>
   <div id="panel-development" data-architecture-panel="development" aria-labelledby="development-heading"><h3 id="development-heading" class="view-heading">{t.developmentTitle}</h3><ol class="flow">{t.developmentFlow.map((label, i) => <li><span class="number">0{i + 1}</span><strong>{label}</strong>{i < t.developmentFlow.length - 1 && <Arrow />}</li>)}</ol><p class="view-description">{t.developmentText}</p></div>

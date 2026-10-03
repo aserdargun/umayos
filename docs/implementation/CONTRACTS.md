@@ -1,17 +1,20 @@
 # UMAY OS — Sınır sözleşmeleri
 
-Durum: önerilen `umay.contracts/0.1` · [Paket dizini](README.md).
+Durum: önerilen `umay.contracts/0.2` · [Paket dizini](README.md).
 
 Bu belgedeki alanlar UMAY için hedef tasarımdır; AOS/AI-Scientist'in mevcut API'si veya henüz teslim edilmemiş SWAPP endpoint'leri değildir. İlk geliştirme işi bunları mevcut tiplerle eşleyip gerekli JSON Schema ve uyumluluk testlerini **özel runtime deposunda** üretmektir. Aşağıdaki örnekler tamamen sentetiktir.
 
 ## 1. Ortak zarf ve doğrulama
 
-İşe/veriye bağlı kalıcı kayıtlar `schema_version`, kayıt kimliği, `tenant_id`, `trace_id`, UTC zaman, veri sınıfı, köken ve izin/policy sürümü taşır; köken/izin bilgisi bağlı immutable manifest üzerinden de çözülebilir. Paylaşılabilir eylemci tanımı gibi registry şablonları görev zarfı taşımaz; etkin deployment onları tenant, izin ve sürüm kapsamına bağlar. Kimlikler anlamdan bağımsız opaque değerlerdir; örneklerdeki `synthetic-*` gerçek şirket veya kullanıcı değildir. UTC saklanır, kaynak zaman dilimi ve birim ayrıca korunur. Kaynak dosyaları içerik hash'iyle, kod/model/indeks sürümleri immutable revision ile bağlanır.
+İşe/veriye bağlı kalıcı kayıtlar `schema_version`, kayıt kimliği, `tenant_id`, `employee_ref`, `workspace_id`, `workspace_run_id`, `trace_id`, UTC zaman, veri sınıfı, köken ve izin/policy sürümü taşır; köken/izin bilgisi bağlı immutable manifest üzerinden de çözülebilir. Paylaşılabilir eylemci tanımı gibi registry şablonları görev zarfı taşımaz; etkin deployment onları tenant, izin ve sürüm kapsamına bağlar. Kimlikler anlamdan bağımsız opaque değerlerdir; örneklerdeki `synthetic-*` gerçek şirket veya kullanıcı değildir. UTC saklanır, kaynak zaman dilimi ve birim ayrıca korunur. Kaynak dosyaları içerik hash'iyle, kod/model/indeks sürümleri immutable revision ile bağlanır.
 
-Şema kontrolü tek başına erişim denetimi değildir. Sunucu kimlik/tenant'ı güvenilir oturumdan türetir; istemcinin yazdığı `tenant_id` yetki vermez. Kritik sınır tiplerinde bilinmeyen alanlar ve bilinmeyen enum/sürüm reddedilir; migration açık sürüm eşlemesiyle yapılır. `null` bilinmeyen/değer yok demektir; sıfır anlamına gelmez.
+Şema kontrolü tek başına erişim denetimi değildir. Sunucu kimlik/tenant/çalışan ve workspace bağını güvenilir oturum ile tahsis kaydından türetir; istemcinin yazdığı `tenant_id` yetki vermez. Kritik sınır tiplerinde bilinmeyen alanlar ve bilinmeyen enum/sürüm reddedilir; migration açık sürüm eşlemesiyle yapılır. `null` bilinmeyen/değer yok demektir; sıfır anlamına gelmez.
 
 | Kayıt | Gerekli çekirdek alanlar | Bağımsız denetim |
 | --- | --- | --- |
+| `EmployeeWorkspace` | employee/workspace/run, image digest, service pins, volume/network/browser scope, quotas, state, log sink | Çalışanlar arası erişim reddi, yeniden kurulum ve kalıcı kayıt testi |
+| `OperationEvent` | employee/workspace/run, actor_kind, session/job/attempt, event/parent/sequence, action, timestamps, status, result/error refs, policy, pins | İstek/başlangıç/terminal bağları, eksik olay, tekrar, arındırma ve kalıcılık |
+| `ArchitectureChange` | gerekçe, model identity, mevcut/hedef sürüm, diff, migration, test/evidence, reviewer/approval, rollout/rollback | Güçlü modelle hazırlama kaydı; günlük eylemciye mimari yazma yetkisi verilmemesi |
 | `TaskRequest` | capability, input_refs, actor/scope, policy, budgets, pins, idempotency_key, deadline | Aktör ve veri yetkisi; desteklenen capability ve bütçe rezervasyonu |
 | `ExperienceEvent` | session/task, uygulama/skill sürümü, gözlem/eylem/sonuç referansı, outcome, izin ve minimizasyon | Eylemi önerdi/çalıştırdı/doğruladı ayrımı; sır ve kişisel veri kontrolü |
 | `DataSnapshot` | twin/asset, alan-birim eşlemesi, örnekleme, zaman, kalite/missingness, export/hash, provenance | Beklenen varlık/tenant/pencere ve kaynak oracle'ı |
@@ -20,17 +23,20 @@ Bu belgedeki alanlar UMAY için hedef tasarımdır; AOS/AI-Scientist'in mevcut A
 | `AdvisoryPacket` | question, evidence_refs, findings, alternatives, uncertainty, next_steps, decision_required | Her sayısal bulgunun hesap artifact'ine bağlanması |
 | `AgentManifest` | capability ve schema version, tool/data scope, runtime/model requirements, limits, cancel/health | En dar yetki, uyumsuzlukta ret, kaynak ve iptal testi |
 | `ModelRelease` | base/tokenizer/template/engine hash, adapter bağı, role/capability, evaluation, approval | Uyumlu yükleme; bağımsız rol ve pair regresyonu |
-| `LearningCandidate` | corpus/dataset/skill refs, lineage, rights/use profile, split/evaluation, teacher provenance | Kaynak hakkı, holdout izolasyonu ve insan terfisi |
+| `LearningCandidate` | source_event_refs, selection_reason, value_evidence/metric, target_role/model, corpus/dataset/skill refs, lineage, rights/use profile, split/evaluation, teacher provenance | Kaynak hakkı, holdout izolasyonu ve insan terfisi |
 | `CostEvent` | activity/job/run, provider/resource, usage/rate, amount/currency, status, invoice/dedupe | Rezervasyon/gerçekleşen ayrımı, eksik kayıt görünürlüğü, çift sayma kontrolü |
 
 ## 2. İş ve izin örneği
 
 ```json
 {
-  "schema_version": "umay.task/0.1",
+  "schema_version": "umay.task/0.2",
   "job_id": "synthetic-job-001",
   "trace_id": "synthetic-trace-001",
   "tenant_id": "synthetic-company",
+  "employee_ref": "synthetic-employee-001",
+  "workspace_id": "synthetic-workspace-001",
+  "workspace_run_id": "synthetic-workspace-run-001",
   "created_at": "2026-10-03T09:00:00Z",
   "data_class": "synthetic",
   "capability": "scientist.twin_anomaly_experiment",
@@ -51,14 +57,26 @@ Bu belgedeki alanlar UMAY için hedef tasarımdır; AOS/AI-Scientist'in mevcut A
 
 Salt okunur tekrarlar bounded retry ve backoff ile yapılabilir. Yan etki veya belirsiz sonuç varsa otomatik replay yapılmaz; idempotency ve postcondition üzerinden mevcut durum çözülür. Yinelenen kayıtlar `idempotency_key`/event kimliğiyle ayıklanır. Hata nesnesi `code`, `retryable`, `safe_detail`, `evidence_ref` taşır; sır/ham ekran hata mesajına sızmaz.
 
-## 3. İnsan kullanım izi örneği
+## 3. Ortak işlem defteri ve insan kullanım izi
+
+`OperationEvent` tüm iş işlemlerinin denetim zarfıdır; `ExperienceEvent` öğrenmeye uygun bağlam/düzeltme ekleyen, bu olaya referans veren türevidir. Her denetim kaydı öğrenme adayı olmak zorunda değildir. `actor_kind` insan/eylemci/servis ayrımını, `parent_event_id` neden-sonuç bağını, `attempt_id` yeniden denemeyi taşır. Sıra numarası üretici ve workspace run kapsamında monotondur; farklı üreticilerin nedenselliği parent/trace üzerinden kurulur.
+
+Asgari olay sözlüğü: workspace tahsis/başlatma/hazır/durdurma, oturum giriş/çıkış, UI eylemi, araç isteği/sonucu, model isteği/sonucu, veri erişimi, deney/eğitim/değerlendirme başlangıcı/sonucu, düzeltme, retry, iptal ve terfi. İşlem adedi ve terminal kayıtlar güvenilir yürütücüyle uzlaştırılır. Yetki reddi ve OOM/timeout da kayıt üretir. Event kimliğiyle dedupe, sıra boşluğu alarmı ve yeniden gönderim gerekir; kaydı eksik iş `verified_success` olamaz.
+
+Collector onayı veya şirketçe onaylı dayanıklı tampon yazımı yürütme önkoşuludur. İkisi de yoksa yeni eylem durur; aktif iş güvenli noktada bekler/durur. Acil durdurma engellenmez. Container silinse bile onaylanmış log kaybolmaz; append-only depoda düzeltme önceki olaya referanslı yeni olaydır. Saklama süresi, arındırma ve yetkili silme ayrıca uygulanır.
+
+### İnsan kullanım izi örneği
 
 ```json
 {
-  "schema_version": "umay.experience/0.1",
+  "schema_version": "umay.experience/0.2",
   "event_id": "synthetic-event-001",
+  "operation_event_ref": "synthetic-operation-001",
   "trace_id": "synthetic-trace-002",
   "tenant_id": "synthetic-company",
+  "employee_ref": "synthetic-employee-001",
+  "workspace_id": "synthetic-workspace-001",
+  "workspace_run_id": "synthetic-workspace-run-001",
   "occurred_at": "2026-10-03T09:10:00Z",
   "data_class": "synthetic",
   "source_kind": "synthetic_human_workflow",
@@ -89,13 +107,16 @@ Parola, token, tuşların eksiksiz kaydı veya tüm ekranın sürekli videosu va
 
 ## 5. Eylemci ve model yayını
 
+Sistem başka yerel uzmanlara açıktır. Aşağıdaki UMAY `AgentManifest`, AOS'un mevcut `AgentRegistration` kaydına ve altı yöntemli `AgentAdapter` yaşam döngüsüne eşlenecek hedef üst sözleşmedir; doğrudan mevcut wire tipi diye kullanılamaz. Adaptör türü, tam sürüm, capability, en fazla aktif iş, toplam/iş bütçesi, izin kapsamı, health/cancel, log ve bağımsız sonuç/cleanup kanıtı kabul edilir. Paylaşılan GPU tahsisi Scientist broker'ında kalır. CPU-only uzmanın fiziksel cleanup kapsamı ayrıca tanımlanır; GPU yetkisi otomatik verilmez.
+
+
 ```json
 {
   "schema_version": "umay.agent/0.1",
   "agent_id": "synthetic-scientist",
   "agent_version": "0.1.0",
   "capabilities": ["scientist.twin_clustering", "scientist.twin_anomaly_experiment"],
-  "request_schema": "umay.task/0.1",
+  "request_schema": "umay.task/0.2",
   "result_schema": "umay.advisory/0.1",
   "tools": ["data.read", "experiment.run"],
   "network_default": "deny",
@@ -116,10 +137,13 @@ Model yayını için temel ağırlık revision/hash'i, tokenizer revision/hash'i
 
 ```json
 {
-  "schema_version": "umay.cost/0.1",
+  "schema_version": "umay.cost/0.2",
   "event_id": "synthetic-cost-001",
   "trace_id": "synthetic-trace-001",
   "tenant_id": "synthetic-company",
+  "employee_ref": "synthetic-employee-001",
+  "workspace_id": "synthetic-workspace-001",
+  "workspace_run_id": "synthetic-workspace-run-001",
   "occurred_at": "2026-10-03T09:05:00Z",
   "data_class": "synthetic",
   "activity": "experiment",
@@ -143,4 +167,6 @@ Provider için input/output/cached token, çağrı/tekrar, model/version, fiyat 
 
 ## 7. Sözleşme kabulü
 
-İlk test paketi geçerli sentetik akışla birlikte yanlış tenant, iptal edilmiş kaynak, eski GUI lease, bilinmeyen sürüm, deadline/OOM, yinelenen maliyet kaydı, para birimi uyuşmazlığı ve eksik maliyet durumlarını kapsar. Beklenti test başlamadan yazılır. Mock geçişi `contract_only`; yerel gerçek SWAPP `local_application`; kurum içi gerçek erişim `institutional` kanıt sınıfıyla raporlanır. Bu sınıflar birbirinin yerine kullanılamaz.
+İlk test paketi iki sentetik çalışan alanında dosya/ağ/oturum/cache izolasyonu, container yeniden kurulunca log kalıcılığı, collector kesintisi/dedupe/sıra boşluğu, mimari değişiklikte yetkisiz terfi reddi ve geçerli sentetik akışla birlikte yanlış tenant, iptal edilmiş kaynak, eski GUI lease, bilinmeyen sürüm, deadline/OOM, yinelenen maliyet kaydı, para birimi uyuşmazlığı ve eksik maliyet durumlarını kapsar. Beklenti test başlamadan yazılır. Mock geçişi `contract_only`; yerel gerçek SWAPP `local_application`; kurum içi gerçek erişim `institutional` kanıt sınıfıyla raporlanır. Bu sınıflar birbirinin yerine kullanılamaz.
+
+Sözleşme 0.2, çalışan/workspace/run kapsamını ekler. Task, Experience, Experiment ve Cost örnekleri bu nedenle 0.2 olarak sürümlendi; değişmeyen Agent şablonu ve Advisory tipi kendi 0.1 sürümünü korur. Eski kayıtlar çalışan bağı kanıtlanmadan 0.2 diye yeniden etiketlenmez; açık migration veya arşivde eski sürüm olarak okuma gerekir. Ortak şirket faaliyeti için çalışan alanları `null` olabilir; bunun için ayrıca doğrulanmış şirket kapsamı gerekir. Çalışana bağlı işlerde bu alanlar zorunludur. Registry şablonu ile çalışan deployment'ı ayrı kayıtlardır.

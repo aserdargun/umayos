@@ -2,7 +2,7 @@
 
 Durum: deney tasarımı ve kabul planı · [Paket dizini](README.md).
 
-İlk ürün dilimi SWAPP'taki dijital ikizler üzerinden işletme rejimlerini kümelemek, rejime bağlı anomali modellerini kıyaslamak ve tekrarlanabilir deney düzenekleri kurmaktır. AI-Scientist öneri/deney/değerlendirme döngüsünü sağlar. Veriyi toplama yetkisi Core'dan, sayısal sonuçlar deterministik hesaplardan, son mühendislik kararı insandan gelir.
+İlk ürün dilimi SWAPP'taki dijital ikizler üzerinden işletme rejimlerini kümelemek, rejime bağlı anomali modellerini kıyaslamak ve tekrarlanabilir deney düzenekleri kurmaktır. AI-Scientist her çalışanın izole Linux container alanında öneri/deney/değerlendirme döngüsünü sağlar; deney kodu ek iş sandbox'ında çalışır. Tüm adımlar, başarısızlıklar ve sonuçlar çalışan/workspace/run kimliğiyle kalıcı işlem defterine bağlanır. Veriyi toplama yetkisi Core'dan, sayısal sonuçlar deterministik hesaplardan, son mühendislik kararı insandan gelir.
 
 ## 1. Mevcut bilimsel tabanı kullan
 
@@ -17,7 +17,13 @@ Pinli AI-Scientist'teki başlangıç noktaları:
 | `lab/llm/aos_gpu_broker.py` | Sınırlandırılmış GPU iş sırası | Core model/deney bütçesi ve iptal zinciri |
 | `lab/training/sft_export.py` | İncelenmiş SFT export yolu | Şirket için uygun hak/kullanım profili; mevcut research profili otomatik genişletilmez |
 
-Kaynak: [pinli Scientist ağacı](https://github.com/aserdargun/ai-scientist/tree/67258cdef33032c9a49eeae31c2e2ba26a98ca17). Bu modüllerin varlığı UMAY entegrasyonunun test edildiğini göstermez. [Operating modes / OMR belgesi](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/docs/ai-scientist/42-operating-modes-omr-experiments.md) mevcut bilimsel çerçeve için referanstır. OMR **Overall Model Residual** anlamındadır; RUL değildir.
+Kaynak: [pinli Scientist ağacı](https://github.com/aserdargun/ai-scientist/tree/01b17c3b3038d3c753cd80f2bbc9fbc04ca646fe). Bu modüllerin varlığı UMAY entegrasyonunun test edildiğini göstermez. [Operating modes / OMR belgesi](https://github.com/aserdargun/ai-scientist/blob/01b17c3b3038d3c753cd80f2bbc9fbc04ca646fe/docs/ai-scientist/42-operating-modes-omr-experiments.md) mevcut bilimsel çerçeve için referanstır. OMR **Overall Model Residual** anlamındadır; RUL değildir.
+
+### Yeni kaynakta gelen uygulama temeli
+
+AI-Scientist ürün teslimi `v0.1.0`, harness/konsol sürümü `0.46.0` olarak ayrıdır. CPU field-lab; LSH/OPTICS/SOM, NN/residual/OMR, anomali baseline'ları ve kalıcı rapor yollarını içerir. Bağımsız Scorer ve deterministik Referee korunur. `lab/director/field_context.py` kullanıcı beyanı saha amacını, `history_context.py` açık seçilmiş geçmiş bulguları bağlar; uygulama varlık yetkisini ispatlamaz. `lab/api/contracts.py` bu alanları opsiyonel taşır.
+
+AOS yeni kaynağındaki CPU adaptörü için gerçek API/deney/Scorer kabulü raporlanmıştır; karar/onay sürücüsü fixture'dır. Stop kabulü pipeline sınırındadır; aktif Scorer kesintisi kanıtlanmamıştır. AOS belgesinin atıf verdiği ayrı CPU capability candidate'ı ile public Scientist pininin aynı içerik olduğu varsayılmaz: yeni `/v1/aos-cpu-capability` yolu incelenen public Scientist `lab/` kaynağında bulunmadı. Aynı kaynak/config çifti ve wire sözleşmesi ilk entegrasyon işi olarak doğrulanır. Ayrıntı: [upstream incelemesi](../UPSTREAM_REVIEW_2026-10-03.md).
 
 ## 2. Dijital ikiz veri sözleşmesi
 
@@ -53,10 +59,13 @@ Bir olayın yüzlerce kayan penceresi yüzlerce bağımsız vaka sayılmaz. İst
 
 ```json
 {
-  "schema_version": "umay.experiment/0.1",
+  "schema_version": "umay.experiment/0.2",
   "experiment_id": "synthetic-exp-001",
   "trace_id": "synthetic-trace-001",
   "tenant_id": "synthetic-company",
+  "employee_ref": "synthetic-employee-001",
+  "workspace_id": "synthetic-workspace-001",
+  "workspace_run_id": "synthetic-workspace-run-001",
   "created_at": "2026-10-03T09:00:00Z",
   "data_class": "synthetic",
   "policy_revision": "synthetic-policy-v1",

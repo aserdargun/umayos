@@ -2,19 +2,32 @@
 
 Durum: hedef öğrenme ve model değişim planı · [Paket dizini](README.md).
 
-## 1. Şirket deneyimi üç ayrı ürüne dönüşür
+## 1. Tüm işlem kayıtlarından seçilmiş öğrenme ürünlerine
+
+İnsan çalışanın Linux container alanındaki bütün iş işlemleri kalıcı denetim defterine bağlanır. SWAPP kullanımı yanında Core/eylemci eylemleri, araç/model çağrıları, Scientist deneyleri, servis süreçlerinin sonuçları, başarısızlıklar ve insan düzeltmeleri de kapsamdadır. Kayıt kapsamı ile eğitimde kullanım izni ayrıdır; ham içerik sır ve gereksiz kişisel veri taşımayacak biçimde sınırlandırılır.
+
+Her kayıt öğrenmeye girmez. `LearningCandidate` seçimi şu kanıtları taşır:
+
+- Doğrulanmış sonuç veya bağımsız olarak doğrulanmış hata/düzeltme dersi.
+- Tekrar kullanılabilir yöntem, yeni kaynaklı bilgi ya da yerel modelde ölçülmüş davranış açığı.
+- Beklenen katkı ve ölçüm planı: kalite, görev başarısı, hata azalması, insan süresi veya maliyet; ölçülen değer yoksa açıkça hipotez.
+- Kaynak olay kimlikleri, çalışan/görev kapsamı, kullanım hakkı, arındırma, reviewer ve kabul/ret gerekçesi.
+
+Katma değer, çalışanın kişisel performans puanı değildir. Başarı ve hata örnekleri amaçlarına göre değerlendirilir; yalnız başarılı işleri seçerek fayda iddiası kurulmaz. Denetim arşivi ile seçilmiş öğrenme kümesi ayrı erişim ve saklama politikasına sahiptir.
+
+### Üç öğrenme ürünü
 
 | Ürün | İçeriği ve işlevi | Güncelleme etkisi |
 | --- | --- | --- |
 | RAG | İzinli belgeler, doğrulanmış vakalar, uygulama bilgisi ve kaynaklı retrieval | Model ağırlıkları değişmez; corpus/embedding/indeks ayrı sürümlenir |
 | Skill | SWAPP akışının parametreli, önkoşullu ve doğrulamalı prosedürü | Araç kullanma kabiliyeti güncellenir; policy sınırı değişmez |
-| LoRA / QLoRA adayı | Ölçülmüş davranış açığı için role özgü eğitim verisi ve adapter | Uyumlu temel modelin davranışı eğitimle değişir; ayrı model kabulü gerekir |
+| Fine-tune adayı (uyumlu LoRA / QLoRA) | Ölçülmüş davranış açığı için role özgü eğitim verisi ve adapter | Uyumlu temel modelin davranışı eğitimle değişir; ayrı model kabulü gerekir |
 
 İlk tercih entegrasyon hatasını düzeltmek, eksik bilgiyi RAG'e eklemek veya akışı skill olarak sağlamlaştırmaktır. Tekrarlayan davranış açığı kalıyorsa eğitim adayı açılır. Daha çok log, daha çok adapter veya daha sık eğitim kendi başına kalite artışı değildir.
 
 ## 2. Mevcut System 1 / System 2 korunur
 
-3 Ekim 2026 incelemesinde AOS'un [model belgeleri](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/docs/MODELS.md) ve hazırlık betikleri şu baseline'ı gösterir. Bunlar gelecekteki model seçimini sabitlemez; karşılaştırmanın başlangıcını tanımlar.
+3 Ekim 2026 incelemesinde AOS'un [model belgeleri](https://github.com/aserdargun/aos/blob/dfd06322219b9295c5fc618bef180464b3d17767/docs/MODELS.md) ve hazırlık betikleri şu baseline'ı gösterir. Bunlar gelecekteki model seçimini sabitlemez; karşılaştırmanın başlangıcını tanımlar.
 
 | Rol | Kaynak baseline | Korunacak sözleşme | Eğitim durumu |
 | --- | --- | --- | --- |
@@ -22,7 +35,7 @@ Durum: hedef öğrenme ve model değişim planı · [Paket dizini](README.md).
 | Core S2 / Supervisor | `prism-ml/Ternary-Bonsai-2-27B-gguf`, revision `6ed5e12bf84b7a63069882c91dd9e9218647d17b` | Plan, toparlanma, kaynaklı açıklama; vision iddiası varsa ayrı kabul | GGUF çıkarım artifact'i; eğitilebilir checkpoint/target modules henüz doğrulanmış değil |
 | Scientist araştırma modeli | `Qwen/Qwen3.5-9B`, revision `c202236235762e1c871ad0ccb60c8ee5ba337b9a` | Bilimsel öneri ve kod adayı; kendi düşünme/örnekleme profilleri | Sentetik Unsloth dry-run kayıtları mevcut; gerçek adapter kaydetme ve TRAIN→SERVE kabulü açık |
 
-S1 hazırlığı [prepare_decider.py](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/scripts/prepare_decider.py), S2 hazırlığı [prepare_bonsai.py](https://github.com/aserdargun/aos/blob/ed6e857b0e61e9c19c8ba63933e2cc9f318fe444/scripts/prepare_bonsai.py), Scientist pinleri [native_runtime.py](https://github.com/aserdargun/ai-scientist/blob/67258cdef33032c9a49eeae31c2e2ba26a98ca17/lab/llm/native_runtime.py) üzerinden izlenir. Pinli Decider kartı İngilizce kapsam bildirir; Türkçe isteğin S1'e normalizasyonunda varlık kimliği, sayılar, birimler ve alıntılar korunmalı ve ayrıca sınanmalıdır. Serbest Türkçe mühendislik açıklaması S2'nin görevidir.
+S1 hazırlığı [prepare_decider.py](https://github.com/aserdargun/aos/blob/dfd06322219b9295c5fc618bef180464b3d17767/scripts/prepare_decider.py), S2 hazırlığı [prepare_bonsai.py](https://github.com/aserdargun/aos/blob/dfd06322219b9295c5fc618bef180464b3d17767/scripts/prepare_bonsai.py), Scientist pinleri [native_runtime.py](https://github.com/aserdargun/ai-scientist/blob/01b17c3b3038d3c753cd80f2bbc9fbc04ca646fe/lab/llm/native_runtime.py) üzerinden izlenir. Pinli Decider kartı İngilizce kapsam bildirir; Türkçe isteğin S1'e normalizasyonunda varlık kimliği, sayılar, birimler ve alıntılar korunmalı ve ayrıca sınanmalıdır. Serbest Türkçe mühendislik açıklaması S2'nin görevidir.
 
 S1'in Mapika kod revision'ı `75b00fade2dd7f353106e3f4683e56fa2481ec28` ile eşlenir. S2 baseline'ı Prism llama.cpp revision `9a9394a895b96003ca842a6041cb28ac49a108f7` kullanır; standart bir llama.cpp/vLLM kurulumuyla eşdeğer kabul edilmez. Yeni engine seçimi ayrıca yükleme, vision ve görev parity testi gerektirir.
 
@@ -41,14 +54,14 @@ S1'in özel olasılık/readout ve loss gereksinimi genel sohbet SFT tarifine ind
 
 ## 4. İzden sürümlü adaya
 
-1. **Capture:** kullanıcıya ve şirkete tanımlı izin/amaçla, gerekli olayları topla; parola/token ve gereksiz kişisel veri toplama. İnsan ve model eylemlerinin kökenini ayır.
+1. **Capture:** çalışan alanındaki tüm iş işlemlerinin olay zarfını kaydet; çalışan/container/oturum/görev/deneme kimliklerini bağla. İnsan, servis ve model eylemlerinin kökenini ayır. İçerikleri izin/amaçla sınırla; parola/token ve gereksiz kişisel veri toplama. Container yeniden kurulunca kalıcı kayıtlar korunur.
 2. **Minimize:** hassas alanları temizle, pseudonymous aktör kullan, saklama süresi ve tenant bağını koru. Ham iz ayrı yetki alanında kalsın.
 3. **Reconstruct:** görev, gözlem, seçilen eylem, düzeltme, bağımsız sonuç ve iptal/başarısızlık bağlarını kur. Başarı kanıtı eksikse `unverified` kaydet.
-4. **Review:** veri hakkı ve kullanım profiliyle birlikte etiketleri incele. Üretim verisini öğretmene göndermek varsayılan adım değildir.
+4. **Select & Review:** katma değeri ve tekrar kullanımını kanıtla; seçim/ret gerekçesi, hedef yerel model/rol, veri hakkı ve kullanım profiliyle etiketleri incele. Skill, RAG veya fine-tune yolunu ihtiyaca göre seç. Üretim verisini öğretmene göndermek varsayılan adım değildir.
 5. **Split:** train/dev/calibration/holdout bölmesini olay ailesi, varlık/saha ve zaman üzerinden dondur; yakın kopya ve örtüşen pencereleri kontrol et.
 6. **Build:** uygun RAG/skill/dataset artifact'i ve provenance manifesti üret; teacher sentetik örneklerini ayrı kökenle say.
 7. **Evaluate:** aynı bağımsız görevlerde mevcut sürüm ve adayı kıyasla; güvenlik, kalite, gecikme ve maliyeti birlikte değerlendir.
-8. **Promote:** yetkili insan onayı, immutable artifact ve atomik aktif sürüm; ardından gözlem, geri alma ve gerekirse iptal.
+8. **Promote:** yetkili insan onayı, immutable artifact ve atomik aktif sürümle kabul edilmiş ürünü yerel işletime al; ardından gözlem, geri alma ve gerekirse iptal. Bu terfi mimari veya policy değiştirme yetkisi vermez; böyle bir ihtiyaç güçlü modelle yürütülen ayrı mimari değişiklik hattına gider.
 
 Aynı olayın grafiği, raporu, kullanıcı konuşması, teacher yeniden yazımı ve sentetik varyantı aynı leakage group'ta kalır. Geleceğe ait bakım etiketi eğitim feature'ına sızmaz. Ölçekleyici/imputer/feature seçimi sadece train'e fit edilir. Holdout soru/cevapları RAG indeksine, teacher promptuna veya tuning bağlamına açılmaz. Holdout defalarca model seçimi için kullanılırsa artık development set sayılır; yeni bağımsız holdout hazırlanır.
 
@@ -90,3 +103,5 @@ Eğitilmiş adapter'dan kaynak silmek bir satır silme işlemi değildir. Etkile
 ## 8. Mevcut kodun gerçek sınırı
 
 AOS'un `knowledge.py` yolu incelenmiş/sınırlı lexical retrieval için başlangıçtır; genel vektör RAG tamamlanmış sayılmaz. `owned_episode_conversion.py` S1/S2 canonical örnek ayrımına başlangıçtır. Scientist'in `sft_export.py` yolu `noncommercial_research`/`local_noncommercial_sft` profili taşır; şirket verisi ve ticari kullanım için kaynak haklarını ve kullanım profilini ayrıca tasarlamak gerekir. Mevcut dry-run'daki `save_adapter: false` gerçek adapter teslimi değildir. Bu sınırlar [kaynak incelemesinde](../CONTENT_SOURCES.md) izlenir.
+
+Yeni push'ta AOS manuel parametre skill review/release/selection/rollback geçmişi, Scientist ise açık `prior_experience` seçimi ve `field_intent` bağlamı sağlar. Bunlar yeniden kullanılacak öğrenme altyapılarıdır. Manuel skill yayını öğrenilmiş model değildir; Scientist deney hafızası otomatik eğitim/terfi yetkisi vermez. Varsayılan field-lab CPU profili yerel LLM'yi açmaz; Qwen araştırma profili ayrı yapılandırmadır. Yerel model gelişimi bağımsız görev kıyasıyla ayrıca gösterilmelidir.
