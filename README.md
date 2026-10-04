@@ -68,9 +68,12 @@ Yayın hedefi `umayos subscription` içindeki `rg-umayos-org / swa-umayos-org`, 
 - `design/IMAGE_PROMPTS.md`, `asset-inventory.json`, `optimized-assets.json`: ilk üretim promptları, kavramsal durum, TR/EN alt metin, kullanım ve optimize dosyalar. Güncel bölüm konseptleri: `design/IMAGE_PROMPTS_V3.md`.
 - `public/umay-icons/light/` ve `dark/`: seçilmiş Umay Ana ikon seti; özgün PNG/ICO baytları korunur. Köken ve entegrasyon: `design/brand/README.md`.
 - Inter Variable, yerelden sunulur; SIL OFL 1.1 metni `public/fonts/Inter-OFL.txt` içinde. Font lisansı proje lisansı değildir.
+- `public/assets/umay-reel.mp4`: 2560×1440, 15 sn, H.264 + AAC stereo (32 kHz) açılış animasyonu; hero ambleminin çift tıklamasıyla sesli açılır. `.mp4` ve `.vtt` MIME tipleri `public/staticwebapp.config.json` içinde tanımlıdır.
 
 Kullanıcının seçtiği açık/koyu Umay Ana ikonları navbar, footer, favicon, Apple/manifest ve sosyal kartta kullanılır. Profil yeniden çizilmedi veya renklendirilmedi. Proje lisansı kendiliğinden seçilmedi.
 
 V3 tasarımında Umay Ana profili açılışın odağıdır. Beş bölüm bağlantısı ve okuma çizgisi, iki sütunlu manifesto, tam genişlikte Scientist adımları ve telefona özel grafik geometrisi bütün içeriği daha rahat gezilebilir kılar. Renkler ve özgün ikon dosyaları korunur.
+
+Hero’daki büyük amblem dekoratif bir görseldir ve `aria-hidden` kalır. Amblemin **iki kez tıklanması** `public/assets/umay-reel.mp4` açılış animasyonunu **sesli** oynatan modal bir `<dialog>` açar; `play()` doğrudan tıklama/double-click kullanıcı aktivasyonu içinde çağrıldığı için otomatik oynatma engeline takılmaz ve öğe hiçbir zaman sessize alınmaz (`muted` işareti ve özelliği yoktur). Klavye ve dokunmatik için amblemin altındaki etiketli düğme aynı işi yapar: `dblclick` yalnız fare içindir. `preload="none"` sayesinde 4,2 MB’lık dosya sayfa açılışında indirilmez. `Escape`, kapatma düğmesi ve arka plana tıklama kapatır; kapanışta video durdurulup başa sarılır. JavaScript kapalıyken düğme gizli kalır ve anlatı aynen okunur. Diyalog kapatıyken sayfa dışı bırakıldığı için video öğesi erişilebilirlik ağacına girmez ve axe kapısı etkilenmez. Açıklama satırları `src/data/site.ts` içinde TR/EN eşlidir; altyazı izleri `public/assets/umay-reel.{tr,en}.vtt` ile gelir.
 
 Tasarım kararları: [SITE_BRIEF](docs/SITE_BRIEF.md). Kaynak kapsamı: [CONTENT_SOURCES](docs/CONTENT_SOURCES.md). Gerçek kontrol kanıtı ve sınırlar: [VALIDATION](docs/VALIDATION.md).

@@ -227,3 +227,42 @@ window.addEventListener("popstate", () => {
   renderView();
   renderStep();
 });
+
+// Two clicks on the hero emblem open the opening animation with its own sound.
+// The labelled control is the same action for keyboard and touch, where a
+// double click is not available, so the reel never depends on the gesture.
+const reelDialog = document.querySelector<HTMLDialogElement>("[data-reel-dialog]");
+const reelVideo = document.querySelector<HTMLVideoElement>("[data-reel-video]");
+const reelSurface = document.querySelector<HTMLElement>("[data-reel-surface]");
+const reelTriggers = [
+  ...document.querySelectorAll<HTMLButtonElement>("[data-reel-open]"),
+];
+const reelClose = document.querySelector<HTMLButtonElement>("[data-reel-close]");
+if (reelDialog && reelVideo) {
+  const playReel = () => {
+    // Sound is the point of the opening, and play() runs inside the user
+    // activation of the click or double click, so it is not autoplay-blocked.
+    reelVideo.muted = false;
+    reelVideo.volume = 1;
+    reelVideo.play().catch(() => {
+      // A browser that cannot decode the file keeps the native controls usable.
+    });
+  };
+  const openReel = () => {
+    if (!reelDialog.open) reelDialog.showModal();
+    playReel();
+  };
+  reelTriggers.forEach((trigger) => {
+    trigger.hidden = false;
+    trigger.addEventListener("click", openReel);
+  });
+  reelSurface?.addEventListener("dblclick", openReel);
+  reelClose?.addEventListener("click", () => reelDialog.close());
+  reelDialog.addEventListener("click", (event) => {
+    if (event.target === reelDialog) reelDialog.close();
+  });
+  reelDialog.addEventListener("close", () => {
+    reelVideo.pause();
+    reelVideo.currentTime = 0;
+  });
+}

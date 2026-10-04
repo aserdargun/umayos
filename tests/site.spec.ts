@@ -227,6 +227,52 @@ test("keyboard controls, shareable state and reduced motion", async ({
   await expect(page.locator("#step-panel-5")).toBeVisible();
 });
 
+test("double-clicking the hero emblem opens the opening animation with sound", async ({
+  page,
+}) => {
+  // Reduced motion keeps the scroll instant, so the emblem is hit precisely.
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const pageErrors: string[] = [];
+  page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.goto("/");
+  const dialog = page.locator("[data-reel-dialog]");
+  const video = page.locator("[data-reel-video]");
+  const media = () =>
+    video.evaluate((el) => {
+      const reel = el as HTMLVideoElement;
+      return {
+        muted: reel.muted,
+        volume: reel.volume,
+        currentTime: reel.currentTime,
+        src: reel.getAttribute("src"),
+        hasMutedAttribute: reel.hasAttribute("muted"),
+      };
+    });
+  // Nothing is fetched or announced before the emblem is deliberately opened.
+  await expect(dialog).toBeHidden();
+  await expect(page.locator("[data-reel-open]")).toBeVisible();
+  await expect(video).toHaveAttribute("preload", "none");
+  expect((await media()).hasMutedAttribute).toBe(false);
+  await page.locator(".hero-emblem").scrollIntoViewIfNeeded();
+  await page.locator(".hero-emblem").dblclick();
+  await expect(dialog).toBeVisible();
+  await expect(video).toHaveAttribute("controls", "");
+  // Sound on: never muted, full level, and play() runs inside the gesture.
+  expect((await media()).muted).toBe(false);
+  expect((await media()).volume).toBe(1);
+  expect((await media()).src).toBe("/assets/umay-reel.mp4");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  expect((await media()).currentTime).toBe(0);
+  // Keyboard and touch reach the same reel through the labelled control.
+  await page.locator("[data-reel-open]").focus();
+  await page.keyboard.press("Enter");
+  await expect(dialog).toBeVisible();
+  await page.locator("[data-reel-close]").click();
+  await expect(dialog).toBeHidden();
+  expect(pageErrors).toEqual([]);
+});
+
 test("all narrative and architecture remain readable without JavaScript", async ({
   browser,
 }, testInfo) => {
@@ -292,8 +338,13 @@ test("distribution, canonical metadata, synthetic source and true 404", async ({
     "/favicon.ico",
     "/apple-touch-icon.png",
     "/fonts/Inter-OFL.txt",
+    "/assets/umay-reel.mp4",
+    "/assets/umay-reel.tr.vtt",
+    "/assets/umay-reel.en.vtt",
   ])
     expect((await request.get(asset)).status()).toBe(200);
+  const reel = await request.get("/assets/umay-reel.mp4");
+  expect(reel.headers()["content-type"]).toContain("video/mp4");
   for (const theme of ["light", "dark"]) {
     const root = `/umay-icons/${theme}/`;
     const manifestResponse = await request.get(`${root}site.webmanifest`);

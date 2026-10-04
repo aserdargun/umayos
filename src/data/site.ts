@@ -48,7 +48,15 @@ export const content = {
         "Manifestoyu oku",
         "Mimariyi keşfet"
       ],
-      "note": "Hedef mimari · Çalışan başına container · Yerel işletim · Güçlü modellerle mimari gelişim"
+      "note": "Hedef mimari · Çalışan başına container · Yerel işletim · Güçlü modellerle mimari gelişim",
+      "reel": {
+        "trigger": "Açılış animasyonunu sesle izle",
+        "hint": "İkonu iki kez tıklayın",
+        "title": "Umay Ana açılış animasyonu",
+        "note": "Sesli oynatılır; ses dosyanın kendi seviyesindedir.",
+        "close": "Animasyonu kapat",
+        "caption": "Umay Ana amblemi oluşuyor; animasyon sesli oynatılıyor."
+      }
     },
     "manifesto": {
       "title": [
@@ -402,7 +410,15 @@ export const content = {
         "Read the manifesto",
         "Explore the architecture"
       ],
-      "note": "Target architecture · Containers per employee · Local operation · Architecture developed with powerful models"
+      "note": "Target architecture · Containers per employee · Local operation · Architecture developed with powerful models",
+      "reel": {
+        "trigger": "Watch the opening animation with sound",
+        "hint": "Double-click the emblem",
+        "title": "Umay Ana opening animation",
+        "note": "Plays with sound; the level is the file's own.",
+        "close": "Close the animation",
+        "caption": "The Umay Ana emblem forms; the animation plays with sound."
+      }
     },
     "manifesto": {
       "title": [

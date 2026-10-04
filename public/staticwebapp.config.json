@@ -19,6 +19,8 @@
     ".csv": "text/csv",
     ".md": "text/markdown; charset=utf-8",
     ".ico": "image/x-icon",
+    ".mp4": "video/mp4",
+    ".vtt": "text/vtt",
     ".webmanifest": "application/manifest+json",
     ".json": "application/json"
   }
