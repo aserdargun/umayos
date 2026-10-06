@@ -8,7 +8,11 @@ for (const width of [1440, 768, 390, 320]) {
       page,
     }) => {
       await page.setViewportSize({ width, height: 960 });
-      await page.emulateMedia({ colorScheme: theme });
+      // Light is the opening default, so each theme is reached by an explicit
+      // stored choice rather than by the system preference.
+      await page.addInitScript((value) => {
+        try { localStorage.setItem("umayos-theme", value); } catch {}
+      }, theme);
       const errors: string[] = [];
       const failedAssets: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
@@ -124,35 +128,38 @@ for (const width of [1440, 768, 390, 320]) {
 test("theme choice, icons and language survive reload and system changes", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-  await page.getByRole("button", { name: "Açık temaya geç" }).click();
+  // A dark system preference does not open the site in dark.
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await expect(page.locator("#umay-favicon")).toHaveAttribute("href", "/umay-icons/light/favicon-32x32.png");
-  await expect(page.locator("#umay-apple-icon")).toHaveAttribute("href", "/umay-icons/light/apple-touch-icon.png");
-  await expect(page.locator("#umay-manifest")).toHaveAttribute("href", "/umay-icons/light/site.webmanifest");
-  await page.reload();
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await page.emulateMedia({ colorScheme: "light" });
-  await page.emulateMedia({ colorScheme: "dark" });
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await page.locator('[data-language="en"]').click();
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await page.getByRole("button", { name: "Switch to dark theme" }).focus();
-  await page.keyboard.press("Enter");
+  await page.getByRole("button", { name: "Karanlık temaya geç" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   await expect(page.locator("#umay-favicon")).toHaveAttribute("href", "/umay-icons/dark/favicon-32x32.png");
   await expect(page.locator("#umay-apple-icon")).toHaveAttribute("href", "/umay-icons/dark/apple-touch-icon.png");
   await expect(page.locator("#umay-manifest")).toHaveAttribute("href", "/umay-icons/dark/site.webmanifest");
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
-});
-
-test("system theme remains live until the visitor chooses a theme", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
-  await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
   await page.emulateMedia({ colorScheme: "dark" });
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.locator('[data-language="en"]').click();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await page.getByRole("button", { name: "Switch to light theme" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  await expect(page.locator("#umay-favicon")).toHaveAttribute("href", "/umay-icons/light/favicon-32x32.png");
+  await expect(page.locator("#umay-apple-icon")).toHaveAttribute("href", "/umay-icons/light/apple-touch-icon.png");
+  await expect(page.locator("#umay-manifest")).toHaveAttribute("href", "/umay-icons/light/site.webmanifest");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+});
+
+test("the site opens light regardless of the system theme", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  expect(await page.locator("body").evaluate(el => getComputedStyle(el).backgroundColor)).toBe("rgb(255, 255, 255)");
+  await page.emulateMedia({ colorScheme: "light" });
+  await page.goto("/en/");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
 });
 
 test("theme preference stays synchronized across tabs", async ({ page, context }) => {
@@ -287,9 +294,11 @@ test("all narrative and architecture remain readable without JavaScript", async 
   for (const path of ["/", "/en/"]) {
     await page.goto(path);
     await expect(page.locator("h1")).toBeVisible();
-    await expect(page.locator(`.header .brand-${theme}`)).toBeVisible();
+    // Without script there is no stored choice, so light is what renders.
+    await expect(page.locator(".header .brand-light")).toBeVisible();
+    await expect(page.locator(".header .brand-dark")).toBeHidden();
     await expect(page.locator("[data-theme-toggle]")).toBeHidden();
-    expect(await page.locator("body").evaluate(el => getComputedStyle(el).backgroundColor)).toBe(theme === "dark" ? "rgb(11, 31, 58)" : "rgb(255, 255, 255)");
+    expect(await page.locator("body").evaluate(el => getComputedStyle(el).backgroundColor)).toBe("rgb(255, 255, 255)");
     for (const id of ["panel-operation", "panel-teacher", "panel-development"])
       await expect(page.locator(`#${id}`)).toBeVisible();
     await expect(page.locator("[data-step-panel]")).toHaveCount(6);

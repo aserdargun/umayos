@@ -22,8 +22,8 @@ const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'UM
       (() => {
         let saved;
         try { saved = localStorage.getItem('umayos-theme'); } catch {}
-        const theme = saved === 'light' || saved === 'dark' ? saved : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.dataset.theme = theme;
+        // Light is the default opening theme; only an explicit choice moves it.
+        document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light';
       })();
     </script>
     <title>{title ?? t.meta.title}</title>
@@ -33,8 +33,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'UM
     <link rel="alternate" hreflang="tr" href="https://umayos.org/" />
     <link rel="alternate" hreflang="en" href="https://umayos.org/en/" />
     <link rel="alternate" hreflang="x-default" href="https://umayos.org/" />
-    <link id="umay-favicon" rel="icon" type="image/png" sizes="32x32" href="/umay-icons/light/favicon-32x32.png" media="(prefers-color-scheme: light)" />
-    <link id="umay-favicon-dark" rel="icon" type="image/png" sizes="32x32" href="/umay-icons/dark/favicon-32x32.png" media="(prefers-color-scheme: dark)" />
+    <link id="umay-favicon" rel="icon" type="image/png" sizes="32x32" href="/umay-icons/light/favicon-32x32.png" />
     <link id="umay-apple-icon" rel="apple-touch-icon" sizes="180x180" href="/umay-icons/light/apple-touch-icon.png" />
     <link id="umay-manifest" rel="manifest" href="/umay-icons/light/site.webmanifest" />
     <meta property="og:type" content="website" />
@@ -71,7 +70,7 @@ const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'UM
     <main id="main" tabindex="-1"><slot /></main>
     <footer class="footer dark">
       <div class="container footer-inner">
-        <div class="footer-brand"><a class="wordmark" href={route}><img src="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" loading="lazy" /><span><strong>UMAY</strong> <span class="accent">OS</span></span></a><p>Unified Multi-Agent Advisor for Yield</p></div>
+        <div class="footer-brand"><a class="wordmark" href={route}><img src="/umay-icons/light/icon-128.png" data-icon-light="/umay-icons/light/icon-128.png" data-icon-dark="/umay-icons/dark/icon-128.png" width="48" height="48" alt="" loading="lazy" decoding="async" /><span><strong>UMAY</strong> <span class="accent">OS</span></span></a><p>Unified Multi-Agent Advisor for Yield</p></div>
         <nav aria-label={locale === 'tr' ? 'Alt gezinme' : 'Footer navigation'}>{t.nav.map((label, i) => <a href={navHref(i)}>{label}</a>)}</nav>
         <a class="back-to-top" href={Astro.url.pathname === route ? '#hero' : route}>{t.backToTop}<Arrow /></a>
       </div>
